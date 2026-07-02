@@ -204,22 +204,36 @@ async def ingest_document(req: IngestDocumentRequest) -> IngestDocumentResponse:
 
 # --- shared ingestion + upload --------------------------------------------
 async def _run_ingest(patient_id: str, doc: dict) -> IngestDocumentResponse:
-    """Push a document's assertion(s) through the self-healing engine."""
+    """Push a document's assertion(s) through the self-healing engine.
+
+    Facts run through run_facts() (perf: ONE Cognee graph build for the whole
+    document, not one per fact — each fact still gets its own full
+    recall->judge->reconcile->ledger-write, so reconciliation is unaffected).
+    """
     built = records.facts_from_document(patient_id, doc)
-    classification, healed, reason, actions, final = "NEW", False, "", [], []
-    for fact in built:
-        state = await service.run_fact(patient_id, fact, cognee_sync=True)
+    states = await service.run_facts(patient_id, built, cognee_sync=True)
+
+    classification, reason, actions, final = "NEW", "", [], []
+    healed = False
+    for fact, state in zip(built, states):
         cls = state.get("classification", "NEW")
         classification = cls
         reason = state.get("reason", "") or reason
         actions += list(state.get("actions") or [])
         if cls in ("SUPERSEDES", "CONTRADICTS"):
             healed = True
-        else:
-            # Naive villain only ever sees ORIGINAL records (no corrections).
-            await cognee_client.add_naive(fact)
-            await cognee_client.cognify_naive(patient_id)
         final.append(ledger.get(fact.id) or fact)
+
+    if not healed:
+        # Naive villain only ever sees documents with NO corrections in them. A
+        # fact's raw_text is the WHOLE source document (shared across every
+        # fact extracted from it), so gating per-fact would leak a correction
+        # into naive via any co-extracted NEW fact from the same document —
+        # withhold the entire document instead.
+        for fact in built:
+            await cognee_client.add_naive(fact)
+        await cognee_client.cognify_naive(patient_id)
+
     return IngestDocumentResponse(
         doc_id=doc["doc_id"], facts=final, classification=classification,
         healed=healed, reason=reason, actions=actions,

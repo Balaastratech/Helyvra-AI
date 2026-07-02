@@ -126,8 +126,17 @@ def monitoring_for(condition: str) -> List[dict]:
 
 
 def family_risk_for(condition: str) -> Optional[str]:
-    """Hereditary risk category a relative's condition confers (None if none)."""
-    return FAMILY_RISK.get(_norm(condition))
+    """Hereditary risk category a relative's condition confers (None if none).
+    Matches exact or as a substring: extracted text often combines terms
+    ("heart attack (myocardial infarction)") rather than one bare vocabulary
+    key, so an exact-only lookup silently misses real phrasing."""
+    n = _norm(condition)
+    if n in FAMILY_RISK:
+        return FAMILY_RISK[n]
+    for key in sorted(FAMILY_RISK, key=len, reverse=True):
+        if key in n:
+            return FAMILY_RISK[key]
+    return None
 
 
 def is_heritable(condition: str) -> bool:
