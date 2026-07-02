@@ -24,3 +24,5 @@ graphify-out/cache/
 .vscode/
 .DS_Store
 Thumbs.db
+.playwright-mcp/
+patient-view.jpeg
