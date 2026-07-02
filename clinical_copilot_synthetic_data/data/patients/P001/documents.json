@@ -1,0 +1,48 @@
+{
+  "patient_id": "P001",
+  "disclaimer": "Demo only - not medical advice. Synthetic data only - no real PHI.",
+  "timeline": [
+    {
+      "date": "2026-01-10",
+      "resource_type": "AllergyIntolerance",
+      "fact": "Penicillin allergy active",
+      "source": "documents.json",
+      "status": "active"
+    },
+    {
+      "date": "2026-02-15",
+      "resource_type": "MedicationStatement",
+      "fact": "Lisinopril 10 mg daily active",
+      "source": "documents.json",
+      "status": "active"
+    },
+    {
+      "date": "2026-03-02",
+      "resource_type": "AllergyIntolerance",
+      "fact": "Penicillin allergy cleared after Dr. Lee re-test",
+      "source": "P001_allergy_cleared.fhir.json",
+      "status": "supersedes 2026-01-10",
+      "hold_back": true
+    },
+    {
+      "date": "2026-04-20",
+      "resource_type": "MedicationStatement",
+      "fact": "Lisinopril stopped; amlodipine 5 mg daily started",
+      "source": "P001_med_switch.txt",
+      "status": "supersedes lisinopril",
+      "hold_back": true
+    },
+    {
+      "date": "2026-05-11",
+      "resource_type": "Condition",
+      "fact": "Type 2 diabetes diagnosed",
+      "source": "documents.json",
+      "status": "active"
+    }
+  ],
+  "expected_self_heal": {
+    "allergy_after_ingest": "No active penicillin allergy; cleared 2026-03-02",
+    "temporal_rewind_feb": "Penicillin allergy shows active as of February 2026",
+    "why_trace": "Superseded 2026-03-02 by Dr. Lee re-test"
+  }
+}

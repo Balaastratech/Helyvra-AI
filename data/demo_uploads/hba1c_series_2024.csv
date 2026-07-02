@@ -1,0 +1,2 @@
+patient,mrn,date,test,value,unit,reference_range,flag,source
+Rahul Sharma,RH-4471,2024-06-12,HbA1c,7.8,%,<7.0,high,hba1c_series_2024.csv

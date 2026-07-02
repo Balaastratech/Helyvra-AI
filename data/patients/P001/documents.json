@@ -1,0 +1,60 @@
+{
+  "patient_id": "P001",
+  "documents": [
+    {
+      "doc_id": "DOC-P001-01",
+      "date": "2026-01-10",
+      "type": "Allergy Note",
+      "author": "Dr. Adams",
+      "title": "Penicillin allergy documented",
+      "text": "On 2026-01-10, patient Margaret Chen (MRN-004471) reported a rash after amoxicillin. A penicillin allergy was documented by Dr. Adams. Avoid all penicillin-class antibiotics.",
+      "asserts": [
+        { "subject": "allergy", "predicate": "diagnosed", "value": "penicillin" }
+      ]
+    },
+    {
+      "doc_id": "DOC-P001-02",
+      "date": "2026-02-15",
+      "type": "Medication Order",
+      "author": "Dr. Adams",
+      "title": "Started lisinopril 10mg",
+      "text": "On 2026-02-15, Dr. Adams started Margaret Chen on lisinopril 10mg once daily for hypertension.",
+      "asserts": [
+        { "subject": "medication", "predicate": "prescribed", "value": "lisinopril 10mg" }
+      ]
+    },
+    {
+      "doc_id": "DOC-P001-03",
+      "date": "2026-03-02",
+      "type": "Allergy Re-test Report",
+      "author": "Dr. Lee",
+      "title": "Penicillin allergy cleared after negative challenge",
+      "text": "On 2026-03-02, a supervised oral penicillin challenge was negative. Dr. Lee cleared the penicillin allergy. The patient may now receive penicillin-class antibiotics.",
+      "asserts": [
+        { "subject": "allergy", "predicate": "cleared", "value": "penicillin" }
+      ]
+    },
+    {
+      "doc_id": "DOC-P001-04",
+      "date": "2026-04-20",
+      "type": "Medication Change",
+      "author": "Dr. Lee",
+      "title": "Switched to amlodipine 5mg",
+      "text": "On 2026-04-20, lisinopril was stopped due to cough and Margaret Chen was switched to amlodipine 5mg once daily by Dr. Lee.",
+      "asserts": [
+        { "subject": "medication", "predicate": "switched", "value": "amlodipine 5mg" }
+      ]
+    },
+    {
+      "doc_id": "DOC-P001-05",
+      "date": "2026-05-11",
+      "type": "Progress Note",
+      "author": "Dr. Patel",
+      "title": "New diagnosis: type 2 diabetes",
+      "text": "On 2026-05-11, HbA1c was 7.4%. Dr. Patel diagnosed Margaret Chen with type 2 diabetes and started lifestyle counseling.",
+      "asserts": [
+        { "subject": "diagnosis", "predicate": "added", "value": "type 2 diabetes" }
+      ]
+    }
+  ]
+}

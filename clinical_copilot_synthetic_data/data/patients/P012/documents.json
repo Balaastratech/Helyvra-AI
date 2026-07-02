@@ -1,0 +1,15 @@
+{
+  "patient_id": "P012",
+  "disclaimer": "Demo only - not medical advice. Synthetic data only - no real PHI.",
+  "documents": [
+    {
+      "file": "P012_visit.txt",
+      "format": "free text",
+      "facts": [
+        "No allergies",
+        "No active medications"
+      ]
+    }
+  ],
+  "expected_disambiguation": "Typing Rahul Sharma should show P010 52M vs P012 31M."
+}

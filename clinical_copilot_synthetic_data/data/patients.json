@@ -1,0 +1,69 @@
+{
+  "generated_at": "2026-06-30",
+  "disclaimer": "Demo only - not medical advice. Synthetic data only - no real PHI.",
+  "patients": [
+    {
+      "patient_id": "P001",
+      "mrn": "MRN-1001",
+      "name": "Margaret Chen",
+      "age": 68,
+      "sex": "F",
+      "demo_role": "Self-heal hero",
+      "summary": "Penicillin allergy cleared; lisinopril switched to amlodipine; type 2 diabetes."
+    },
+    {
+      "patient_id": "P010",
+      "mrn": "MRN-2010",
+      "name": "Rahul Sharma",
+      "age": 52,
+      "sex": "M",
+      "demo_role": "Clinical-checks hero",
+      "summary": "T2 diabetes, severe penicillin allergy, rising HbA1c, rising creatinine, CV risk factors."
+    },
+    {
+      "patient_id": "P011",
+      "mrn": "MRN-2011",
+      "name": "Priya Mehta",
+      "age": 34,
+      "sex": "F",
+      "demo_role": "Isolation + safety",
+      "summary": "Asthma and pregnancy flag; clean unrelated record; no penicillin allergy."
+    },
+    {
+      "patient_id": "P012",
+      "mrn": "MRN-2012",
+      "name": "Rahul Sharma",
+      "age": 31,
+      "sex": "M",
+      "demo_role": "Disambiguation duplicate-name patient",
+      "summary": "Minimal visit note; no allergies."
+    },
+    {
+      "patient_id": "P002",
+      "mrn": "MRN-1002",
+      "name": "James O'Sullivan",
+      "age": 54,
+      "sex": "M",
+      "demo_role": "Interaction + renal dosing stretch",
+      "summary": "Atrial fibrillation, warfarin, CKD, INR trend."
+    },
+    {
+      "patient_id": "P003",
+      "mrn": "MRN-1003",
+      "name": "Aisha Rahman",
+      "age": 37,
+      "sex": "F",
+      "demo_role": "Forget/retract",
+      "summary": "Asthma; one entered-in-error diagnosis to retract."
+    },
+    {
+      "patient_id": "P013",
+      "mrn": "MRN-2013",
+      "name": "Meera Nair",
+      "age": 41,
+      "sex": "F",
+      "demo_role": "Hereditary variety",
+      "summary": "Family history of breast cancer in mother and maternal aunt; normal labs."
+    }
+  ]
+}

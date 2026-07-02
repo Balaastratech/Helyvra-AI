@@ -1,0 +1,4 @@
+cognee
+python-dotenv
+# Local embeddings (free, no API key). Cognee pulls fastembed when EMBEDDING_PROVIDER=fastembed.
+fastembed

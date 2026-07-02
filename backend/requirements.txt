@@ -1,0 +1,24 @@
+# Pinned where it matters; loose elsewhere.
+cognee==1.2.2
+python-dotenv
+fastembed                      # local embeddings (CPU, no key)
+
+# LLM (Vertex via ADC) — judge calls + (Cognee uses its bundled litellm)
+google-genai
+
+# Engine (Phase 1+)
+langgraph
+langgraph-checkpoint-sqlite
+aiosqlite                      # async checkpointer backend (AsyncSqliteSaver)
+sqlmodel                       # app-side authoritative fact ledger (SQLite)
+
+# API (Phase 2+)
+fastapi
+uvicorn[standard]
+
+# Tests
+pytest
+httpx                          # in-process ASGI client for API tests
+
+# Intake (Phase 5+)
+pypdf                          # PDF text extraction (pure Python, no native deps)

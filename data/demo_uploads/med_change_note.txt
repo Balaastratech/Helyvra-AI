@@ -1,0 +1,7 @@
+SUNRISE FAMILY CLINIC — Progress Note
+Demo only — synthetic data, not medical advice. No real PHI.
+
+Patient: Rahul Sharma   MRN: RH-4471
+Date: 2026-04-20
+
+Blood pressure inadequately controlled on lisinopril. Stopped lisinopril; switched to amlodipine 5 mg daily. Patient tolerating well. — Dr. R. Mehta

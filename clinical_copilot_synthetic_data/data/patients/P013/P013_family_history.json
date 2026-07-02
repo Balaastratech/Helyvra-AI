@@ -1,0 +1,67 @@
+{
+  "resourceType": "Bundle",
+  "id": "P013-family-history-2026",
+  "type": "collection",
+  "entry": [
+    {
+      "resource": {
+        "resourceType": "FamilyMemberHistory",
+        "id": "P013-mother-breast-ca",
+        "status": "completed",
+        "patient": {
+          "reference": "Patient/P013"
+        },
+        "date": "2026-01-21",
+        "relationship": {
+          "text": "mother"
+        },
+        "condition": [
+          {
+            "code": {
+              "text": "breast cancer"
+            },
+            "onsetAge": {
+              "value": 45,
+              "unit": "years"
+            },
+            "note": [
+              {
+                "text": "Mother diagnosed with breast cancer at age 45."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "FamilyMemberHistory",
+        "id": "P013-aunt-breast-ca",
+        "status": "completed",
+        "patient": {
+          "reference": "Patient/P013"
+        },
+        "date": "2026-01-21",
+        "relationship": {
+          "text": "maternal aunt"
+        },
+        "condition": [
+          {
+            "code": {
+              "text": "breast cancer"
+            },
+            "note": [
+              {
+                "text": "Maternal aunt diagnosed with breast cancer."
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "meta": {
+    "source": "P013_family_history.json",
+    "disclaimer": "Demo only - not medical advice. Synthetic data only - no real PHI."
+  }
+}

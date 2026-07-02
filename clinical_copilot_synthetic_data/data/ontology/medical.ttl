@@ -1,0 +1,23 @@
+@prefix med: <https://demo.totalrecall.ai/ontology/medical#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# Demo only - not medical advice. Synthetic data only - no real PHI.
+
+med:Amoxicillin a med:Drug ; rdfs:label "amoxicillin" ; med:memberOf med:BetaLactam ; med:crossReactsWith med:PenicillinAllergy .
+med:Ampicillin a med:Drug ; rdfs:label "ampicillin" ; med:memberOf med:BetaLactam ; med:crossReactsWith med:PenicillinAllergy .
+med:Penicillin a med:Drug ; rdfs:label "penicillin" ; med:memberOf med:BetaLactam ; med:canCause med:PenicillinAllergy .
+med:Cephalexin a med:Drug ; rdfs:label "cephalexin" ; med:memberOf med:Cephalosporin ; med:partialCrossReactsWith med:PenicillinAllergy .
+med:BetaLactam a med:DrugClass ; rdfs:label "beta-lactam antibiotic" .
+med:Cephalosporin a med:DrugClass ; rdfs:label "cephalosporin" .
+med:PenicillinAllergy a med:AllergyClass ; rdfs:label "penicillin allergy" .
+
+med:DiabetesMellitus a med:Condition ; rdfs:label "type 2 diabetes" ; med:monitoring med:HbA1cMonitoring, med:RenalMonitoring, med:EyeExamMonitoring .
+med:HbA1cMonitoring a med:MonitoringNeed ; rdfs:label "HbA1c monitoring" .
+med:RenalMonitoring a med:MonitoringNeed ; rdfs:label "renal monitoring" .
+med:EyeExamMonitoring a med:MonitoringNeed ; rdfs:label "diabetic eye exam monitoring" .
+
+med:PrematureMI a med:FamilyHistoryRisk ; rdfs:label "myocardial infarction before age 50 in first-degree relative" ; med:raisesRiskFor med:CardiovascularRisk .
+med:Smoking a med:LifestyleRisk ; rdfs:label "current smoker" ; med:raisesRiskFor med:CardiovascularRisk .
+med:HighLDL a med:LabRisk ; rdfs:label "LDL cholesterol >= 160 mg/dL" ; med:raisesRiskFor med:CardiovascularRisk .
+med:MotherBreastCancerBefore50 a med:FamilyHistoryRisk ; rdfs:label "mother with breast cancer before age 50" ; med:raisesRiskFor med:HereditaryBreastCancerRisk .
+med:MaternalAuntBreastCancer a med:FamilyHistoryRisk ; rdfs:label "maternal aunt with breast cancer" ; med:raisesRiskFor med:HereditaryBreastCancerRisk .

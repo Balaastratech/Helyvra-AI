@@ -1,0 +1,44 @@
+{
+  "resourceType": "Bundle",
+  "id": "P010-recent-labs-2026-05",
+  "type": "collection",
+  "entry": [
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "P010-hba1c-2026-05",
+        "status": "final",
+        "subject": {
+          "reference": "Patient/P010"
+        },
+        "effectiveDateTime": "2026-05-08",
+        "code": {
+          "text": "HbA1c"
+        },
+        "valueQuantity": {
+          "value": 8.9,
+          "unit": "%"
+        },
+        "interpretation": [
+          {
+            "text": "high"
+          }
+        ],
+        "referenceRange": [
+          {
+            "text": "Target < 7.0 %"
+          }
+        ],
+        "note": [
+          {
+            "text": "HbA1c remains rising: 7.8 -> 8.6 -> 8.9 over 18 months."
+          }
+        ]
+      }
+    }
+  ],
+  "meta": {
+    "source": "P010_lab_recent.fhir.json",
+    "disclaimer": "Demo only - not medical advice. Synthetic data only - no real PHI."
+  }
+}

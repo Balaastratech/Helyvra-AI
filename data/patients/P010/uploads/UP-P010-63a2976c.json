@@ -1,0 +1,56 @@
+{
+  "doc_id": "UP-P010-63a2976c",
+  "date": "2024-06-12",
+  "type": "Uploaded record",
+  "author": "P010_labs_2024.csv",
+  "title": "P010_labs_2024.csv",
+  "text": "patient_id,mrn,date,test,value,unit,reference_range,flag,source\r\nP010,MRN-2010,2024-06-12,HbA1c,7.8,%,<7.0,high,P010_labs_2024.csv\r\nP010,MRN-2010,2024-06-12,LDL cholesterol,165,mg/dL,<100,high,P010_labs_2024.csv\r\nP010,MRN-2010,2024-09-05,Creatinine,1.0,mg/dL,0.7-1.3,normal,P010_labs_2024.csv\r\n",
+  "uploaded": true,
+  "asserts": [
+    {
+      "resource_type": "LabResult",
+      "subject": "lab hba1c",
+      "predicate": "measured",
+      "value": "HbA1c 7.8 %",
+      "date": "2024-06-12",
+      "source": "P010_labs_2024.csv",
+      "attributes": {
+        "analyte": "hba1c",
+        "value": 7.8,
+        "unit": "%",
+        "ref_range": "<7.0",
+        "abnormal_flag": "high"
+      }
+    },
+    {
+      "resource_type": "LabResult",
+      "subject": "lab ldl",
+      "predicate": "measured",
+      "value": "LDL cholesterol 165 mg/dL",
+      "date": "2024-06-12",
+      "source": "P010_labs_2024.csv",
+      "attributes": {
+        "analyte": "ldl",
+        "value": 165.0,
+        "unit": "mg/dL",
+        "ref_range": "<100",
+        "abnormal_flag": "high"
+      }
+    },
+    {
+      "resource_type": "LabResult",
+      "subject": "lab creatinine",
+      "predicate": "measured",
+      "value": "Creatinine 1.0 mg/dL",
+      "date": "2024-09-05",
+      "source": "P010_labs_2024.csv",
+      "attributes": {
+        "analyte": "creatinine",
+        "value": 1.0,
+        "unit": "mg/dL",
+        "ref_range": "0.7-1.3",
+        "abnormal_flag": "normal"
+      }
+    }
+  ]
+}

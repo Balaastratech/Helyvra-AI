@@ -1,0 +1,14 @@
+Demo only - not medical advice. Synthetic data only - no real PHI.
+Patient: Rahul Sharma
+MRN: MRN-2010
+Date: 2023-01-15
+
+Intake notes:
+- Current smoker: about 1 pack per day for 24 years.
+- Lifestyle: sedentary work; little structured exercise.
+- Family history: father had myocardial infarction at age 49.
+- Known diabetes since 2019; taking metformin.
+
+Expected extraction:
+Lifestyle = current smoker; sedentary.
+FamilyHistory = father myocardial infarction at age 49.

@@ -1,0 +1,58 @@
+{
+  "resourceType": "Bundle",
+  "type": "collection",
+  "entry": [
+    {
+      "resource": {
+        "resourceType": "Patient",
+        "identifier": [
+          {
+            "type": { "coding": [{ "code": "MR", "display": "Medical Record Number" }] },
+            "system": "urn:oid:hospital-mrn",
+            "value": "MRN-073310"
+          }
+        ],
+        "name": [{ "text": "Elena Vasquez", "family": "Vasquez", "given": ["Elena"] }],
+        "birthDate": "1984-07-19",
+        "gender": "female"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "AllergyIntolerance",
+        "clinicalStatus": { "coding": [{ "code": "active", "display": "Active" }] },
+        "code": { "text": "sulfa drugs" },
+        "onsetDateTime": "2025-12-01",
+        "recorder": { "display": "Dr. Nguyen" }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "MedicationStatement",
+        "status": "active",
+        "medicationCodeableConcept": { "text": "albuterol inhaler 90mcg" },
+        "effectiveDateTime": "2026-01-15",
+        "asserter": { "display": "Dr. Nguyen" }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Condition",
+        "clinicalStatus": { "coding": [{ "code": "active", "display": "Active" }] },
+        "code": { "text": "asthma" },
+        "onsetDateTime": "2025-11-20",
+        "recorder": { "display": "Dr. Nguyen" }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "category": [{ "coding": [{ "code": "laboratory", "display": "Laboratory" }] }],
+        "code": { "text": "Total IgE" },
+        "valueQuantity": { "value": 320, "unit": "IU/mL" },
+        "effectiveDateTime": "2026-02-10",
+        "performer": [{ "display": "Dr. Nguyen" }]
+      }
+    }
+  ]
+}

@@ -1,0 +1,109 @@
+{
+  "patient_id": "P010",
+  "disclaimer": "Demo only - not medical advice. Synthetic data only - no real PHI.",
+  "documents": [
+    {
+      "file": "P010_discharge_2019.pdf",
+      "format": "PDF narrative",
+      "date": "2019-03-18",
+      "facts": [
+        "Type 2 diabetes diagnosed",
+        "Metformin 500mg started"
+      ]
+    },
+    {
+      "file": "P010_discharge_2021.pdf",
+      "format": "PDF narrative",
+      "date": "2021-08-09",
+      "facts": [
+        "Penicillin allergy with rash + breathing difficulty; severe"
+      ],
+      "citation_target": {
+        "page": 2,
+        "expected_quote": "Allergy: Penicillin - reaction includes rash and breathing difficulty. Severity: severe."
+      }
+    },
+    {
+      "file": "P010_family_history.json",
+      "format": "FHIR FamilyMemberHistory",
+      "date": "2023-01-15",
+      "facts": [
+        "Father myocardial infarction at age 49"
+      ]
+    },
+    {
+      "file": "P010_intake_form.txt",
+      "format": "free text",
+      "date": "2023-01-15",
+      "facts": [
+        "Current smoker",
+        "Sedentary"
+      ]
+    },
+    {
+      "file": "P010_labs_2024.csv",
+      "format": "CSV",
+      "date": "2024-06-12/2024-09-05",
+      "facts": [
+        "HbA1c 7.8 high",
+        "LDL 165 high",
+        "Creatinine 1.0 normal"
+      ]
+    },
+    {
+      "file": "P010_lab_hba1c_2025.pdf",
+      "format": "PDF lab report",
+      "date": "2025-06-18",
+      "facts": [
+        "HbA1c 8.6 high"
+      ]
+    },
+    {
+      "file": "P010_lab_renal_2025.pdf",
+      "format": "PDF lab report",
+      "date": "2025-12-04",
+      "facts": [
+        "Creatinine 1.6 high",
+        "No nephrology follow-up after 2025-12-03"
+      ]
+    },
+    {
+      "file": "P010_lab_recent.fhir.json",
+      "format": "FHIR Observation bundle",
+      "date": "2026-05-08",
+      "facts": [
+        "HbA1c 8.9 high; rising trend"
+      ]
+    },
+    {
+      "file": "P010_prescription_scan.png",
+      "format": "scanned image",
+      "date": "2026-06-01",
+      "facts": [
+        "Amoxicillin prescription scan"
+      ],
+      "ingest_expected": "needs-verification"
+    }
+  ],
+  "expected_open_checks": [
+    {
+      "id": "renal-gap",
+      "severity": "warning",
+      "expected": "Creatinine 1.0 -> 1.6, no nephrology follow-up after 2025-12"
+    },
+    {
+      "id": "hba1c-rising",
+      "severity": "warning",
+      "expected": "HbA1c 7.8 -> 8.6 -> 8.9 over 18 months"
+    },
+    {
+      "id": "combined-cv-risk",
+      "severity": "warning",
+      "expected": "Father MI <50 + current smoker + LDL 165"
+    }
+  ],
+  "expected_prescribe_amoxicillin": {
+    "severity": "critical",
+    "expected": "penicillin allergy cross-reactivity with beta-lactam; cite P010_discharge_2021.pdf page 2"
+  }
+}

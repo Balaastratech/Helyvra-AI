@@ -1,0 +1,104 @@
+{
+  "doc_id": "UP-P010-2bdc61fc",
+  "date": "2019-03-01",
+  "type": "Uploaded record",
+  "author": "P010_discharge_2021.pdf",
+  "title": "P010_discharge_2021.pdf",
+  "text": "Demo only - not medical advice. Synthetic data only - no real PHI.\nPage 1\nP010 Rahul Sharma - MRN-2010\n Discharge Summary - Rahul Sharma\nDemo only - not medical advice. Synthetic data only - no real PHI.\nEncounter - Page 1\nEncounter date: 2021-08-09. Treated for acute sinusitis with antibiotic review. Diabetes remains active problem.\nMetformin continued. No hospitalization complications.\nProblem List - Page 1\nDate\nResource type\nFact\n2019-03\nCondition\nType 2 diabetes mellitus\n2019-03\nMedication\nMetformin 500 mg twice daily\n\n\nDemo only - not medical advice. Synthetic data only - no real PHI.\nPage 2\nP010 Rahul Sharma - MRN-2010\nAllergy Review - Page 2 Citation Target\nAllergy: Penicillin - reaction includes rash and breathing difficulty. Severity: severe. Date recorded: 2021-08.\nClinician instruction: avoid penicillin-class antibiotics and review beta-lactam alternatives before prescribing.\nThis is the canonical citation target for the amoxicillin safety check. Expected citation: P010_discharge_2021.pdf\npage 2.\nDischarge Instructions - Page 2\nContinue metformin. Follow up with primary care. Document allergy alert in medication reconciliation.\n",
+  "uploaded": true,
+  "asserts": [
+    {
+      "resource_type": "Condition",
+      "subject": "diagnosis",
+      "predicate": "diagnosed",
+      "value": "Type 2 diabetes mellitus",
+      "date": "2019-03",
+      "source": "P010_discharge_2021.pdf",
+      "attributes": {
+        "condition": "type 2 diabetes mellitus"
+      },
+      "raw_text": "Demo only - not medical advice. Synthetic data only - no real PHI.\nPage 1\nP010 Rahul Sharma - MRN-2010\n Discharge Summary - Rahul Sharma\nDemo only - not medical advice. Synthetic data only - no real PHI.\nEncounter - Page 1\nEncounter date: 2021-08-09. Treated for acute sinusitis with antibiotic review. Diabetes remains active problem.\nMetformin continued. No hospitalization complications.\nProblem List - Page 1\nDate\nResource type\nFact\n2019-03\nCondition\nType 2 diabetes mellitus\n2019-03\nMedication\nMetformin 500 mg twice daily\n",
+      "page": 1
+    },
+    {
+      "resource_type": "Medication",
+      "subject": "medication",
+      "predicate": "prescribed",
+      "value": "Metformin 500 mg twice daily",
+      "date": "2019-03",
+      "source": "P010_discharge_2021.pdf",
+      "attributes": {
+        "drug": "metformin 500 mg twice daily"
+      },
+      "raw_text": "Demo only - not medical advice. Synthetic data only - no real PHI.\nPage 1\nP010 Rahul Sharma - MRN-2010\n Discharge Summary - Rahul Sharma\nDemo only - not medical advice. Synthetic data only - no real PHI.\nEncounter - Page 1\nEncounter date: 2021-08-09. Treated for acute sinusitis with antibiotic review. Diabetes remains active problem.\nMetformin continued. No hospitalization complications.\nProblem List - Page 1\nDate\nResource type\nFact\n2019-03\nCondition\nType 2 diabetes mellitus\n2019-03\nMedication\nMetformin 500 mg twice daily\n",
+      "page": 1
+    },
+    {
+      "resource_type": "Condition",
+      "subject": "diagnosis",
+      "predicate": "diagnosed",
+      "value": "acute sinusitis",
+      "date": "2021-08-09",
+      "source": "P010_discharge_2021.pdf",
+      "attributes": {
+        "condition": "acute sinusitis"
+      },
+      "raw_text": "Demo only - not medical advice. Synthetic data only - no real PHI.\nPage 1\nP010 Rahul Sharma - MRN-2010\n Discharge Summary - Rahul Sharma\nDemo only - not medical advice. Synthetic data only - no real PHI.\nEncounter - Page 1\nEncounter date: 2021-08-09. Treated for acute sinusitis with antibiotic review. Diabetes remains active problem.\nMetformin continued. No hospitalization complications.\nProblem List - Page 1\nDate\nResource type\nFact\n2019-03\nCondition\nType 2 diabetes mellitus\n2019-03\nMedication\nMetformin 500 mg twice daily\n",
+      "page": 1
+    },
+    {
+      "resource_type": "Condition",
+      "subject": "diagnosis",
+      "predicate": "diagnosed",
+      "value": "Type 2 diabetes mellitus",
+      "date": "2021-08-09",
+      "source": "P010_discharge_2021.pdf",
+      "attributes": {
+        "condition": "type 2 diabetes mellitus"
+      },
+      "raw_text": "Demo only - not medical advice. Synthetic data only - no real PHI.\nPage 1\nP010 Rahul Sharma - MRN-2010\n Discharge Summary - Rahul Sharma\nDemo only - not medical advice. Synthetic data only - no real PHI.\nEncounter - Page 1\nEncounter date: 2021-08-09. Treated for acute sinusitis with antibiotic review. Diabetes remains active problem.\nMetformin continued. No hospitalization complications.\nProblem List - Page 1\nDate\nResource type\nFact\n2019-03\nCondition\nType 2 diabetes mellitus\n2019-03\nMedication\nMetformin 500 mg twice daily\n",
+      "page": 1
+    },
+    {
+      "resource_type": "Medication",
+      "subject": "medication",
+      "predicate": "prescribed",
+      "value": "Metformin 500 mg twice daily",
+      "date": "2021-08-09",
+      "source": "P010_discharge_2021.pdf",
+      "attributes": {
+        "drug": "metformin 500 mg twice daily"
+      },
+      "raw_text": "Demo only - not medical advice. Synthetic data only - no real PHI.\nPage 1\nP010 Rahul Sharma - MRN-2010\n Discharge Summary - Rahul Sharma\nDemo only - not medical advice. Synthetic data only - no real PHI.\nEncounter - Page 1\nEncounter date: 2021-08-09. Treated for acute sinusitis with antibiotic review. Diabetes remains active problem.\nMetformin continued. No hospitalization complications.\nProblem List - Page 1\nDate\nResource type\nFact\n2019-03\nCondition\nType 2 diabetes mellitus\n2019-03\nMedication\nMetformin 500 mg twice daily\n",
+      "page": 1
+    },
+    {
+      "resource_type": "Allergy",
+      "subject": "allergy",
+      "predicate": "diagnosed",
+      "value": "Penicillin",
+      "date": "2021-08-01",
+      "source": "P010_discharge_2021.pdf",
+      "attributes": {
+        "substance": "penicillin",
+        "reaction": "rash and breathing difficulty",
+        "severity": "severe"
+      },
+      "raw_text": "Demo only - not medical advice. Synthetic data only - no real PHI.\nPage 2\nP010 Rahul Sharma - MRN-2010\nAllergy Review - Page 2 Citation Target\nAllergy: Penicillin - reaction includes rash and breathing difficulty. Severity: severe. Date recorded: 2021-08.\nClinician instruction: avoid penicillin-class antibiotics and review beta-lactam alternatives before prescribing.\nThis is the canonical citation target for the amoxicillin safety check. Expected citation: P010_discharge_2021.pdf\npage 2.\nDischarge Instructions - Page 2\nContinue metformin. Follow up with primary care. Document allergy alert in medication reconciliation.\n",
+      "page": 2
+    },
+    {
+      "resource_type": "Medication",
+      "subject": "medication",
+      "predicate": "prescribed",
+      "value": "metformin",
+      "date": "2021-08-01",
+      "source": "P010_discharge_2021.pdf",
+      "attributes": {
+        "drug": "metformin"
+      },
+      "raw_text": "Demo only - not medical advice. Synthetic data only - no real PHI.\nPage 2\nP010 Rahul Sharma - MRN-2010\nAllergy Review - Page 2 Citation Target\nAllergy: Penicillin - reaction includes rash and breathing difficulty. Severity: severe. Date recorded: 2021-08.\nClinician instruction: avoid penicillin-class antibiotics and review beta-lactam alternatives before prescribing.\nThis is the canonical citation target for the amoxicillin safety check. Expected citation: P010_discharge_2021.pdf\npage 2.\nDischarge Instructions - Page 2\nContinue metformin. Follow up with primary care. Document allergy alert in medication reconciliation.\n",
+      "page": 2
+    }
+  ]
+}

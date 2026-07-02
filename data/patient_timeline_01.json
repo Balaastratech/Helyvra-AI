@@ -1,0 +1,61 @@
+{
+  "patient_id": "P001",
+  "name": "Synthetic Patient (demo only — not real PHI)",
+  "facts": [
+    {
+      "date": "2026-01-10",
+      "subject": "allergy",
+      "predicate": "diagnosed",
+      "value": "penicillin",
+      "source": "Dr. Adams",
+      "text": "On 2026-01-10, patient P001 was diagnosed with a penicillin allergy by Dr. Adams."
+    },
+    {
+      "date": "2026-02-15",
+      "subject": "medication",
+      "predicate": "prescribed",
+      "value": "lisinopril 10mg",
+      "source": "Dr. Adams",
+      "text": "On 2026-02-15, patient P001 was prescribed lisinopril 10mg for hypertension."
+    },
+    {
+      "date": "2026-03-02",
+      "subject": "allergy",
+      "predicate": "cleared",
+      "value": "penicillin",
+      "source": "Dr. Lee",
+      "supersedes": "2026-01-10",
+      "hold_back": true,
+      "text": "On 2026-03-02, patient P001's penicillin allergy was cleared after a negative re-test by Dr. Lee."
+    },
+    {
+      "date": "2026-04-20",
+      "subject": "medication",
+      "predicate": "switched",
+      "value": "amlodipine 5mg",
+      "source": "Dr. Lee",
+      "supersedes": "2026-02-15",
+      "hold_back": true,
+      "text": "On 2026-04-20, patient P001 stopped lisinopril and switched to amlodipine 5mg."
+    },
+    {
+      "date": "2026-05-11",
+      "subject": "diagnosis",
+      "predicate": "added",
+      "value": "type 2 diabetes",
+      "source": "Dr. Patel",
+      "text": "On 2026-05-11, patient P001 was diagnosed with type 2 diabetes by Dr. Patel."
+    }
+  ],
+  "demo_questions": [
+    {
+      "ask": "Is the patient allergic to penicillin?",
+      "naive_risk": "may answer 'yes' from the 2026-01-10 fact (DANGEROUS)",
+      "correct": "No — allergy was cleared on 2026-03-02."
+    },
+    {
+      "ask": "What blood-pressure medication is the patient on?",
+      "correct": "amlodipine 5mg (switched from lisinopril on 2026-04-20)."
+    }
+  ]
+}

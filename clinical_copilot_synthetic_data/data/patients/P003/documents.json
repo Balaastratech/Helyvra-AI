@@ -1,0 +1,15 @@
+{
+  "patient_id": "P003",
+  "disclaimer": "Demo only - not medical advice. Synthetic data only - no real PHI.",
+  "documents": [
+    {
+      "file": "P003_erroneous_dx.txt",
+      "format": "free text",
+      "facts": [
+        "entered-in-error CKD",
+        "true active asthma"
+      ]
+    }
+  ],
+  "expected_forget": "Remove erroneous dx; fact vanishes; audit row written."
+}

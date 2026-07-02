@@ -1,0 +1,5 @@
+Demo only - not medical advice. Synthetic data only - no real PHI.
+Patient: Priya Mehta (P011), 34F, MRN-2011
+Date: 2026-02-14
+Visit note: mild intermittent asthma. Uses salbutamol inhaler as needed. Pregnant, estimated gestational age 18 weeks. No drug allergies documented. No penicillin allergy on record for this patient.
+Isolation assertion: asking about Rahul's allergy while scoped to Priya should not reveal Rahul's data.

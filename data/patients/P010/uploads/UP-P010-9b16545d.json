@@ -1,0 +1,43 @@
+{
+  "doc_id": "UP-P010-9b16545d",
+  "date": "2024-06-12",
+  "type": "Uploaded record",
+  "author": "P010_lab_hba1c_2025.pdf",
+  "title": "P010_lab_hba1c_2025.pdf",
+  "text": "Demo only - not medical advice. Synthetic data only - no real PHI.\nPage 1\nP010 Rahul Sharma - MRN-2010\n Lab Report - HbA1c\nDemo only - not medical advice. Synthetic data only - no real PHI.\nSpecimen\nCollection date: 2025-06-17. Report date: 2025-06-18.\nResult Table\nDate\nTest\nResult\n2025-06-17\nHbA1c\n8.6 % - high; reference target < 7.0 %\nInterpretive note\nHbA1c has risen compared with prior value 7.8 % from 2024-06-12. Trend check expected to warn if later value\nremains higher.\n",
+  "uploaded": true,
+  "asserts": [
+    {
+      "resource_type": "LabResult",
+      "subject": "lab hba1c",
+      "predicate": "measured",
+      "value": "HbA1c 8.6 %",
+      "date": "2025-06-17",
+      "source": "P010_lab_hba1c_2025.pdf",
+      "attributes": {
+        "analyte": "hba1c",
+        "value": 8.6,
+        "unit": "%",
+        "ref_range": "< 7.0 %",
+        "abnormal_flag": "high"
+      },
+      "raw_text": "Demo only - not medical advice. Synthetic data only - no real PHI.\nPage 1\nP010 Rahul Sharma - MRN-2010\n Lab Report - HbA1c\nDemo only - not medical advice. Synthetic data only - no real PHI.\nSpecimen\nCollection date: 2025-06-17. Report date: 2025-06-18.\nResult Table\nDate\nTest\nResult\n2025-06-17\nHbA1c\n8.6 % - high; reference target < 7.0 %\nInterpretive note\nHbA1c has risen compared with prior value 7.8 % from 2024-06-12. Trend check expected to warn if later value\nremains higher.\n",
+      "page": 1
+    },
+    {
+      "resource_type": "LabResult",
+      "subject": "lab hba1c",
+      "predicate": "measured",
+      "value": "HbA1c 7.8 %",
+      "date": "2024-06-12",
+      "source": "P010_lab_hba1c_2025.pdf",
+      "attributes": {
+        "analyte": "hba1c",
+        "value": 7.8,
+        "unit": "%"
+      },
+      "raw_text": "Demo only - not medical advice. Synthetic data only - no real PHI.\nPage 1\nP010 Rahul Sharma - MRN-2010\n Lab Report - HbA1c\nDemo only - not medical advice. Synthetic data only - no real PHI.\nSpecimen\nCollection date: 2025-06-17. Report date: 2025-06-18.\nResult Table\nDate\nTest\nResult\n2025-06-17\nHbA1c\n8.6 % - high; reference target < 7.0 %\nInterpretive note\nHbA1c has risen compared with prior value 7.8 % from 2024-06-12. Trend check expected to warn if later value\nremains higher.\n",
+      "page": 1
+    }
+  ]
+}

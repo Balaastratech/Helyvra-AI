@@ -1,0 +1,25 @@
+{
+  "doctors": [
+    {
+      "doctor_id": "dr_mehta",
+      "name": "Dr. Anjali Mehta",
+      "specialty": "Internal Medicine",
+      "role": "doctor",
+      "patients": ["P001", "P002", "P003", "P010", "P011", "P012", "P013"]
+    },
+    {
+      "doctor_id": "dr_rao",
+      "name": "Dr. Vikram Rao",
+      "specialty": "Cardiology",
+      "role": "doctor",
+      "patients": ["P002", "P010"]
+    },
+    {
+      "doctor_id": "nurse_kim",
+      "name": "Nurse Grace Kim",
+      "specialty": "Triage",
+      "role": "nurse",
+      "patients": ["P001", "P003"]
+    }
+  ]
+}

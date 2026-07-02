@@ -1,0 +1,66 @@
+{
+  "doc_id": "UP-P008-1d9ccbcc",
+  "date": "2026-07-01",
+  "type": "Uploaded record",
+  "author": "P020_intake_form.txt",
+  "title": "P020_intake_form.txt",
+  "text": "New patient intake — Arjun Sharma, DOB 1999-06-01, MRN-2020.\r\nReason for visit: routine check, family history review.\r\nLifestyle: non-smoker, exercises weekly.\r\nFamily history: Father — Rahul Sharma — has type 2 diabetes and had a myocardial\r\ninfarction at age 49. Mother — no significant history.\r\nDemo only — synthetic data, not medical advice.",
+  "uploaded": true,
+  "asserts": [
+    {
+      "resource_type": "Lifestyle",
+      "subject": "lifestyle",
+      "predicate": "reported",
+      "value": "non-smoker",
+      "date": "2026-07-01",
+      "source": "P020_intake_form.txt",
+      "attributes": {
+        "factor": "smoking",
+        "value": "non-smoker"
+      },
+      "raw_text": "New patient intake — Arjun Sharma, DOB 1999-06-01, MRN-2020.\r\nReason for visit: routine check, family history review.\r\nLifestyle: non-smoker, exercises weekly.\r\nFamily history: Father — Rahul Sharma — has type 2 diabetes and had a myocardial\r\ninfarction at age 49. Mother — no significant history.\r\nDemo only — synthetic data, not medical advice."
+    },
+    {
+      "resource_type": "Lifestyle",
+      "subject": "lifestyle",
+      "predicate": "reported",
+      "value": "exercises weekly",
+      "date": "2026-07-01",
+      "source": "P020_intake_form.txt",
+      "attributes": {
+        "factor": "exercise",
+        "value": "exercises weekly"
+      },
+      "raw_text": "New patient intake — Arjun Sharma, DOB 1999-06-01, MRN-2020.\r\nReason for visit: routine check, family history review.\r\nLifestyle: non-smoker, exercises weekly.\r\nFamily history: Father — Rahul Sharma — has type 2 diabetes and had a myocardial\r\ninfarction at age 49. Mother — no significant history.\r\nDemo only — synthetic data, not medical advice."
+    },
+    {
+      "resource_type": "FamilyHistory",
+      "subject": "family",
+      "predicate": "reported",
+      "value": "Father: type 2 diabetes",
+      "date": "2026-07-01",
+      "source": "P020_intake_form.txt",
+      "attributes": {
+        "relation": "father",
+        "condition": "type 2 diabetes",
+        "relative_name": "Rahul Sharma"
+      },
+      "raw_text": "New patient intake — Arjun Sharma, DOB 1999-06-01, MRN-2020.\r\nReason for visit: routine check, family history review.\r\nLifestyle: non-smoker, exercises weekly.\r\nFamily history: Father — Rahul Sharma — has type 2 diabetes and had a myocardial\r\ninfarction at age 49. Mother — no significant history.\r\nDemo only — synthetic data, not medical advice."
+    },
+    {
+      "resource_type": "FamilyHistory",
+      "subject": "family",
+      "predicate": "reported",
+      "value": "Father: myocardial infarction (age 49)",
+      "date": "2026-07-01",
+      "source": "P020_intake_form.txt",
+      "attributes": {
+        "relation": "father",
+        "condition": "myocardial infarction",
+        "age_at_onset": 49,
+        "relative_name": "Rahul Sharma"
+      },
+      "raw_text": "New patient intake — Arjun Sharma, DOB 1999-06-01, MRN-2020.\r\nReason for visit: routine check, family history review.\r\nLifestyle: non-smoker, exercises weekly.\r\nFamily history: Father — Rahul Sharma — has type 2 diabetes and had a myocardial\r\ninfarction at age 49. Mother — no significant history.\r\nDemo only — synthetic data, not medical advice."
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "links": [
+    {
+      "patient_id": "P008",
+      "relative_id": "P010",
+      "relation": "father",
+      "confidence": "high",
+      "consent": true,
+      "proposed": false
+    },
+    {
+      "patient_id": "P010",
+      "relative_id": "P008",
+      "relation": "child",
+      "confidence": "high",
+      "consent": true,
+      "proposed": false
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "resourceType": "Bundle",
+  "type": "collection",
+  "entry": [
+    {
+      "resource": {
+        "resourceType": "Patient",
+        "identifier": [
+          {
+            "type": { "coding": [{ "code": "MR", "display": "Medical Record Number" }] },
+            "system": "urn:oid:hospital-mrn",
+            "value": "MRN-004471"
+          }
+        ],
+        "name": [{ "text": "Margaret Chen", "family": "Chen", "given": ["Margaret"] }],
+        "birthDate": "1958-03-12",
+        "gender": "female"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Condition",
+        "clinicalStatus": { "coding": [{ "code": "active", "display": "Active" }] },
+        "code": { "text": "chronic kidney disease stage 2" },
+        "onsetDateTime": "2026-06-05",
+        "recorder": { "display": "Dr. Patel" }
+      }
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+Demo only - not medical advice. Synthetic data only - no real PHI.
+Patient: Margaret Chen (P001)
+Date: 2026-04-20
+Live ingest correction - hold_back true.
+Lisinopril stopped due to cough. Amlodipine 5 mg daily started. This supersedes lisinopril 10 mg daily from 2026-02-15.

@@ -1,0 +1,75 @@
+{
+  "doc_id": "UP-P010-f2aaaeba",
+  "date": "2019-01-01",
+  "type": "Uploaded record",
+  "author": "P010_intake_form.txt",
+  "title": "P010_intake_form.txt",
+  "text": "Demo only - not medical advice. Synthetic data only - no real PHI.\nPatient: Rahul Sharma\nMRN: MRN-2010\nDate: 2023-01-15\n\nIntake notes:\n- Current smoker: about 1 pack per day for 24 years.\n- Lifestyle: sedentary work; little structured exercise.\n- Family history: father had myocardial infarction at age 49.\n- Known diabetes since 2019; taking metformin.\n\nExpected extraction:\nLifestyle = current smoker; sedentary.\nFamilyHistory = father myocardial infarction at age 49.",
+  "uploaded": true,
+  "asserts": [
+    {
+      "resource_type": "Lifestyle",
+      "subject": "lifestyle",
+      "predicate": "reported",
+      "value": "current smoker, 1 pack per day for 24 years",
+      "date": "2023-01-15",
+      "source": "P010_intake_form.txt",
+      "attributes": {
+        "factor": "smoking",
+        "value": "current smoker, 1 pack per day for 24 years"
+      },
+      "raw_text": "Demo only - not medical advice. Synthetic data only - no real PHI.\nPatient: Rahul Sharma\nMRN: MRN-2010\nDate: 2023-01-15\n\nIntake notes:\n- Current smoker: about 1 pack per day for 24 years.\n- Lifestyle: sedentary work; little structured exercise.\n- Family history: father had myocardial infarction at age 49.\n- Known diabetes since 2019; taking metformin.\n\nExpected extraction:\nLifestyle = current smoker; sedentary.\nFamilyHistory = father myocardial infarction at age 49."
+    },
+    {
+      "resource_type": "Lifestyle",
+      "subject": "lifestyle",
+      "predicate": "reported",
+      "value": "sedentary work; little structured exercise",
+      "date": "2023-01-15",
+      "source": "P010_intake_form.txt",
+      "attributes": {
+        "factor": "exercise",
+        "value": "sedentary work; little structured exercise"
+      },
+      "raw_text": "Demo only - not medical advice. Synthetic data only - no real PHI.\nPatient: Rahul Sharma\nMRN: MRN-2010\nDate: 2023-01-15\n\nIntake notes:\n- Current smoker: about 1 pack per day for 24 years.\n- Lifestyle: sedentary work; little structured exercise.\n- Family history: father had myocardial infarction at age 49.\n- Known diabetes since 2019; taking metformin.\n\nExpected extraction:\nLifestyle = current smoker; sedentary.\nFamilyHistory = father myocardial infarction at age 49."
+    },
+    {
+      "resource_type": "FamilyHistory",
+      "subject": "family",
+      "predicate": "reported",
+      "value": "Father: myocardial infarction (age 49)",
+      "date": "2023-01-15",
+      "source": "P010_intake_form.txt",
+      "attributes": {
+        "relation": "father",
+        "condition": "myocardial infarction",
+        "age_at_onset": 49
+      },
+      "raw_text": "Demo only - not medical advice. Synthetic data only - no real PHI.\nPatient: Rahul Sharma\nMRN: MRN-2010\nDate: 2023-01-15\n\nIntake notes:\n- Current smoker: about 1 pack per day for 24 years.\n- Lifestyle: sedentary work; little structured exercise.\n- Family history: father had myocardial infarction at age 49.\n- Known diabetes since 2019; taking metformin.\n\nExpected extraction:\nLifestyle = current smoker; sedentary.\nFamilyHistory = father myocardial infarction at age 49."
+    },
+    {
+      "resource_type": "Condition",
+      "subject": "diagnosis",
+      "predicate": "diagnosed",
+      "value": "diabetes",
+      "date": "2019-01-01",
+      "source": "P010_intake_form.txt",
+      "attributes": {
+        "condition": "diabetes"
+      },
+      "raw_text": "Demo only - not medical advice. Synthetic data only - no real PHI.\nPatient: Rahul Sharma\nMRN: MRN-2010\nDate: 2023-01-15\n\nIntake notes:\n- Current smoker: about 1 pack per day for 24 years.\n- Lifestyle: sedentary work; little structured exercise.\n- Family history: father had myocardial infarction at age 49.\n- Known diabetes since 2019; taking metformin.\n\nExpected extraction:\nLifestyle = current smoker; sedentary.\nFamilyHistory = father myocardial infarction at age 49."
+    },
+    {
+      "resource_type": "Medication",
+      "subject": "medication",
+      "predicate": "prescribed",
+      "value": "metformin",
+      "date": "2023-01-15",
+      "source": "P010_intake_form.txt",
+      "attributes": {
+        "drug": "metformin"
+      },
+      "raw_text": "Demo only - not medical advice. Synthetic data only - no real PHI.\nPatient: Rahul Sharma\nMRN: MRN-2010\nDate: 2023-01-15\n\nIntake notes:\n- Current smoker: about 1 pack per day for 24 years.\n- Lifestyle: sedentary work; little structured exercise.\n- Family history: father had myocardial infarction at age 49.\n- Known diabetes since 2019; taking metformin.\n\nExpected extraction:\nLifestyle = current smoker; sedentary.\nFamilyHistory = father myocardial infarction at age 49."
+    }
+  ]
+}

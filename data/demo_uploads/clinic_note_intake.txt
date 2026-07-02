@@ -1,0 +1,10 @@
+SUNRISE FAMILY CLINIC — New Patient Intake Note
+Demo only — synthetic data, not medical advice. No real PHI.
+
+Patient: Rahul Sharma   MRN: RH-4471   DOB: 1974-02-03
+Date: 2024-06-12
+
+History: Type 2 diabetes mellitus diagnosed in 2019, currently on metformin 500 mg twice daily. Hypertension — started on lisinopril 10 mg daily in 2024-02.
+Lifestyle: Current smoker (about 1 pack/day), sedentary, limited exercise.
+Labs today: LDL cholesterol 165 mg/dL (high).
+Family history: Father had a heart attack (myocardial infarction) at age 49. Mother — no significant history.

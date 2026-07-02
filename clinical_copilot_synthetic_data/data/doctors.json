@@ -1,0 +1,27 @@
+{
+  "generated_at": "2026-06-30",
+  "disclaimer": "Demo only - not medical advice. Synthetic data only - no real PHI.",
+  "doctors": [
+    {
+      "doctor_id": "D001",
+      "name": "Dr. Anya Sharma",
+      "role": "General Practitioner",
+      "email": "anya.sharma@example.test",
+      "login_demo_pin": "111111"
+    },
+    {
+      "doctor_id": "D002",
+      "name": "Dr. Victor Lee",
+      "role": "Allergy Specialist",
+      "email": "victor.lee@example.test",
+      "login_demo_pin": "222222"
+    },
+    {
+      "doctor_id": "D003",
+      "name": "Dr. Maya Patel",
+      "role": "Cardiology Specialist",
+      "email": "maya.patel@example.test",
+      "login_demo_pin": "333333"
+    }
+  ]
+}

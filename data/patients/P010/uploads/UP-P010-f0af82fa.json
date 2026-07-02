@@ -1,0 +1,43 @@
+{
+  "doc_id": "UP-P010-f0af82fa",
+  "date": "2024-09-05",
+  "type": "Uploaded record",
+  "author": "P010_lab_renal_2025.pdf",
+  "title": "P010_lab_renal_2025.pdf",
+  "text": "Demo only - not medical advice. Synthetic data only - no real PHI.\nPage 1\nP010 Rahul Sharma - MRN-2010\n Lab Report - Renal Function\nDemo only - not medical advice. Synthetic data only - no real PHI.\nSpecimen\nCollection date: 2025-12-03. Report date: 2025-12-04.\nResult Table\nDate\nTest\nResult\n2025-12-03\nCreatinine\n1.6 mg/dL - high; reference 0.7-1.3 mg/dL\nInterpretive note\nCreatinine rose from 1.0 mg/dL on 2024-09-05 to 1.6 mg/dL on 2025-12-03. In this synthetic chart there is\nintentionally no nephrology follow-up note after 2025-12-03.\n",
+  "uploaded": true,
+  "asserts": [
+    {
+      "resource_type": "LabResult",
+      "subject": "lab creatinine",
+      "predicate": "measured",
+      "value": "Creatinine 1.0 mg/dL",
+      "date": "2024-09-05",
+      "source": "P010_lab_renal_2025.pdf",
+      "attributes": {
+        "analyte": "creatinine",
+        "value": 1.0,
+        "unit": "mg/dL"
+      },
+      "raw_text": "Demo only - not medical advice. Synthetic data only - no real PHI.\nPage 1\nP010 Rahul Sharma - MRN-2010\n Lab Report - Renal Function\nDemo only - not medical advice. Synthetic data only - no real PHI.\nSpecimen\nCollection date: 2025-12-03. Report date: 2025-12-04.\nResult Table\nDate\nTest\nResult\n2025-12-03\nCreatinine\n1.6 mg/dL - high; reference 0.7-1.3 mg/dL\nInterpretive note\nCreatinine rose from 1.0 mg/dL on 2024-09-05 to 1.6 mg/dL on 2025-12-03. In this synthetic chart there is\nintentionally no nephrology follow-up note after 2025-12-03.\n",
+      "page": 1
+    },
+    {
+      "resource_type": "LabResult",
+      "subject": "lab creatinine",
+      "predicate": "measured",
+      "value": "Creatinine 1.6 mg/dL",
+      "date": "2025-12-03",
+      "source": "P010_lab_renal_2025.pdf",
+      "attributes": {
+        "analyte": "creatinine",
+        "value": 1.6,
+        "unit": "mg/dL",
+        "ref_range": "0.7-1.3 mg/dL",
+        "abnormal_flag": "high"
+      },
+      "raw_text": "Demo only - not medical advice. Synthetic data only - no real PHI.\nPage 1\nP010 Rahul Sharma - MRN-2010\n Lab Report - Renal Function\nDemo only - not medical advice. Synthetic data only - no real PHI.\nSpecimen\nCollection date: 2025-12-03. Report date: 2025-12-04.\nResult Table\nDate\nTest\nResult\n2025-12-03\nCreatinine\n1.6 mg/dL - high; reference 0.7-1.3 mg/dL\nInterpretive note\nCreatinine rose from 1.0 mg/dL on 2024-09-05 to 1.6 mg/dL on 2025-12-03. In this synthetic chart there is\nintentionally no nephrology follow-up note after 2025-12-03.\n",
+      "page": 1
+    }
+  ]
+}

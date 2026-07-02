@@ -1,0 +1,96 @@
+{
+  "generated_at": "2026-06-30",
+  "disclaimer": "Demo only - not medical advice. Synthetic data only - no real PHI.",
+  "assertions": [
+    {
+      "id": 1,
+      "feature": "Pre-visit brief",
+      "patient_action": "open P010",
+      "expected": "summary + exactly 3 Top cards: renal gap, HbA1c trend, CV risk; each cited"
+    },
+    {
+      "id": 2,
+      "feature": "Allergy-before-prescribe",
+      "patient_action": "P010 prescribe amoxicillin?",
+      "expected": "critical card; cites penicillin -> beta-lactam and P010_discharge_2021.pdf page 2"
+    },
+    {
+      "id": 3,
+      "feature": "Missed follow-up",
+      "patient_action": "P010 brief / abnormal labs not acted on",
+      "expected": "creatinine 1.0 -> 1.6; no nephrology note after 2025-12"
+    },
+    {
+      "id": 4,
+      "feature": "Combined risk",
+      "patient_action": "P010 why CV risk?",
+      "expected": "father MI<50 + smoking + LDL 165, each with citation"
+    },
+    {
+      "id": 5,
+      "feature": "Self-heal supersession",
+      "patient_action": "P001 ingest allergy cleared",
+      "expected": "old fact greys + REDACTED; answer flips to cleared 2026-03-02"
+    },
+    {
+      "id": 6,
+      "feature": "Temporal rewind",
+      "patient_action": "P001 scrub to Feb",
+      "expected": "allergy active as of February 2026"
+    },
+    {
+      "id": 7,
+      "feature": "Why-trace",
+      "patient_action": "P001 click allergy",
+      "expected": "superseded 2026-03-02 by Dr. Lee re-test"
+    },
+    {
+      "id": 8,
+      "feature": "Compare villain",
+      "patient_action": "P010 amoxicillin Compare tab",
+      "expected": "naive says fine to prescribe; Total Recall says no - allergy"
+    },
+    {
+      "id": 9,
+      "feature": "Forget/retract",
+      "patient_action": "P003 remove erroneous dx",
+      "expected": "fact vanishes; wrongly superseded fact restored; audit row written"
+    },
+    {
+      "id": 10,
+      "feature": "Disambiguation",
+      "patient_action": "type Rahul Sharma",
+      "expected": "two-match selector: P010 52M vs P012 31M"
+    },
+    {
+      "id": 11,
+      "feature": "Isolation/no-leak",
+      "patient_action": "in P011, ask Rahul's allergy",
+      "expected": "no penicillin allergy on record for Priya Mehta; no leak"
+    },
+    {
+      "id": 12,
+      "feature": "Multi-format intake",
+      "patient_action": "drag each sample_uploads/*",
+      "expected": "text/PDF/CSV/FHIR ingest correctly; PNG -> needs-verification"
+    },
+    {
+      "id": 13,
+      "feature": "FHIR structured",
+      "patient_action": "upload *.fhir.json",
+      "expected": "resources map to facts with no LLM, correct types"
+    },
+    {
+      "id": 14,
+      "feature": "Hereditary variety",
+      "patient_action": "open P013",
+      "expected": "hereditary breast cancer risk card distinct from CV"
+    },
+    {
+      "id": 15,
+      "feature": "Access/audit",
+      "patient_action": "doctor opens non-allowed patient",
+      "expected": "refused + audit row written"
+    }
+  ]
+}

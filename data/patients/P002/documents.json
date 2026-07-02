@@ -1,0 +1,60 @@
+{
+  "patient_id": "P002",
+  "documents": [
+    {
+      "doc_id": "DOC-P002-01",
+      "date": "2025-11-03",
+      "type": "Cardiology Note",
+      "author": "Dr. Okafor",
+      "title": "Atrial fibrillation diagnosed",
+      "text": "On 2025-11-03, James O'Sullivan (MRN-008830) presented with palpitations. ECG confirmed atrial fibrillation. Dr. Okafor initiated anticoagulation planning.",
+      "asserts": [
+        { "subject": "diagnosis", "predicate": "added", "value": "atrial fibrillation" }
+      ]
+    },
+    {
+      "doc_id": "DOC-P002-02",
+      "date": "2025-11-03",
+      "type": "Medication Order",
+      "author": "Dr. Okafor",
+      "title": "Started warfarin 5mg",
+      "text": "On 2025-11-03, Dr. Okafor started warfarin 5mg daily with INR monitoring for stroke prevention in atrial fibrillation.",
+      "asserts": [
+        { "subject": "medication", "predicate": "prescribed", "value": "warfarin 5mg" }
+      ]
+    },
+    {
+      "doc_id": "DOC-P002-03",
+      "date": "2026-01-18",
+      "type": "Anticoagulation Clinic",
+      "author": "Dr. Okafor",
+      "title": "Switched to apixaban 5mg",
+      "text": "On 2026-01-18, due to unstable INR, warfarin was stopped and James O'Sullivan was switched to apixaban 5mg twice daily by Dr. Okafor.",
+      "asserts": [
+        { "subject": "medication", "predicate": "switched", "value": "apixaban 5mg" }
+      ]
+    },
+    {
+      "doc_id": "DOC-P002-04",
+      "date": "2026-02-22",
+      "type": "Nephrology Note",
+      "author": "Dr. Singh",
+      "title": "Stage 3 chronic kidney disease",
+      "text": "On 2026-02-22, eGFR was 48. Dr. Singh diagnosed stage 3 chronic kidney disease and advised renal dosing review.",
+      "asserts": [
+        { "subject": "diagnosis", "predicate": "added", "value": "stage 3 chronic kidney disease" }
+      ]
+    },
+    {
+      "doc_id": "DOC-P002-05",
+      "date": "2026-03-15",
+      "type": "Allergy Note",
+      "author": "Dr. Okafor",
+      "title": "Sulfa allergy documented",
+      "text": "On 2026-03-15, James O'Sullivan developed hives after trimethoprim-sulfamethoxazole. A sulfa allergy was documented by Dr. Okafor.",
+      "asserts": [
+        { "subject": "allergy", "predicate": "diagnosed", "value": "sulfa" }
+      ]
+    }
+  ]
+}

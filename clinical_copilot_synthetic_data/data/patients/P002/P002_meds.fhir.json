@@ -1,0 +1,30 @@
+{
+  "resourceType": "Bundle",
+  "id": "P002-meds-2025",
+  "type": "collection",
+  "entry": [
+    {
+      "resource": {
+        "resourceType": "MedicationStatement",
+        "id": "P002-warfarin",
+        "status": "active",
+        "subject": {
+          "reference": "Patient/P002"
+        },
+        "effectiveDateTime": "2025-01-10",
+        "medicationCodeableConcept": {
+          "text": "Warfarin"
+        },
+        "dosage": [
+          {
+            "text": "Warfarin 5 mg by mouth daily; adjust per INR."
+          }
+        ]
+      }
+    }
+  ],
+  "meta": {
+    "source": "P002_meds.fhir.json",
+    "disclaimer": "Demo only - not medical advice. Synthetic data only - no real PHI."
+  }
+}

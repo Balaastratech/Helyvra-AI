@@ -1,0 +1,24 @@
+{
+  "resourceType": "Observation",
+  "id": "P011-pregnancy-flag",
+  "status": "final",
+  "subject": {
+    "reference": "Patient/P011"
+  },
+  "effectiveDateTime": "2026-02-14",
+  "code": {
+    "text": "Pregnancy status"
+  },
+  "valueCodeableConcept": {
+    "text": "pregnant"
+  },
+  "note": [
+    {
+      "text": "Deferred-check stub for pregnancy safety workflows."
+    }
+  ],
+  "meta": {
+    "source": "P011_pregnancy_flag.fhir.json",
+    "disclaimer": "Demo only - not medical advice. Synthetic data only - no real PHI."
+  }
+}

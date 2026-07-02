@@ -1,0 +1,24 @@
+{
+  "doc_id": "UP-P010-a4f68154",
+  "date": "2023-01-15",
+  "type": "Uploaded record",
+  "author": "unknown",
+  "title": "P010_family_history.json",
+  "text": "{\n  \"resourceType\": \"FamilyMemberHistory\",\n  \"id\": \"P010-family-history-2023\",\n  \"status\": \"completed\",\n  \"patient\": {\n    \"reference\": \"Patient/P010\"\n  },\n  \"date\": \"2023-01-15\",\n  \"relationship\": {\n    \"text\": \"father\"\n  },\n  \"condition\": [\n    {\n      \"code\": {\n        \"text\": \"myocardial infarction\"\n      },\n      \"onsetAge\": {\n        \"value\": 49,\n        \"unit\": \"years\"\n      },\n      \"note\": [\n        {\n          \"text\": \"Father had myocardial infarction at age 49.\"\n        }\n      ]\n    }\n  ],\n  \"meta\": {\n    \"source\": \"P010_family_history.json\",\n    \"disclaimer\": \"Demo only - not medical advice. Synthetic data only - no real PHI.\"\n  }\n}",
+  "uploaded": true,
+  "asserts": [
+    {
+      "resource_type": "FamilyHistory",
+      "subject": "family",
+      "predicate": "reported",
+      "value": "Father: myocardial infarction (age 49)",
+      "date": "2023-01-15",
+      "source": "unknown",
+      "attributes": {
+        "relation": "father",
+        "condition": "myocardial infarction",
+        "age_at_onset": 49
+      }
+    }
+  ]
+}

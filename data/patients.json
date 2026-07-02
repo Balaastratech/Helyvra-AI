@@ -1,0 +1,60 @@
+{
+  "patients": [
+    {
+      "patient_id": "P001",
+      "mrn": "MRN-004471",
+      "name": "Margaret Chen",
+      "dob": "1958-03-12",
+      "sex": "F",
+      "summary": "68 F — hypertension, recent allergy re-test."
+    },
+    {
+      "patient_id": "P002",
+      "mrn": "MRN-008830",
+      "name": "James O'Sullivan",
+      "dob": "1971-09-04",
+      "sex": "M",
+      "summary": "54 M — atrial fibrillation, anticoagulation, CKD."
+    },
+    {
+      "patient_id": "P003",
+      "mrn": "MRN-002055",
+      "name": "Aisha Rahman",
+      "dob": "1989-06-22",
+      "sex": "F",
+      "summary": "37 F — asthma; one record filed in error."
+    },
+    {
+      "patient_id": "P010",
+      "mrn": "MRN-2010",
+      "name": "Rahul Sharma",
+      "dob": "1974-02-11",
+      "sex": "M",
+      "summary": "52 M — type 2 diabetes; upload records to build the chart."
+    },
+    {
+      "patient_id": "P011",
+      "mrn": "MRN-2011",
+      "name": "Priya Mehta",
+      "dob": "1992-07-30",
+      "sex": "F",
+      "summary": "34 F — asthma; pregnancy flag. Unrelated chart (isolation demo)."
+    },
+    {
+      "patient_id": "P012",
+      "mrn": "MRN-2012",
+      "name": "Rahul Sharma",
+      "dob": "1995-05-19",
+      "sex": "M",
+      "summary": "31 M — minimal record; same name as P010 (disambiguation)."
+    },
+    {
+      "patient_id": "P013",
+      "mrn": "MRN-2013",
+      "name": "Meera Nair",
+      "dob": "1985-10-03",
+      "sex": "F",
+      "summary": "41 F — family history of breast cancer; hereditary-risk demo."
+    }
+  ]
+}

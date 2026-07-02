@@ -1,0 +1,28 @@
+{
+  "patient_id": "P013",
+  "disclaimer": "Demo only - not medical advice. Synthetic data only - no real PHI.",
+  "documents": [
+    {
+      "file": "P013_family_history.json",
+      "format": "FHIR FamilyMemberHistory Bundle",
+      "facts": [
+        "Mother breast cancer age 45",
+        "Maternal aunt breast cancer"
+      ]
+    },
+    {
+      "file": "P013_labs.csv",
+      "format": "CSV",
+      "facts": [
+        "Normal labs"
+      ]
+    }
+  ],
+  "expected_open_checks": [
+    {
+      "id": "hereditary-breast-cancer-risk",
+      "severity": "warning",
+      "expected": "mother breast cancer age 45 + maternal aunt breast cancer"
+    }
+  ]
+}

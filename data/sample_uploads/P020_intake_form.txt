@@ -1,0 +1,6 @@
+New patient intake — Arjun Sharma, DOB 1999-06-01, MRN-2020.
+Reason for visit: routine check, family history review.
+Lifestyle: non-smoker, exercises weekly.
+Family history: Father — Rahul Sharma — has type 2 diabetes and had a myocardial
+infarction at age 49. Mother — no significant history.
+Demo only — synthetic data, not medical advice.

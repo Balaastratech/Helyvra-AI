@@ -1,0 +1,32 @@
+{
+  "resourceType": "FamilyMemberHistory",
+  "id": "P010-family-history-2023",
+  "status": "completed",
+  "patient": {
+    "reference": "Patient/P010"
+  },
+  "date": "2023-01-15",
+  "relationship": {
+    "text": "father"
+  },
+  "condition": [
+    {
+      "code": {
+        "text": "myocardial infarction"
+      },
+      "onsetAge": {
+        "value": 49,
+        "unit": "years"
+      },
+      "note": [
+        {
+          "text": "Father had myocardial infarction at age 49."
+        }
+      ]
+    }
+  ],
+  "meta": {
+    "source": "P010_family_history.json",
+    "disclaimer": "Demo only - not medical advice. Synthetic data only - no real PHI."
+  }
+}

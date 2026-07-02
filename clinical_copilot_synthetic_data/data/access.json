@@ -1,0 +1,51 @@
+{
+  "generated_at": "2026-06-30",
+  "disclaimer": "Demo only - not medical advice. Synthetic data only - no real PHI.",
+  "access_rules": [
+    {
+      "doctor_id": "D001",
+      "allowed_patient_ids": [
+        "P001",
+        "P010",
+        "P011",
+        "P012",
+        "P013"
+      ],
+      "denied_demo_patient_ids": [
+        "P002"
+      ]
+    },
+    {
+      "doctor_id": "D002",
+      "allowed_patient_ids": [
+        "P001",
+        "P010"
+      ],
+      "denied_demo_patient_ids": [
+        "P011",
+        "P013"
+      ]
+    },
+    {
+      "doctor_id": "D003",
+      "allowed_patient_ids": [
+        "P002",
+        "P010",
+        "P013"
+      ],
+      "denied_demo_patient_ids": [
+        "P003"
+      ]
+    }
+  ],
+  "expected_access_assertions": [
+    {
+      "action": "D001 opens P002",
+      "expected": "refused + audit row written"
+    },
+    {
+      "action": "D003 opens P003",
+      "expected": "refused + audit row written"
+    }
+  ]
+}

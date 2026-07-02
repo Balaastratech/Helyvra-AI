@@ -1,0 +1,24 @@
+{
+  "patient_id": "P011",
+  "disclaimer": "Demo only - not medical advice. Synthetic data only - no real PHI.",
+  "documents": [
+    {
+      "file": "P011_visit_note.txt",
+      "format": "free text",
+      "facts": [
+        "Asthma",
+        "Salbutamol",
+        "Pregnant",
+        "No drug allergies documented"
+      ]
+    },
+    {
+      "file": "P011_pregnancy_flag.fhir.json",
+      "format": "FHIR Observation",
+      "facts": [
+        "Pregnant"
+      ]
+    }
+  ],
+  "expected_isolation": "In P011, ask Rahul's allergy -> no penicillin allergy on record for Priya Mehta; no leakage."
+}

@@ -1,0 +1,5 @@
+Demo only - not medical advice. Synthetic data only - no real PHI.
+Patient: Aisha Rahman (P003), 37F, MRN-1003
+Date: 2026-03-12
+Entered in error: chronic kidney disease. This record is intentionally wrong and should be removed during the forget/retract demo. True active condition: asthma.
+Expected after forget: erroneous CKD fact vanishes; any fact wrongly superseded by it is restored; audit row written.

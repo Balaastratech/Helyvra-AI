@@ -1,0 +1,36 @@
+{
+  "resourceType": "Bundle",
+  "id": "P001-allergy-clearance-2026-03",
+  "type": "collection",
+  "hold_back": true,
+  "entry": [
+    {
+      "resource": {
+        "resourceType": "AllergyIntolerance",
+        "id": "P001-penicillin-cleared",
+        "clinicalStatus": {
+          "text": "inactive"
+        },
+        "verificationStatus": {
+          "text": "confirmed"
+        },
+        "patient": {
+          "reference": "Patient/P001"
+        },
+        "recordedDate": "2026-03-02",
+        "code": {
+          "text": "Penicillin"
+        },
+        "note": [
+          {
+            "text": "Dr. Victor Lee supervised allergy re-test; penicillin allergy cleared. Supersedes allergy recorded 2026-01-10."
+          }
+        ]
+      }
+    }
+  ],
+  "meta": {
+    "source": "P001_allergy_cleared.fhir.json",
+    "disclaimer": "Demo only - not medical advice. Synthetic data only - no real PHI."
+  }
+}

@@ -1,0 +1,5 @@
+Demo only - not medical advice. Synthetic data only - no real PHI.
+Patient: Rahul Sharma (P012), 31M, MRN-2012
+Date: 2026-01-08
+Reason: annual wellness visit. No active medications. No known allergies. No chronic diseases documented.
+Resolver assertion: same name as P010 but different age and MRN.

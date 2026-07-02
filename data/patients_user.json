@@ -1,0 +1,12 @@
+{
+  "patients": [
+    {
+      "patient_id": "P008",
+      "mrn": "MRN-2020",
+      "name": "Arjun Sharma",
+      "dob": "1999-06-01",
+      "sex": "",
+      "summary": "New chart — upload records to begin."
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "disclaimer": "Demo only - not medical advice. Synthetic data only - no real PHI.",
+  "drug_class": {
+    "amoxicillin": "beta-lactam",
+    "ampicillin": "beta-lactam",
+    "penicillin": "beta-lactam",
+    "cephalexin": "cephalosporin"
+  },
+  "allergy_cross_reactivity": [
+    {
+      "drug": "amoxicillin",
+      "class": "beta-lactam",
+      "allergy": "penicillin",
+      "severity_if_history": "critical"
+    },
+    {
+      "drug": "ampicillin",
+      "class": "beta-lactam",
+      "allergy": "penicillin",
+      "severity_if_history": "critical"
+    },
+    {
+      "drug": "cephalexin",
+      "class": "cephalosporin",
+      "allergy": "penicillin",
+      "severity_if_history": "warning"
+    }
+  ],
+  "condition_monitoring": {
+    "type 2 diabetes": [
+      "HbA1c",
+      "renal function",
+      "diabetic eye exam"
+    ]
+  },
+  "family_relation_risks": [
+    {
+      "relation": "father",
+      "condition": "MI",
+      "age_lt": 50,
+      "risk": "combined cardiovascular risk"
+    },
+    {
+      "relation": "mother",
+      "condition": "breast cancer",
+      "age_lt": 50,
+      "risk": "hereditary breast cancer risk"
+    },
+    {
+      "relation": "maternal aunt",
+      "condition": "breast cancer",
+      "risk": "hereditary breast cancer risk"
+    }
+  ]
+}

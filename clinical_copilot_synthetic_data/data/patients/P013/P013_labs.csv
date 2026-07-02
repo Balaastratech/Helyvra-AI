@@ -1,0 +1,3 @@
+patient_id,date,test,value,unit,reference_range,flag
+P013,2026-01-21,CBC,within normal limits,,normal,normal
+P013,2026-01-21,CMP,within normal limits,,normal,normal

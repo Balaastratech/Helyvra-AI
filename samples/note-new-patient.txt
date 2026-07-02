@@ -1,0 +1,11 @@
+Clinic Progress Note
+
+Patient: Robert Halloway
+Date of birth: 1962-11-08
+MRN: MRN-051182
+Date of visit: 2026-02-03
+Provider: Dr. Susan Okafor
+
+On 2026-02-03, Robert Halloway was diagnosed with hypertension. Blood pressure
+readings over the past three visits averaged 158/96. Dr. Okafor started lifestyle
+counseling and will reassess in six weeks before considering pharmacotherapy.

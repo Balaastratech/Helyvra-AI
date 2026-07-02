@@ -1,0 +1,4 @@
+patient_id,date,test,value,unit,reference_range,flag
+P002,2025-01-10,INR,2.1,ratio,2.0-3.0,therapeutic
+P002,2025-04-10,INR,3.4,ratio,2.0-3.0,high
+P002,2025-09-10,INR,1.7,ratio,2.0-3.0,low

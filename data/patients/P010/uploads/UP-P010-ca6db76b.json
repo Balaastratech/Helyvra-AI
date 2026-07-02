@@ -1,0 +1,105 @@
+{
+  "doc_id": "UP-P010-ca6db76b",
+  "date": "2019-03-01",
+  "type": "Uploaded record",
+  "author": "P010_discharge_2019.pdf",
+  "title": "P010_discharge_2019.pdf",
+  "text": "Demo only - not medical advice. Synthetic data only - no real PHI.\nPage 1\nP010 Rahul Sharma - MRN-2010\n Discharge Summary - Rahul Sharma\nDemo only - not medical advice. Synthetic data only - no real PHI.\nEncounter\nEncounter date: 2019-03-18. Rahul Sharma, 52M in synthetic demo, established care after hyperglycemia noted\nduring admission for community-acquired pneumonia.\nAssessment\nCondition: Type 2 diabetes diagnosed in 2019-03. No diabetic complications documented at this encounter.\nMedication Plan\nMedication: Metformin 500 mg by mouth twice daily started 2019-03. Lifestyle counseling documented: diet,\nexercise, smoking cessation.\nKnown Allergies\nNo known drug allergies documented in this 2019 discharge summary. Later records may supersede this.\n",
+  "uploaded": true,
+  "asserts": [
+    {
+      "resource_type": "Condition",
+      "subject": "diagnosis",
+      "predicate": "diagnosed",
+      "value": "Type 2 diabetes",
+      "date": "2019-03-01",
+      "source": "P010_discharge_2019.pdf",
+      "attributes": {
+        "condition": "type 2 diabetes"
+      },
+      "raw_text": "Demo only - not medical advice. Synthetic data only - no real PHI.\nPage 1\nP010 Rahul Sharma - MRN-2010\n Discharge Summary - Rahul Sharma\nDemo only - not medical advice. Synthetic data only - no real PHI.\nEncounter\nEncounter date: 2019-03-18. Rahul Sharma, 52M in synthetic demo, established care after hyperglycemia noted\nduring admission for community-acquired pneumonia.\nAssessment\nCondition: Type 2 diabetes diagnosed in 2019-03. No diabetic complications documented at this encounter.\nMedication Plan\nMedication: Metformin 500 mg by mouth twice daily started 2019-03. Lifestyle counseling documented: diet,\nexercise, smoking cessation.\nKnown Allergies\nNo known drug allergies documented in this 2019 discharge summary. Later records may supersede this.\n",
+      "page": 1
+    },
+    {
+      "resource_type": "Condition",
+      "subject": "diagnosis",
+      "predicate": "diagnosed",
+      "value": "hyperglycemia",
+      "date": "2019-03-18",
+      "source": "P010_discharge_2019.pdf",
+      "attributes": {
+        "condition": "hyperglycemia"
+      },
+      "raw_text": "Demo only - not medical advice. Synthetic data only - no real PHI.\nPage 1\nP010 Rahul Sharma - MRN-2010\n Discharge Summary - Rahul Sharma\nDemo only - not medical advice. Synthetic data only - no real PHI.\nEncounter\nEncounter date: 2019-03-18. Rahul Sharma, 52M in synthetic demo, established care after hyperglycemia noted\nduring admission for community-acquired pneumonia.\nAssessment\nCondition: Type 2 diabetes diagnosed in 2019-03. No diabetic complications documented at this encounter.\nMedication Plan\nMedication: Metformin 500 mg by mouth twice daily started 2019-03. Lifestyle counseling documented: diet,\nexercise, smoking cessation.\nKnown Allergies\nNo known drug allergies documented in this 2019 discharge summary. Later records may supersede this.\n",
+      "page": 1
+    },
+    {
+      "resource_type": "Condition",
+      "subject": "diagnosis",
+      "predicate": "diagnosed",
+      "value": "community-acquired pneumonia",
+      "date": "2019-03-18",
+      "source": "P010_discharge_2019.pdf",
+      "attributes": {
+        "condition": "community-acquired pneumonia"
+      },
+      "raw_text": "Demo only - not medical advice. Synthetic data only - no real PHI.\nPage 1\nP010 Rahul Sharma - MRN-2010\n Discharge Summary - Rahul Sharma\nDemo only - not medical advice. Synthetic data only - no real PHI.\nEncounter\nEncounter date: 2019-03-18. Rahul Sharma, 52M in synthetic demo, established care after hyperglycemia noted\nduring admission for community-acquired pneumonia.\nAssessment\nCondition: Type 2 diabetes diagnosed in 2019-03. No diabetic complications documented at this encounter.\nMedication Plan\nMedication: Metformin 500 mg by mouth twice daily started 2019-03. Lifestyle counseling documented: diet,\nexercise, smoking cessation.\nKnown Allergies\nNo known drug allergies documented in this 2019 discharge summary. Later records may supersede this.\n",
+      "page": 1
+    },
+    {
+      "resource_type": "Medication",
+      "subject": "medication",
+      "predicate": "prescribed",
+      "value": "Metformin 500 mg",
+      "date": "2019-03-01",
+      "source": "P010_discharge_2019.pdf",
+      "attributes": {
+        "drug": "metformin 500 mg"
+      },
+      "raw_text": "Demo only - not medical advice. Synthetic data only - no real PHI.\nPage 1\nP010 Rahul Sharma - MRN-2010\n Discharge Summary - Rahul Sharma\nDemo only - not medical advice. Synthetic data only - no real PHI.\nEncounter\nEncounter date: 2019-03-18. Rahul Sharma, 52M in synthetic demo, established care after hyperglycemia noted\nduring admission for community-acquired pneumonia.\nAssessment\nCondition: Type 2 diabetes diagnosed in 2019-03. No diabetic complications documented at this encounter.\nMedication Plan\nMedication: Metformin 500 mg by mouth twice daily started 2019-03. Lifestyle counseling documented: diet,\nexercise, smoking cessation.\nKnown Allergies\nNo known drug allergies documented in this 2019 discharge summary. Later records may supersede this.\n",
+      "page": 1
+    },
+    {
+      "resource_type": "Lifestyle",
+      "subject": "lifestyle",
+      "predicate": "reported",
+      "value": "diet counseling",
+      "date": "2019-03-18",
+      "source": "P010_discharge_2019.pdf",
+      "attributes": {
+        "factor": "diet",
+        "value": "diet counseling"
+      },
+      "raw_text": "Demo only - not medical advice. Synthetic data only - no real PHI.\nPage 1\nP010 Rahul Sharma - MRN-2010\n Discharge Summary - Rahul Sharma\nDemo only - not medical advice. Synthetic data only - no real PHI.\nEncounter\nEncounter date: 2019-03-18. Rahul Sharma, 52M in synthetic demo, established care after hyperglycemia noted\nduring admission for community-acquired pneumonia.\nAssessment\nCondition: Type 2 diabetes diagnosed in 2019-03. No diabetic complications documented at this encounter.\nMedication Plan\nMedication: Metformin 500 mg by mouth twice daily started 2019-03. Lifestyle counseling documented: diet,\nexercise, smoking cessation.\nKnown Allergies\nNo known drug allergies documented in this 2019 discharge summary. Later records may supersede this.\n",
+      "page": 1
+    },
+    {
+      "resource_type": "Lifestyle",
+      "subject": "lifestyle",
+      "predicate": "reported",
+      "value": "exercise counseling",
+      "date": "2019-03-18",
+      "source": "P010_discharge_2019.pdf",
+      "attributes": {
+        "factor": "exercise",
+        "value": "exercise counseling"
+      },
+      "raw_text": "Demo only - not medical advice. Synthetic data only - no real PHI.\nPage 1\nP010 Rahul Sharma - MRN-2010\n Discharge Summary - Rahul Sharma\nDemo only - not medical advice. Synthetic data only - no real PHI.\nEncounter\nEncounter date: 2019-03-18. Rahul Sharma, 52M in synthetic demo, established care after hyperglycemia noted\nduring admission for community-acquired pneumonia.\nAssessment\nCondition: Type 2 diabetes diagnosed in 2019-03. No diabetic complications documented at this encounter.\nMedication Plan\nMedication: Metformin 500 mg by mouth twice daily started 2019-03. Lifestyle counseling documented: diet,\nexercise, smoking cessation.\nKnown Allergies\nNo known drug allergies documented in this 2019 discharge summary. Later records may supersede this.\n",
+      "page": 1
+    },
+    {
+      "resource_type": "Lifestyle",
+      "subject": "lifestyle",
+      "predicate": "reported",
+      "value": "smoking cessation counseling",
+      "date": "2019-03-18",
+      "source": "P010_discharge_2019.pdf",
+      "attributes": {
+        "factor": "smoking",
+        "value": "smoking cessation counseling"
+      },
+      "raw_text": "Demo only - not medical advice. Synthetic data only - no real PHI.\nPage 1\nP010 Rahul Sharma - MRN-2010\n Discharge Summary - Rahul Sharma\nDemo only - not medical advice. Synthetic data only - no real PHI.\nEncounter\nEncounter date: 2019-03-18. Rahul Sharma, 52M in synthetic demo, established care after hyperglycemia noted\nduring admission for community-acquired pneumonia.\nAssessment\nCondition: Type 2 diabetes diagnosed in 2019-03. No diabetic complications documented at this encounter.\nMedication Plan\nMedication: Metformin 500 mg by mouth twice daily started 2019-03. Lifestyle counseling documented: diet,\nexercise, smoking cessation.\nKnown Allergies\nNo known drug allergies documented in this 2019 discharge summary. Later records may supersede this.\n",
+      "page": 1
+    }
+  ]
+}

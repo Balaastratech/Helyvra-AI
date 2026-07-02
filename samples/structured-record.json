@@ -1,0 +1,16 @@
+{
+  "date": "2026-05-30",
+  "author": "Dr. Patel",
+  "asserts": [
+    {
+      "subject": "lab",
+      "predicate": "updated",
+      "value": "HbA1c 7.4%"
+    },
+    {
+      "subject": "medication",
+      "predicate": "prescribed",
+      "value": "metformin 500mg"
+    }
+  ]
+}

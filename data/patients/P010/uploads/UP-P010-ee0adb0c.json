@@ -1,0 +1,26 @@
+{
+  "doc_id": "UP-P010-ee0adb0c",
+  "date": "2026-05-08",
+  "type": "Uploaded record",
+  "author": "unknown",
+  "title": "P010_lab_recent.fhir.json",
+  "text": "{\n  \"resourceType\": \"Bundle\",\n  \"id\": \"P010-recent-labs-2026-05\",\n  \"type\": \"collection\",\n  \"entry\": [\n    {\n      \"resource\": {\n        \"resourceType\": \"Observation\",\n        \"id\": \"P010-hba1c-2026-05\",\n        \"status\": \"final\",\n        \"subject\": {\n          \"reference\": \"Patient/P010\"\n        },\n        \"effectiveDateTime\": \"2026-05-08\",\n        \"code\": {\n          \"text\": \"HbA1c\"\n        },\n        \"valueQuantity\": {\n          \"value\": 8.9,\n          \"unit\": \"%\"\n        },\n        \"interpretation\": [\n          {\n            \"text\": \"high\"\n          }\n        ],\n        \"referenceRange\": [\n          {\n            \"text\": \"Target < 7.0 %\"\n          }\n        ],\n        \"note\": [\n          {\n            \"text\": \"HbA1c remains rising: 7.8 -> 8.6 -> 8.9 over 18 months.\"\n          }\n        ]\n      }\n    }\n  ],\n  \"meta\": {\n    \"source\": \"P010_lab_recent.fhir.json\",\n    \"disclaimer\": \"Demo only - not medical advice. Synthetic data only - no real PHI.\"\n  }\n}",
+  "uploaded": true,
+  "asserts": [
+    {
+      "resource_type": "LabResult",
+      "subject": "lab hba1c",
+      "predicate": "measured",
+      "value": "HbA1c 8.9 %",
+      "date": "2026-05-08",
+      "source": "unknown",
+      "attributes": {
+        "analyte": "hba1c",
+        "value": 8.9,
+        "unit": "%",
+        "ref_range": "Target < 7.0 %",
+        "abnormal_flag": "high"
+      }
+    }
+  ]
+}

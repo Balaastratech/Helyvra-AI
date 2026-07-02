@@ -1,0 +1,311 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Bebas+Neue&family=Monoton&display=swap');
+@import 'tailwindcss';
+
+/* ===========================================================================
+   Dual-register clinical copilot (docs/UX_DESIGN_PLAN.md §0-1).
+   The doctor workspace is LIGHT + premium (calm, precise, trustworthy); NOIR
+   lives only at the framed edges (cold-open, Compare). The core design tokens
+   below are the light-clinical system — existing components re-skin for free.
+   ===========================================================================*/
+@theme {
+  /* clinical surfaces (the workspace) */
+  --color-bg: #fbfcfd; /* near-white, faint cool */
+  --color-surface: #ffffff; /* cards */
+  --color-raised: #f4f7f9; /* sidebars, inputs, sunken wells */
+  --color-border: #e6ebf0;
+  --color-border-strong: #cfd8e3;
+  --color-text: #0c1521; /* near-black, warm */
+  --color-text-muted: #5a6b7b;
+  --color-text-faint: #8a99a8;
+
+  /* accent — one, used with intent (refined teal) */
+  --color-active: #0e8c84;
+  --color-active-soft: #e6f4f2;
+  --color-active-glow: rgba(14, 140, 132, 0.25);
+  --color-accent-strong: #0a6f68;
+
+  /* semantic clinical severity (the safety system) */
+  --color-critical: #d7263d;
+  --color-critical-soft: #fcebed;
+  --color-warning: #c77700;
+  --color-warning-soft: #fbf1e2;
+  --color-info: #0e8c84;
+  --color-info-soft: #e6f4f2;
+  --color-success: #1f9d6b;
+  --color-success-soft: #e7f5ee;
+
+  /* status / certainty */
+  --color-danger: #d7263d; /* stale / dangerous */
+  --color-replaced: #8a99a8; /* greyed replaced facts */
+  --color-warn: #c77700; /* disclaimer amber (clinical) */
+  --color-contested: #c77700;
+  --color-unverified: #8a99a8;
+
+  /* framing accents (Compare / cold-open only) */
+  --color-magenta: #d7263d;
+  --color-magenta-soft: #fcebed;
+  --color-gold: #b8860b;
+
+  /* NOIR tokens — cinematic layer + cold-open + Compare (kept dark) */
+  --color-neon-magenta: #ff2d95;
+  --color-neon-cyan: #22d3ee;
+  --color-neon-gold: #ffb020;
+  --color-noir-bg: #0a0e1a;
+  --color-noir-surface: #131a2a;
+  --color-noir-text: #e8eef5;
+  --color-noir-muted: #94a3b8;
+  --color-stale: #ef4444;
+  --color-string: #e11d48;
+
+  /* fonts */
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', monospace;
+  --font-neon: 'Monoton', 'Bebas Neue', cursive;
+  --font-cinema: 'Bebas Neue', 'Inter', sans-serif;
+
+  --radius-xl: 0.875rem;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* slim scrollbars that match the light clinical surface */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(12, 21, 33, 0.18) transparent;
+}
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+*::-webkit-scrollbar-thumb {
+  background: rgba(12, 21, 33, 0.18);
+  border-radius: 4px;
+}
+
+/* ===========================================================================
+   Motion — all gated behind prefers-reduced-motion.
+   ===========================================================================*/
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes neon-flicker {
+    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+      opacity: 1;
+      text-shadow:
+        0 0 4px var(--color-neon-magenta),
+        0 0 11px var(--color-neon-magenta),
+        0 0 19px var(--color-neon-magenta),
+        0 0 40px rgba(255, 45, 149, 0.6);
+    }
+    20%, 24%, 55% {
+      opacity: 0.55;
+      text-shadow: none;
+    }
+  }
+  @keyframes lights-on {
+    0% { background: var(--color-noir-bg); opacity: 1; }
+    55% { background: #dfe9f2; opacity: 1; }
+    100% { background: #dfe9f2; opacity: 0; }
+  }
+  @keyframes stamp-slam {
+    0% { transform: scale(0.6) rotate(-8deg); opacity: 0; }
+    70% { transform: scale(1.08) rotate(-8deg); opacity: 1; }
+    100% { transform: scale(1) rotate(-8deg); opacity: 1; }
+  }
+  @keyframes polaroid-develop {
+    0% { filter: sepia(0.8) contrast(1.6) brightness(1.3) blur(2px); opacity: 0.2; }
+    100% { filter: none; opacity: 1; }
+  }
+  @keyframes pulse-ring {
+    0% { box-shadow: 0 0 0 0 var(--color-active-glow); }
+    70% { box-shadow: 0 0 0 8px rgba(34, 211, 238, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(34, 211, 238, 0); }
+  }
+  .animate-flicker { animation: neon-flicker 3s infinite alternate; }
+  .animate-lights-on { animation: lights-on 800ms ease-out forwards; }
+  .animate-stamp { animation: stamp-slam 350ms cubic-bezier(0.22, 1.4, 0.36, 1) forwards; }
+  .animate-develop { animation: polaroid-develop 600ms ease-out forwards; }
+  .animate-pulse-ring { animation: pulse-ring 1.8s ease-out infinite; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-flicker,
+  .animate-lights-on,
+  .animate-stamp,
+  .animate-develop,
+  .animate-pulse-ring,
+  .animate-pulse {
+    animation: none;
+  }
+}
+
+/* neon helpers (>=18px bold only — WCAG safe) */
+.neon-magenta {
+  color: var(--color-neon-magenta);
+  text-shadow: 0 0 4px var(--color-neon-magenta), 0 0 12px rgba(255, 45, 149, 0.7);
+}
+.neon-cyan {
+  color: var(--color-neon-cyan);
+  text-shadow: 0 0 4px var(--color-neon-cyan), 0 0 12px rgba(34, 211, 238, 0.7);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .chromatic {
+    text-shadow: -1px 0 rgba(255, 0, 80, 0.6), 1px 0 rgba(0, 200, 255, 0.6);
+  }
+}
+
+/* range slider — themed cyan track + grabbable thumb (RewindSlider) */
+input[type='range'].rewind {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  border-radius: 999px;
+  background: linear-gradient(
+    to right,
+    var(--color-active) 0%,
+    var(--color-active) var(--fill, 50%),
+    rgba(255, 255, 255, 0.12) var(--fill, 50%),
+    rgba(255, 255, 255, 0.12) 100%
+  );
+  cursor: grab;
+}
+input[type='range'].rewind:active {
+  cursor: grabbing;
+}
+input[type='range'].rewind::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  background: #fff;
+  border: 3px solid var(--color-active);
+  box-shadow: 0 0 10px var(--color-active-glow);
+  cursor: grab;
+}
+input[type='range'].rewind::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  background: #fff;
+  border: 3px solid var(--color-active);
+  box-shadow: 0 0 10px var(--color-active-glow);
+  cursor: grab;
+}
+
+/* ===========================================================================
+   Clinical workspace helpers (UX_DESIGN_PLAN §1.3-1.4).
+   Soft layered elevation (never a hard 1px black border as the separator);
+   tabular monospaced numerics for MRN / dates / lab values a doctor scans.
+   ===========================================================================*/
+.elev-1 {
+  box-shadow:
+    0 1px 2px rgba(12, 21, 33, 0.04),
+    0 4px 12px rgba(12, 21, 33, 0.06);
+}
+.elev-2 {
+  box-shadow:
+    0 1px 2px rgba(12, 21, 33, 0.05),
+    0 8px 28px rgba(12, 21, 33, 0.1);
+}
+.tabular {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+
+/* calm staged-entrance for the pre-visit brief (like a chart being laid out) */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes brief-rise {
+    0% { opacity: 0; transform: translateY(8px); }
+    100% { opacity: 1; transform: none; }
+  }
+  .animate-brief-rise { animation: brief-rise 480ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+  @keyframes chip-settle {
+    0% { transform: scale(0.96); opacity: 0; }
+    60% { transform: scale(1.02); }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  .animate-chip-settle { animation: chip-settle 300ms cubic-bezier(0.22, 1.2, 0.36, 1) both; }
+  @keyframes severity-pulse {
+    0% { box-shadow: 0 0 0 0 rgba(215, 38, 61, 0.35); }
+    70% { box-shadow: 0 0 0 10px rgba(215, 38, 61, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(215, 38, 61, 0); }
+  }
+  .animate-severity-pulse { animation: severity-pulse 1.6s ease-out 1; }
+}
+
+/* ===========================================================================
+   vis-timeline — light-clinical skin (PatientTimeline). Category swimlanes,
+   duration bars vs point facts, superseded greyed. Overrides the default
+   vis-timeline CSS to match the workspace tokens.
+   ===========================================================================*/
+.tl-root .vis-timeline { border: none; font-family: var(--font-sans); }
+.tl-root .vis-panel.vis-left,
+.tl-root .vis-panel.vis-center,
+.tl-root .vis-panel.vis-top,
+.tl-root .vis-panel.vis-bottom { border-color: var(--color-border); }
+.tl-root .vis-time-axis .vis-text { color: var(--color-text-faint); font-size: 11px; }
+.tl-root .vis-time-axis .vis-grid.vis-minor { border-color: rgba(12, 21, 33, 0.05); }
+.tl-root .vis-time-axis .vis-grid.vis-major { border-color: rgba(12, 21, 33, 0.1); }
+.tl-root .vis-labelset .vis-label {
+  color: var(--color-text-muted); font-size: 11px; font-weight: 600;
+  border-color: var(--color-border);
+}
+.tl-root .vis-labelset .vis-label .vis-inner { padding: 6px 10px; }
+.tl-root .vis-foreground .vis-group { border-color: rgba(12, 21, 33, 0.05); }
+
+/* item base */
+.tl-root .vis-item {
+  border-radius: 8px; border-width: 1px; font-size: 11px; color: var(--color-text);
+  background: var(--color-surface); box-shadow: 0 1px 2px rgba(12, 21, 33, 0.06);
+}
+.tl-root .vis-item .vis-item-content { padding: 2px 8px; }
+.tl-root .vis-item.vis-selected { box-shadow: 0 0 0 2px var(--color-active); border-color: var(--color-active); }
+.tl-root .vis-item.vis-point .vis-item-content { transform: translateY(-2px); }
+
+/* superseded / future states */
+.tl-root .vis-item.tl-superseded {
+  opacity: 0.55; text-decoration: line-through; text-decoration-color: rgba(12,21,33,.35);
+  background: var(--color-raised); border-style: dashed;
+}
+.tl-root .vis-item.tl-future { opacity: 0.35; }
+
+/* per-category accent (left border on bars, dot color on points) */
+.tl-root .vis-item.tl-cat-Allergy { border-left: 4px solid #d7263d; background: #fcebed; }
+.tl-root .vis-item.tl-cat-Condition { border-left: 4px solid #6366f1; background: #eef0fe; }
+.tl-root .vis-item.tl-cat-Medication { border-left: 4px solid #0e8c84; background: #e6f4f2; }
+.tl-root .vis-item.tl-cat-LabResult { border-left: 4px solid #c77700; background: #fbf1e2; }
+.tl-root .vis-item.tl-cat-Vital { border-left: 4px solid #8b5cf6; background: #f2ecfe; }
+.tl-root .vis-item.tl-cat-Family { border-left: 4px solid #7c3aed; background: #f3ecff; }
+.tl-root .vis-item.tl-cat-Lifestyle { border-left: 4px solid #1f9d6b; background: #e7f5ee; }
+.tl-root .vis-item.tl-cat-Other { border-left: 4px solid #64748b; background: var(--color-raised); }
+.tl-root .vis-item.vis-point.tl-cat-Allergy .vis-dot { border-color: #d7263d; }
+.tl-root .vis-item.vis-point.tl-cat-LabResult .vis-dot { border-color: #c77700; }
+.tl-root .vis-item.vis-point.tl-cat-Vital .vis-dot { border-color: #8b5cf6; }
+.tl-root .vis-item.vis-point.tl-cat-Family .vis-dot { border-color: #7c3aed; }
+.tl-root .vis-item.vis-dot { border-width: 4px; }
+
+/* the "as of" rewind cursor */
+.tl-root .vis-custom-time.asof { background-color: var(--color-active); width: 2px; }
+.tl-root .vis-custom-time.asof .vis-custom-time-marker {
+  background: var(--color-active); color: #fff; font-size: 10px; border-radius: 6px; padding: 1px 6px;
+}
+
+/* vis tooltip → clean card */
+.vis-tooltip {
+  background: var(--color-surface) !important; border: 1px solid var(--color-border) !important;
+  color: var(--color-text) !important; border-radius: 10px !important;
+  box-shadow: 0 8px 28px rgba(12,21,33,.12) !important; padding: 8px 10px !important;
+  font-family: var(--font-sans) !important;
+}

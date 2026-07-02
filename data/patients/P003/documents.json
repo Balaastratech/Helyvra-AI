@@ -1,0 +1,50 @@
+{
+  "patient_id": "P003",
+  "documents": [
+    {
+      "doc_id": "DOC-P003-01",
+      "date": "2026-02-01",
+      "type": "Pulmonology Note",
+      "author": "Dr. Mensah",
+      "title": "Asthma diagnosed",
+      "text": "On 2026-02-01, Aisha Rahman (MRN-002055) was diagnosed with mild persistent asthma by Dr. Mensah following spirometry.",
+      "asserts": [
+        { "subject": "diagnosis", "predicate": "added", "value": "asthma" }
+      ]
+    },
+    {
+      "doc_id": "DOC-P003-02",
+      "date": "2026-02-01",
+      "type": "Medication Order",
+      "author": "Dr. Mensah",
+      "title": "Started albuterol inhaler",
+      "text": "On 2026-02-01, Dr. Mensah prescribed an albuterol rescue inhaler as needed for Aisha Rahman.",
+      "asserts": [
+        { "subject": "medication", "predicate": "prescribed", "value": "albuterol inhaler" }
+      ]
+    },
+    {
+      "doc_id": "DOC-P003-03",
+      "date": "2026-04-10",
+      "type": "Allergy Note",
+      "author": "Dr. Cole",
+      "title": "Penicillin allergy (FILED IN ERROR)",
+      "text": "On 2026-04-10, a penicillin allergy was entered for Aisha Rahman. This note was later found to belong to a different patient and was filed to this chart in error.",
+      "entered_in_error": true,
+      "asserts": [
+        { "subject": "allergy", "predicate": "diagnosed", "value": "penicillin" }
+      ]
+    },
+    {
+      "doc_id": "DOC-P003-04",
+      "date": "2026-05-20",
+      "type": "Medication Change",
+      "author": "Dr. Mensah",
+      "title": "Added fluticasone inhaler",
+      "text": "On 2026-05-20, due to ongoing symptoms, Dr. Mensah added a fluticasone inhaled corticosteroid twice daily for Aisha Rahman.",
+      "asserts": [
+        { "subject": "medication", "predicate": "prescribed", "value": "fluticasone inhaler" }
+      ]
+    }
+  ]
+}

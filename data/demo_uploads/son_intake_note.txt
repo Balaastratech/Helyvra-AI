@@ -1,0 +1,9 @@
+SUNRISE FAMILY CLINIC — New Patient Intake Note
+Demo only — synthetic data, not medical advice. No real PHI.
+
+Patient: Arjun Sharma   MRN: AS-7788   DOB: 1999-06-01
+Date: 2026-06-20
+
+Reason for visit: routine check, family history review.
+Lifestyle: non-smoker, exercises regularly.
+Family history: Father — Rahul Sharma, MRN RH-4471 — has type 2 diabetes and had a myocardial infarction at age 49. Mother — no significant history.

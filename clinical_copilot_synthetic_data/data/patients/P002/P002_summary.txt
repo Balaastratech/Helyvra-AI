@@ -1,0 +1,5 @@
+Demo only - not medical advice. Synthetic data only - no real PHI.
+Patient: James O'Sullivan (P002), 54M, MRN-1002
+Conditions: atrial fibrillation; chronic kidney disease stage 3.
+Medication: warfarin for atrial fibrillation.
+Stretch check: flag drug-drug interaction risk and missing recent kidney lab before renal-sensitive dose change.
