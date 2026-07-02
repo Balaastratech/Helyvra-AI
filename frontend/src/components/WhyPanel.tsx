@@ -22,12 +22,17 @@ export function WhyPanel() {
   }, [open, closeWhy])
 
   // One plain sentence (design-brief): "X was cleared on DATE by SOURCE, so the earlier record no longer applies."
+  // A repeated measurement (e.g. a lab value) never supersedes the last one —
+  // each reading is independently true — so that case gets its own sentence
+  // instead of the misleading "nothing has replaced it".
   const sentence =
     data && data.superseded_by
       ? `${data.superseded_by.label} on ${data.date} (${data.source}), so the earlier record no longer applies.`
-      : data
-        ? `${data.fact.label} — still current; nothing has replaced it.`
-        : ''
+      : data && data.trend.length > 1
+        ? `No single record replaced another — this has been measured ${data.trend.length} times. Each reading stands on its own.`
+        : data
+          ? `${data.fact.label} — still current; nothing has replaced it.`
+          : ''
 
   return (
     <AnimatePresence>
@@ -94,6 +99,31 @@ export function WhyPanel() {
                           <li key={c.id} className="flex items-center gap-2 text-sm">
                             {i > 0 && <ArrowRight className="h-3.5 w-3.5 shrink-0 text-text-muted" />}
                             <span className="rounded-lg bg-white/5 px-2 py-1 text-text">{c.label}</span>
+                            <span className="text-xs text-text-muted">{c.valid_from}</span>
+                          </li>
+                        ))}
+                      </ol>
+                    </section>
+                  )}
+
+                  {data.trend.length > 1 && (
+                    <section>
+                      <p className="mb-2 text-xs font-medium uppercase tracking-wide text-text-muted">
+                        Readings over time
+                      </p>
+                      <ol className="space-y-2">
+                        {data.trend.map((c, i) => (
+                          <li key={c.id} className="flex items-center gap-2 text-sm">
+                            {i > 0 && <ArrowRight className="h-3.5 w-3.5 shrink-0 text-text-muted" />}
+                            <span
+                              className={
+                                c.id === data.fact.id
+                                  ? 'rounded-lg bg-active-soft px-2 py-1 font-medium text-text'
+                                  : 'rounded-lg bg-white/5 px-2 py-1 text-text'
+                              }
+                            >
+                              {c.label}
+                            </span>
                             <span className="text-xs text-text-muted">{c.valid_from}</span>
                           </li>
                         ))}

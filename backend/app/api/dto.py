@@ -138,6 +138,12 @@ class WhyResponse(BaseModel):
     # qualify it as `datetime.date` to keep the annotation correct.
     date: Optional[datetime.date] = None
     chain: List[ClinicalFact] = Field(default_factory=list)
+    # Other active readings of the SAME subject (oldest first), populated only
+    # when this fact was never superseded. A lab value never invalidates the
+    # last one — each reading is independently true — so "nothing replaced it"
+    # is correct but misleading for a trend; this lets the UI show the history
+    # instead of a flat dead-end.
+    trend: List[ClinicalFact] = Field(default_factory=list)
 
 
 # --- /health --------------------------------------------------------------

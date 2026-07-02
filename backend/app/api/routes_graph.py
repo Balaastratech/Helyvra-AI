@@ -216,13 +216,30 @@ async def graph_cognee(patient_id: str = Query("P001")) -> CogneeGraphResponse:
 # --- provenance -----------------------------------------------------------
 @router.get("/why", response_model=WhyResponse)
 def why(fact_id: str = Query(...)) -> WhyResponse:
-    """Why did this fact change? -> superseding event + reason + source + date."""
+    """Why did this fact change? -> superseding event + reason + source + date.
+
+    Not every fact fits the supersede model: a lab reading never invalidates
+    the last one (each measurement is independently true), so it's never
+    superseded — but "nothing has replaced it" reads as wrong next to a
+    visibly rising HbA1c. When there's no supersession, look for other ACTIVE
+    facts sharing this subject and surface them as a trend instead.
+    """
     fact = ledger.get(fact_id)
     if fact is None:
         raise HTTPException(404, f"fact not found: {fact_id}")
 
     chain = ledger.chain(fact_id)
     sup = ledger.get(fact.superseded_by) if fact.superseded_by else None
+
+    trend: list = []
+    if sup is None:
+        siblings = [
+            f for f in ledger.query_all(fact.patient_id, fact.subject)
+            if f.status == "active"
+        ]
+        if len(siblings) > 1:
+            trend = siblings
+
     return WhyResponse(
         fact=fact,
         superseded_by=sup,
@@ -230,6 +247,7 @@ def why(fact_id: str = Query(...)) -> WhyResponse:
         source=(sup.source if sup else fact.source),
         date=(sup.valid_from if sup else fact.valid_from),
         chain=chain,
+        trend=trend,
     )
 
 

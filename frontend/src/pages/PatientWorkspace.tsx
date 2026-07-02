@@ -8,7 +8,6 @@ import { PreVisitBrief } from '@/components/clinical/PreVisitBrief'
 import { ClinicalCard } from '@/components/clinical/ClinicalCard'
 import { ChatPane } from '@/components/ChatPane'
 import { PatientTimeline } from '@/components/PatientTimeline'
-import { RewindSlider } from '@/components/RewindSlider'
 import { SplitChat } from '@/components/SplitChat'
 import { DropZone } from '@/components/DropZone'
 import { cn } from '@/lib/utils'
@@ -78,11 +77,10 @@ export function PatientWorkspace() {
               <div className="shrink-0 overflow-hidden rounded-xl border border-border bg-surface">
                 <PatientTimeline />
               </div>
-              <RewindSlider />
               <p className="text-xs text-text-muted">
                 Bars are long-running states; dots are events and short episodes; lab values
-                plot as trends below. Drag the blue playhead (or the slider) to rewind —
-                facts the AI didn&apos;t know yet fade, replaced facts grey out, retained not deleted.
+                plot as trends below. Drag the blue playhead to rewind — facts the AI
+                didn&apos;t know yet fade, replaced facts grey out, retained not deleted.
                 Click anything for “why it changed”.
               </p>
             </div>

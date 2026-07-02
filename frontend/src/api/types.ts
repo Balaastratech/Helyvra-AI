@@ -156,6 +156,9 @@ export interface WhyResponse {
   source: string
   date: string | null
   chain: ClinicalFact[]
+  /** Other active readings of the same subject (oldest first) — populated
+   * only when this fact was never superseded, e.g. repeated lab values. */
+  trend: ClinicalFact[]
 }
 
 // --- /health --------------------------------------------------------------

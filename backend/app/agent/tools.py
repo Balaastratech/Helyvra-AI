@@ -170,6 +170,16 @@ def _why_narrative(patient_id: str, subject: str) -> Tuple[str, Optional[str]]:
     superseded = [f for f in facts if f.superseded_by]
     if not superseded:
         active = [f for f in facts if f.status == "active"]
+        if len(active) > 1:
+            # A trend, not a supersession: e.g. repeated lab readings, each
+            # independently true. Show the history instead of claiming
+            # falsely that nothing changed.
+            points = "; ".join(f"{f.label} ({f.valid_from})" for f in active)
+            return (
+                f"No single record replaced another — {f.subject} has {len(active)} "
+                f"readings on file, each still active: {points}.",
+                active[-1].id,
+            )
         if active:
             f = active[-1]
             return (
