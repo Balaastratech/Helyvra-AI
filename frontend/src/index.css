@@ -274,6 +274,24 @@ input[type='range'].rewind::-moz-range-thumb {
 .tl-root .vis-item.vis-selected { box-shadow: 0 0 0 2px var(--color-active); border-color: var(--color-active); }
 .tl-root .vis-item.vis-point .vis-item-content { transform: translateY(-2px); }
 
+/* labels never clip — spill into empty lane space instead of hiding.
+   (extra specificity: vis-timeline's own css loads after this file) */
+.tl-root .vis-itemset .vis-item .vis-item-overflow { overflow: visible; }
+.tl-root .vis-itemset .vis-item .vis-item-content { white-space: nowrap; }
+/* items whose label would clip at the right panel edge flip their label to
+   the LEFT of the bar/dot (class computed per item against the live window).
+   !important: vis-timeline writes an inline transform on range labels while
+   panning, which would silently undo this flip. */
+.tl-root .vis-itemset .vis-item.tl-edge .vis-item-content {
+  transform: translateX(calc(-100% - 14px)) !important;
+}
+
+/* "not yet known" backdrop right of the playhead */
+.tl-root .vis-item.vis-background.tl-notyet {
+  background: rgba(12, 21, 33, 0.05);
+  border-left: 1px dashed rgba(12, 21, 33, 0.2);
+}
+
 /* superseded / future states */
 .tl-root .vis-item.tl-superseded {
   opacity: 0.55; text-decoration: line-through; text-decoration-color: rgba(12,21,33,.35);

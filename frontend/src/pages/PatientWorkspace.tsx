@@ -68,21 +68,22 @@ export function PatientWorkspace() {
           )}
           {tab === 'consult' && <ChatPane />}
           {tab === 'timeline' && (
-            <div className="flex h-full flex-col gap-3 p-4">
+            <div className="flex h-full flex-col gap-3 overflow-y-auto p-4">
               <div className="flex items-center justify-between">
                 <h2 className="text-sm font-semibold text-text">Memory timeline</h2>
                 <Link to="/memory" className="flex items-center gap-1 text-xs text-active hover:underline">
                   Relationship map <ArrowUpRight className="h-3 w-3" />
                 </Link>
               </div>
-              <div className="min-h-0 flex-1 overflow-hidden rounded-xl border border-border bg-surface">
+              <div className="shrink-0 overflow-hidden rounded-xl border border-border bg-surface">
                 <PatientTimeline />
               </div>
               <RewindSlider />
               <p className="text-xs text-text-muted">
-                Each row is a category; bars are states (e.g. a medication's active span),
-                dots are point-in-time facts. Hover for detail, click for “why it changed”.
-                Scrub the slider to move the “as of” cursor — superseded facts grey out, retained not deleted.
+                Bars are long-running states; dots are events and short episodes; lab values
+                plot as trends below. Drag the blue playhead (or the slider) to rewind —
+                facts the AI didn&apos;t know yet fade, replaced facts grey out, retained not deleted.
+                Click anything for “why it changed”.
               </p>
             </div>
           )}
