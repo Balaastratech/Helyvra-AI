@@ -1,0 +1,124 @@
+- generic [ref=f1e2]:
+  - generic [ref=f1e39]:
+    - banner [ref=f1e40]:
+      - generic [ref=f1e41]:
+        - button "Total Recall" [ref=f1e42]:
+          - img [ref=f1e44]
+          - generic [ref=f1e48]: Total Recall
+        - button "Close patient — back to dashboard" [ref=f1e322]:
+          - img [ref=f1e323]
+        - generic [ref=f1e326]:
+          - img [ref=f1e328]
+          - generic [ref=f1e331]: Margaret Chen
+          - generic [ref=f1e332]: 68F
+          - generic [ref=f1e333]: MRN-004471
+        - navigation [ref=f1e49]:
+          - link "Compare" [ref=f1e50] [cursor=pointer]:
+            - /url: /compare
+            - img [ref=f1e51]
+            - text: Compare
+          - link "Memory Map" [ref=f1e56] [cursor=pointer]:
+            - /url: /memory
+            - img [ref=f1e57]
+            - text: Memory Map
+          - link "Cognee graph" [ref=f1e62] [cursor=pointer]:
+            - /url: /board
+            - img [ref=f1e63]
+            - text: Cognee graph
+      - generic [ref=f1e68]:
+        - button "⌘K" [ref=f1e69]:
+          - img [ref=f1e70]
+          - generic [ref=f1e73]: ⌘K
+        - button "How it works" [ref=f1e74]:
+          - img [ref=f1e75]
+          - text: How it works
+        - 'generic "memory: up · records: up" [ref=f1e78]':
+          - img [ref=f1e79]
+          - text: systems up
+        - generic [ref=f1e81]:
+          - generic [ref=f1e82]:
+            - paragraph [ref=f1e83]: Dr. Anjali Mehta
+            - paragraph [ref=f1e84]: Internal Medicine
+          - button "Sign out" [ref=f1e85]:
+            - img [ref=f1e86]
+    - note [ref=f1e89]:
+      - img [ref=f1e90]
+      - generic [ref=f1e92]: Demo only · synthetic data · not medical advice
+    - main [ref=f1e93]:
+      - generic [ref=f1e334]:
+        - generic [ref=f1e335]:
+          - generic [ref=f1e336]:
+            - heading "The Memory Map" [level=1] [ref=f1e337]
+            - paragraph [ref=f1e338]: Every fact the AI holds, on a timeline. Drag “Rewind time” to watch facts turn on and off; click a fact to see why it changed.
+          - generic [ref=f1e339]:
+            - generic [ref=f1e340]: Active fact
+            - generic [ref=f1e342]: Replaced / not yet known
+            - generic [ref=f1e344]:
+              - img [ref=f1e345]
+              - text: Replaced by
+            - generic [ref=f1e346]: Drag “Rewind time” to watch facts turn on and off.
+          - generic [ref=f1e353]:
+            - generic [ref=f1e354]:
+              - generic [ref=f1e355]: Categories
+              - generic [ref=f1e356]:
+                - button "Zoom in" [ref=f1e357]:
+                  - img [ref=f1e358]
+                - button "Zoom out" [ref=f1e361]:
+                  - img [ref=f1e362]
+                - button "Fit to view" [ref=f1e365]:
+                  - img [ref=f1e366]
+            - generic [ref=f1e371]:
+              - button "Allergies" [ref=f1e372]:
+                - img [ref=f1e373]
+                - generic [ref=f1e375]: Allergies
+              - button "Conditions" [ref=f1e376]:
+                - img [ref=f1e377]
+                - generic [ref=f1e381]: Conditions
+              - button "Medications" [ref=f1e382]:
+                - img [ref=f1e383]
+                - generic [ref=f1e386]: Medications
+            - generic [ref=f1e387]:
+              - generic [ref=f1e388]:
+                - img [ref=f1e389]
+                - text: Replaced by
+              - generic [ref=f1e390]:
+                - img [ref=f1e391]
+                - text: Family
+          - generic [ref=f1e392]:
+            - generic [ref=f1e393]:
+              - generic [ref=f1e394]:
+                - img [ref=f1e395]
+                - text: Rewind time
+              - generic [ref=f1e399]: now
+            - paragraph [ref=f1e400]: Drag to see what the AI knew on any date.
+            - slider "Rewind time — choose a date" [ref=f1e401]: "173"
+            - generic [ref=f1e402]:
+              - generic [ref=f1e403]: 2026-01-10
+              - generic [ref=f1e404]: now
+        - complementary [ref=f1e405]:
+          - heading "The records, as photos" [level=2] [ref=f1e406]
+          - paragraph [ref=f1e407]: Each result is a snapshot. Rewind to develop the reel; replaced records get stamped.
+          - generic [ref=f1e409]:
+            - button "Allergic to penicillin 2026-01-10 · Dr. Adams replaced" [ref=f1e410]:
+              - img [ref=f1e411]
+              - paragraph [ref=f1e413]: Allergic to penicillin
+              - paragraph [ref=f1e414]: 2026-01-10 · Dr. Adams
+              - img "replaced"
+            - button "On lisinopril 10mg 2026-02-15 · Dr. Adams replaced" [ref=f1e415]:
+              - img [ref=f1e416]
+              - paragraph [ref=f1e418]: On lisinopril 10mg
+              - paragraph [ref=f1e419]: 2026-02-15 · Dr. Adams
+              - img "replaced"
+            - button "Penicillin allergy cleared 2026-03-02 · Dr. Lee" [ref=f1e420]:
+              - img [ref=f1e421]
+              - paragraph [ref=f1e423]: Penicillin allergy cleared
+              - paragraph [ref=f1e424]: 2026-03-02 · Dr. Lee
+            - button "Switched to amlodipine 5mg 2026-04-20 · Dr. Lee" [ref=f1e425]:
+              - img [ref=f1e426]
+              - paragraph [ref=f1e428]: Switched to amlodipine 5mg
+              - paragraph [ref=f1e429]: 2026-04-20 · Dr. Lee
+            - 'button "Diagnosed: type 2 diabetes 2026-05-11 · Dr. Patel" [ref=f1e430]':
+              - img [ref=f1e431]
+              - paragraph [ref=f1e433]: "Diagnosed: type 2 diabetes"
+              - paragraph [ref=f1e434]: 2026-05-11 · Dr. Patel
+  - region "Notifications alt+T"

@@ -1,0 +1,137 @@
+- generic [ref=e2]:
+  - generic [ref=e53]:
+    - banner [ref=e54]:
+      - generic [ref=e55]:
+        - button "Total Recall" [ref=e56]:
+          - img [ref=e58]
+          - generic [ref=e62]: Total Recall
+        - button "Close patient — back to dashboard" [ref=e239]:
+          - img [ref=e240]
+        - generic [ref=e243]:
+          - img [ref=e245]
+          - generic [ref=e248]: Margaret Chen
+          - generic [ref=e249]: 68F
+          - generic [ref=e250]: MRN-004471
+        - navigation [ref=e63]:
+          - link "Compare" [ref=e64] [cursor=pointer]:
+            - /url: /compare
+            - img [ref=e65]
+            - text: Compare
+          - link "Memory Map" [ref=e70] [cursor=pointer]:
+            - /url: /memory
+            - img [ref=e71]
+            - text: Memory Map
+          - link "Cognee graph" [ref=e76] [cursor=pointer]:
+            - /url: /board
+            - img [ref=e77]
+            - text: Cognee graph
+      - generic [ref=e82]:
+        - button "⌘K" [ref=e83]:
+          - img [ref=e84]
+          - generic [ref=e87]: ⌘K
+        - button "How it works" [ref=e88]:
+          - img [ref=e89]
+          - text: How it works
+        - 'generic "memory: up · records: up" [ref=e92]':
+          - img [ref=e93]
+          - text: systems up
+        - generic [ref=e95]:
+          - generic [ref=e96]:
+            - paragraph [ref=e97]: Dr. Anjali Mehta
+            - paragraph [ref=e98]: Internal Medicine
+          - button "Sign out" [ref=e99]:
+            - img [ref=e100]
+    - note [ref=e103]:
+      - img [ref=e104]
+      - generic [ref=e106]: Demo only · synthetic data · not medical advice
+    - main [ref=e107]:
+      - generic [ref=e251]:
+        - generic [ref=e252]:
+          - tablist "Patient views" [ref=e253]:
+            - tab "Pre-visit brief" [ref=e254]:
+              - img [ref=e255]
+              - text: Pre-visit brief
+            - tab "Consult" [selected] [ref=e258]:
+              - img [ref=e259]
+              - text: Consult
+            - tab "Timeline" [ref=e261]:
+              - img [ref=e262]
+              - text: Timeline
+            - tab "Compare" [ref=e267]:
+              - img [ref=e268]
+              - text: Compare
+          - generic [ref=e534]:
+            - complementary [ref=e535]:
+              - generic [ref=e536]:
+                - generic [ref=e537]: Conversations
+                - button "New conversation" [ref=e538]:
+                  - img [ref=e539]
+              - generic [ref=e540]:
+                - button "New chat" [ref=e541]:
+                  - img [ref=e542]
+                  - generic [ref=e545]: New chat
+                - button "Is the patient allergic to penicillin?" [ref=e596]:
+                  - img [ref=e597]
+                  - generic [ref=e599]: Is the patient allergic to penicillin?
+                - button "Is the patient allergic to penicillin?" [ref=e546]:
+                  - img [ref=e547]
+                  - generic [ref=e549]: Is the patient allergic to penicillin?
+                - button "Is the patient allergic to penicillin?" [ref=e550]:
+                  - img [ref=e551]
+                  - generic [ref=e553]: Is the patient allergic to penicillin?
+                - button "Is the patient allergic to penicillin?" [ref=e554]:
+                  - img [ref=e555]
+                  - generic [ref=e557]: Is the patient allergic to penicillin?
+            - generic [ref=e558]:
+              - generic [ref=e559]:
+                - button "Hide sidebar" [ref=e560]:
+                  - img [ref=e561]
+                - heading "Is the patient allergic to penicillin?" [level=2] [ref=e600]
+              - generic [ref=e564]:
+                - generic [ref=e603]: Is the patient allergic to penicillin?
+                - generic [ref=e605]:
+                  - generic [ref=e606]: The patient's penicillin allergy was cleared on 2026-03-02 by Dr. Lee. Previously, a penicillin allergy was diagnosed on 2026-01-10 by Dr. Adams.
+                  - generic [ref=e608]:
+                    - term [ref=e609]: Reason
+                    - definition [ref=e610]: The most recent record indicates the penicillin allergy has been cleared, superseding a prior diagnosis.
+                  - generic [ref=e611]:
+                    - button "Dr. Lee" [ref=e612]:
+                      - img [ref=e613]
+                      - text: Dr. Lee
+                    - button "Dr. Adams" [ref=e616]:
+                      - img [ref=e617]
+                      - text: Dr. Adams
+                  - button "Recalled memory raw" [ref=e621]:
+                    - img [ref=e622]
+                    - img [ref=e624]
+                    - generic [ref=e626]: Recalled memory
+                    - generic [ref=e627]: raw
+              - generic [ref=e583]:
+                - textbox "Chat message" [ref=e584]:
+                  - /placeholder: Ask about this patient…
+                - button [disabled]:
+                  - img
+        - complementary [ref=e392]:
+          - heading "Doctor might miss" [level=2] [ref=e394]
+          - paragraph [ref=e396]: No open flags yet. Upload this patient’s records to build the brief.
+          - generic [ref=e398]:
+            - button "Upload clinical documents" [ref=e399] [cursor=pointer]
+            - generic [ref=e400]:
+              - img [ref=e401]
+              - paragraph [ref=e404]: Drop clinical documents here or browse
+              - paragraph [ref=e405]: One or many · PDF, FHIR JSON, CSV, or text — patient auto-detected
+    - dialog "Why did this change?" [ref=e629]:
+      - banner [ref=e630]:
+        - heading "Why did this change?" [level=2] [ref=e631]
+        - button "Close" [ref=e632]:
+          - img [ref=e633]
+      - generic [ref=e636]:
+        - paragraph [ref=e637]: Penicillin allergy cleared — still current; nothing has replaced it.
+        - generic [ref=e638]:
+          - paragraph [ref=e639]: This fact
+          - paragraph [ref=e640]: Penicillin allergy cleared
+          - generic [ref=e642]: Active
+        - generic [ref=e643]:
+          - img [ref=e644]
+          - paragraph [ref=e656]: The AI's own memory agrees — this is the reconciled truth, not a guess.
+  - region "Notifications alt+T"

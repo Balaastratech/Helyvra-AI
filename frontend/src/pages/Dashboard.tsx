@@ -173,7 +173,7 @@ export function Dashboard() {
                       {(nCrit > 0 || nWarn > 0) && (
                         <div className="mt-1.5 flex items-center gap-1.5">
                           {nCrit > 0 && <span className="h-2 w-2 rounded-full bg-critical" title={`${nCrit} critical`} />}
-                          {nWarn > 0 && <span className="h-2 w-2 rounded-full bg-warning" title={`${nWarn} warnings`} />}
+                          {nWarn > 0 && <span className="h-2 w-2 rounded-full bg-warning" title={`${nWarn} warning${nWarn > 1 ? 's' : ''}`} />}
                           <span className="text-[10px] text-text-faint">{nCrit + nWarn} open flag{nCrit + nWarn > 1 ? 's' : ''}</span>
                         </div>
                       )}

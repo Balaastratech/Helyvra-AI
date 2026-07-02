@@ -1,0 +1,12 @@
+- generic [ref=f2e2]:
+  - generic [ref=f2e4]:
+    - generic [ref=f2e5]:
+      - img [ref=f2e7]
+      - heading "Total Recall" [level=1] [ref=f2e11]
+      - paragraph [ref=f2e12]: Clinical copilot — choose a demo clinician to continue.
+    - paragraph [ref=f2e13]:
+      - img [ref=f2e14]
+      - text: Loading clinicians…
+    - list
+    - paragraph [ref=f2e16]: Demo login · synthetic data · not medical advice
+  - region "Notifications alt+T"

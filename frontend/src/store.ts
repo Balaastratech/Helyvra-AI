@@ -1,5 +1,6 @@
 /** UI state (zustand). Server state lives in TanStack Query, not here. */
 import { create } from 'zustand'
+import { persist } from 'zustand/middleware'
 import type { Doctor } from '@/api/types'
 
 export type StepKey = 'loaded' | 'added' | 'asked'
@@ -34,7 +35,7 @@ interface UiState {
   markStep: (k: StepKey) => void
 }
 
-export const useUi = create<UiState>((set) => ({
+export const useUi = create<UiState>()(persist((set) => ({
   doctor: null,
   patientId: null,
   asOf: null,
@@ -65,6 +66,10 @@ export const useUi = create<UiState>((set) => ({
   setHowOpen: (v) => set({ howOpen: v }),
   setCmdkOpen: (v) => set({ cmdkOpen: v }),
   markStep: (k) => set((s) => ({ steps: { ...s.steps, [k]: true } })),
+}), {
+  // ponytail: persist ONLY the demo login so a judge's F5 doesn't log them out.
+  name: 'total-recall-ui',
+  partialize: (s) => ({ doctor: s.doctor }) as UiState,
 }))
 
 export function nextStep(steps: Record<StepKey, boolean>): StepKey | null {

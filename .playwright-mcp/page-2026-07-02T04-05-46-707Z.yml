@@ -1,0 +1,134 @@
+- generic [ref=f1e2]:
+  - generic [ref=f1e39]:
+    - banner [ref=f1e40]:
+      - generic [ref=f1e41]:
+        - button "Total Recall" [ref=f1e42]:
+          - img [ref=f1e44]
+          - generic [ref=f1e48]: Total Recall
+        - navigation [ref=f1e49]:
+          - link "Compare" [ref=f1e50] [cursor=pointer]:
+            - /url: /compare
+            - img [ref=f1e51]
+            - text: Compare
+          - link "Memory Map" [ref=f1e56] [cursor=pointer]:
+            - /url: /memory
+            - img [ref=f1e57]
+            - text: Memory Map
+          - link "Cognee graph" [ref=f1e62] [cursor=pointer]:
+            - /url: /board
+            - img [ref=f1e63]
+            - text: Cognee graph
+      - generic [ref=f1e68]:
+        - button "⌘K" [ref=f1e69]:
+          - img [ref=f1e70]
+          - generic [ref=f1e73]: ⌘K
+        - button "How it works" [ref=f1e74]:
+          - img [ref=f1e75]
+          - text: How it works
+        - 'generic "memory: up · records: up" [ref=f1e78]':
+          - img [ref=f1e79]
+          - text: systems up
+        - generic [ref=f1e81]:
+          - generic [ref=f1e82]:
+            - paragraph [ref=f1e83]: Dr. Anjali Mehta
+            - paragraph [ref=f1e84]: Internal Medicine
+          - button "Sign out" [ref=f1e85]:
+            - img [ref=f1e86]
+    - note [ref=f1e89]:
+      - img [ref=f1e90]
+      - generic [ref=f1e92]: Demo only · synthetic data · not medical advice
+    - main [ref=f1e93]:
+      - generic [ref=f1e95]:
+        - generic [ref=f1e96]:
+          - heading "Good day, Dr. Anjali Mehta" [level=1] [ref=f1e97]
+          - paragraph [ref=f1e98]: Resolve a patient, review today’s charts, or file a new record.
+        - generic [ref=f1e100]:
+          - img [ref=f1e101]
+          - textbox "Resolve patient" [ref=f1e104]:
+            - /placeholder: Find a patient by name or MRN…
+          - button "Resolve" [disabled] [ref=f1e105]
+        - generic [ref=f1e106]:
+          - heading "Patients" [level=2] [ref=f1e107]
+          - generic [ref=f1e108]:
+            - button "Margaret Chen MRN-004471 68 F — hypertension, recent allergy re-test." [ref=f1e109]:
+              - img [ref=f1e111]
+              - generic [ref=f1e114]:
+                - generic [ref=f1e115]:
+                  - paragraph [ref=f1e116]: Margaret Chen
+                  - generic [ref=f1e117]: MRN-004471
+                - paragraph [ref=f1e118]: 68 F — hypertension, recent allergy re-test.
+              - img [ref=f1e119]
+            - button "James O'Sullivan MRN-008830 54 M — atrial fibrillation, anticoagulation, CKD." [ref=f1e121]:
+              - img [ref=f1e123]
+              - generic [ref=f1e126]:
+                - generic [ref=f1e127]:
+                  - paragraph [ref=f1e128]: James O'Sullivan
+                  - generic [ref=f1e129]: MRN-008830
+                - paragraph [ref=f1e130]: 54 M — atrial fibrillation, anticoagulation, CKD.
+              - img [ref=f1e131]
+            - button "Aisha Rahman MRN-002055 37 F — asthma; one record filed in error." [ref=f1e133]:
+              - img [ref=f1e135]
+              - generic [ref=f1e138]:
+                - generic [ref=f1e139]:
+                  - paragraph [ref=f1e140]: Aisha Rahman
+                  - generic [ref=f1e141]: MRN-002055
+                - paragraph [ref=f1e142]: 37 F — asthma; one record filed in error.
+              - img [ref=f1e143]
+            - button "Rahul Sharma MRN-2010 52 M — type 2 diabetes; upload records to build the chart. 3 warnings 3 open flags" [ref=f1e145]:
+              - img [ref=f1e147]
+              - generic [ref=f1e150]:
+                - generic [ref=f1e151]:
+                  - paragraph [ref=f1e152]: Rahul Sharma
+                  - generic [ref=f1e153]: MRN-2010
+                - paragraph [ref=f1e154]: 52 M — type 2 diabetes; upload records to build the chart.
+                - generic [ref=f1e155]:
+                  - generic "3 warnings" [ref=f1e156]
+                  - generic [ref=f1e157]: 3 open flags
+              - img [ref=f1e158]
+            - button "Priya Mehta MRN-2011 34 F — asthma; pregnancy flag. Unrelated chart (isolation demo)." [ref=f1e160]:
+              - img [ref=f1e162]
+              - generic [ref=f1e165]:
+                - generic [ref=f1e166]:
+                  - paragraph [ref=f1e167]: Priya Mehta
+                  - generic [ref=f1e168]: MRN-2011
+                - paragraph [ref=f1e169]: 34 F — asthma; pregnancy flag. Unrelated chart (isolation demo).
+              - img [ref=f1e170]
+            - button "Rahul Sharma MRN-2012 31 M — minimal record; same name as P010 (disambiguation)." [ref=f1e172]:
+              - img [ref=f1e174]
+              - generic [ref=f1e177]:
+                - generic [ref=f1e178]:
+                  - paragraph [ref=f1e179]: Rahul Sharma
+                  - generic [ref=f1e180]: MRN-2012
+                - paragraph [ref=f1e181]: 31 M — minimal record; same name as P010 (disambiguation).
+              - img [ref=f1e182]
+            - button "Meera Nair MRN-2013 41 F — family history of breast cancer; hereditary-risk demo." [ref=f1e184]:
+              - img [ref=f1e186]
+              - generic [ref=f1e189]:
+                - generic [ref=f1e190]:
+                  - paragraph [ref=f1e191]: Meera Nair
+                  - generic [ref=f1e192]: MRN-2013
+                - paragraph [ref=f1e193]: 41 F — family history of breast cancer; hereditary-risk demo.
+              - img [ref=f1e194]
+            - button "Arjun Sharma MRN-2020 New chart — upload records to begin. 1 warning 1 open flag" [ref=f1e196]:
+              - img [ref=f1e198]
+              - generic [ref=f1e201]:
+                - generic [ref=f1e202]:
+                  - paragraph [ref=f1e203]: Arjun Sharma
+                  - generic [ref=f1e204]: MRN-2020
+                - paragraph [ref=f1e205]: New chart — upload records to begin.
+                - generic [ref=f1e206]:
+                  - generic "1 warning" [ref=f1e207]
+                  - generic [ref=f1e208]: 1 open flag
+              - img [ref=f1e209]
+        - generic [ref=f1e211]:
+          - heading "File a record" [level=2] [ref=f1e212]:
+            - img [ref=f1e213]
+            - text: File a record
+          - generic [ref=f1e216]:
+            - button "Upload clinical documents" [ref=f1e217] [cursor=pointer]
+            - generic [ref=f1e218]:
+              - img [ref=f1e219]
+              - paragraph [ref=f1e222]: Drop clinical documents here or browse
+              - paragraph [ref=f1e223]: One or many · PDF, FHIR JSON, CSV, or text — patient auto-detected
+          - paragraph [ref=f1e224]: Drop a PDF, FHIR bundle, CSV, or note — the system detects the patient (or creates a new chart) and files it.
+  - region "Notifications alt+T"

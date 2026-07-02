@@ -15,8 +15,8 @@ export function plainStatus(status: string): string {
 /** Assistant search-type → human label + the tech term kept for the tooltip. */
 export function searchTypeCopy(searchType: string): { label: string; tip: string } {
   const st = searchType.toUpperCase()
-  if (st.includes('TEMPORAL') || st.includes('GRAPH')) {
-    return { label: 'Time-aware memory', tip: `Cognee ${searchType}` }
+  if (st.includes('RAG') || st.includes('CHUNK')) {
+    return { label: 'No memory · plain lookup', tip: `Cognee ${searchType}` }
   }
-  return { label: 'No memory · plain lookup', tip: `Cognee ${searchType}` }
+  return { label: 'Time-aware memory', tip: `Cognee ${searchType}` }
 }
