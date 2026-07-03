@@ -1,6 +1,7 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState, type CSSProperties } from 'react'
 import { Timeline, type TimelineOptions } from 'vis-timeline/standalone'
 import { DataSet } from 'vis-data'
+import { History } from 'lucide-react'
 import 'vis-timeline/styles/vis-timeline-graph2d.css'
 import { useTimeline } from '@/api/hooks'
 import { useUi } from '@/store'
@@ -64,6 +65,24 @@ function escapeHtml(s: string): string {
 type View = { start: number; end: number; centerW: number }
 
 const CHAR_PX = 6.3 // ≈ px per character at the 11px item font
+
+/** The chart's hard pan/zoom universe — the ONLY place this is computed, so
+ * the chart and the rewind slider can never disagree on what "the timeline"
+ * spans. `min`/`max` are enforced on the vis-timeline instance itself, so
+ * panning or ctrl-scroll zooming physically cannot reach empty dead space
+ * beyond the data. */
+function computeBounds(nodes: GraphNode[]) {
+  const today = parseDate(todayIso()).getTime()
+  const froms = nodes.map((n) => parseDate(n.valid_from).getTime())
+  const min = froms.length ? Math.min(...froms) : today - 365 * DAY
+  const leftPad = Math.max(30 * DAY, (today - min) * 0.04)
+  // The "now" flag is ~32px wide; at Fit-all zoom this needs ~90 days of
+  // buffer for the flag to fully clear the panel's right edge (measured:
+  // 45 days left it clipped by ~15px — this is what the "no" instead of
+  // "now" cutoff was).
+  const rightPad = 90 * DAY
+  return { min: min - leftPad, max: today + rightPad, today }
+}
 
 function buildItems(nodes: GraphNode[], asOf: string | null, nowIso: string, view: View | null) {
   const span = view ? Math.max(1, view.end - view.start) : 1
@@ -242,6 +261,7 @@ export function PatientTimeline() {
     return { start: now - 365 * DAY, end: now }
   })
   const [leftPad, setLeftPad] = useState(110)
+  const [bounds, setBounds] = useState(() => computeBounds([]))
 
   // Build the timeline once the container exists.
   useEffect(() => {
@@ -256,6 +276,8 @@ export function PatientTimeline() {
       selectable: true,
       zoomKey: 'ctrlKey',
       zoomMin: 1000 * 60 * 60 * 24 * 30,
+      min: new Date(bounds.min),
+      max: new Date(bounds.max),
       orientation: { axis: 'top', item: 'top' },
       margin: { item: { horizontal: 8, vertical: 6 }, axis: 8 },
       groupOrder: (a: any, b: any) =>
@@ -324,11 +346,18 @@ export function PatientTimeline() {
     groups.add(GROUPS.filter((g) => used.has(g.id)).map((g) => ({ id: g.id, content: g.label })))
     items.clear()
     items.add(built)
+    // Recompute the hard pan/zoom universe for THIS patient's actual data and
+    // push it onto the live instance — panning/zooming can never wander into
+    // empty space beyond it, and the slider (driven by the same `bounds`
+    // state) can never disagree with the chart about what "now" means.
+    const newBounds = computeBounds(nodes)
+    setBounds(newBounds)
+    tl.setOptions({ min: new Date(newBounds.min), max: new Date(newBounds.max) })
     // Fit to data once per patient/data load — never during a drag.
     const key = `${patientId}:${nodes.length}`
     if (nodes.length && loadedRef.current !== key) {
       loadedRef.current = key
-      fitAll()
+      tl.setWindow(new Date(newBounds.min), new Date(newBounds.max), { animation: false })
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data, patientId])
@@ -360,22 +389,28 @@ export function PatientTimeline() {
   }, [asOf, data, win])
 
   function fitAll() {
-    const tl = tlRef.current
-    const nodes = data?.nodes ?? []
-    if (!tl) return
-    const today = parseDate(todayIso()).getTime()
-    const froms = nodes.map((n) => parseDate(n.valid_from).getTime())
-    const min = froms.length ? Math.min(...froms) : today - 365 * DAY
-    const pad = Math.max(45 * DAY, (today - min) * 0.05)
-    // extra right pad: labels of items at "now" need room to breathe
-    tl.setWindow(new Date(min - pad), new Date(today + pad * 2), { animation: false })
+    tlRef.current?.setWindow(new Date(bounds.min), new Date(bounds.max), { animation: false })
   }
 
   function setSpan(days: number) {
-    const tl = tlRef.current
-    if (!tl) return
-    const today = parseDate(todayIso()).getTime()
-    tl.setWindow(new Date(today - days * DAY), new Date(today + 14 * DAY), { animation: false })
+    tlRef.current?.setWindow(
+      new Date(bounds.today - days * DAY),
+      new Date(bounds.today + 14 * DAY),
+      { animation: false },
+    )
+  }
+
+  // Rewind slider — shares `bounds` with the chart (same min, same "now"), so
+  // it can never visually disagree with the playhead above it. Dragging pans
+  // the chart into view too, so the playhead stays visible while scrubbing
+  // even if the chart is currently zoomed into a narrower span.
+  function onScrub(ms: number) {
+    const clamped = Math.min(ms, bounds.today)
+    setAsOf(clamped >= bounds.today ? null : isoOf(new Date(clamped)))
+    const v = viewRef.current
+    if (v && (clamped < v.start || clamped > v.end)) {
+      tlRef.current?.moveTo(new Date(clamped), { animation: false })
+    }
   }
 
   const nodes = data?.nodes ?? []
@@ -396,7 +431,42 @@ export function PatientTimeline() {
         ))}
       </div>
       <div ref={containerRef} className="tl-root" />
+      <RewindScrub bounds={bounds} asOf={asOf} onScrub={onScrub} />
       <LabTrends nodes={nodes} win={win} leftPad={leftPad} asOf={asOf} />
+    </div>
+  )
+}
+
+/** The slider, sharing the chart's own `bounds` — cannot drift out of sync
+ * with the playhead above it because both read the same numbers. */
+function RewindScrub({
+  bounds, asOf, onScrub,
+}: {
+  bounds: { min: number; max: number; today: number }
+  asOf: string | null
+  onScrub: (ms: number) => void
+}) {
+  const value = asOf ? parseDate(asOf).getTime() : bounds.today
+  const span = Math.max(1, bounds.today - bounds.min)
+  const fill = ((value - bounds.min) / span) * 100
+
+  return (
+    <div className="flex items-center gap-3 border-t border-border px-3 py-2">
+      <History className="h-3.5 w-3.5 shrink-0 text-active" />
+      <input
+        type="range"
+        className="rewind flex-1"
+        style={{ ['--fill' as keyof CSSProperties]: `${fill}%` } as CSSProperties}
+        min={bounds.min}
+        max={bounds.today}
+        step={DAY}
+        value={value}
+        onChange={(e) => onScrub(Number(e.target.value))}
+        aria-label="Rewind time"
+      />
+      <span className="w-16 shrink-0 text-right text-[11px] font-medium text-text-muted">
+        {asOf ?? 'now'}
+      </span>
     </div>
   )
 }
