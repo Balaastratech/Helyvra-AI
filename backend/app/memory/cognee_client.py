@@ -145,6 +145,15 @@ def _ontology_resolver():
     return _resolver
 
 
+def invalidate_ontology_resolver() -> None:
+    """Force the next grounding call to rebuild the resolver from disk. Call
+    this after ontology.build_owl() regenerates the OWL file with a newly
+    learned drug/condition — otherwise the cached resolver never sees it."""
+    global _resolver, _resolver_built
+    _resolver = None
+    _resolver_built = False
+
+
 def _ontology_config():
     """Cognee cognify config that attaches our ontology, or None to run ungrounded."""
     resolver = _ontology_resolver()

@@ -15,6 +15,7 @@ ontology (per its docs). Extend the tables, not a hand-written .owl.
 
 from __future__ import annotations
 
+import json
 import os
 from typing import Dict, List, Optional
 
@@ -91,6 +92,63 @@ FIRST_DEGREE_RELATIONS = {
 # hereditary red flag (CLINICAL_COPILOT_PLAN: "father MI<50").
 EARLY_ONSET_AGE = 55
 
+# The closed vocabulary a dynamic classification is allowed to assign. This is
+# what keeps "non-static" safe: new DRUG NAMES / CONDITION NAMES get learned,
+# but the categories themselves stay a deliberate, developer-curated set — an
+# LLM can never mint a brand new class at runtime.
+KNOWN_DRUG_CLASSES = sorted(set(DRUG_CLASS.values()))
+KNOWN_RISK_CATEGORIES = sorted(set(FAMILY_RISK.values()))
+
+
+# --- 5. learned overrides (non-static layer) -----------------------------------
+# Extends tables 1 and 4 at RUNTIME with mappings discovered by an LLM
+# classifier (ontology_classify.py) for a drug/condition the curated tables
+# above don't cover. Persisted to disk so a restart doesn't re-ask the LLM for
+# something already learned, and folded into build_owl() below so Cognee's OWN
+# grounding resolver learns the new entity too — this is the "use Cognee as
+# well" integration: the discovery flows into Cognee's knowledge graph, not
+# just a side-cache our checks read.
+_OVERRIDES_PATH = os.environ.get("MED_ONTOLOGY_OVERRIDES", r"C:\cg\ontology_overrides.json")
+_overrides_cache: Optional[Dict[str, Dict[str, str]]] = None
+
+
+def _overrides() -> Dict[str, Dict[str, str]]:
+    global _overrides_cache
+    if _overrides_cache is None:
+        try:
+            with open(_OVERRIDES_PATH, "r", encoding="utf-8") as f:
+                _overrides_cache = json.load(f)
+        except (FileNotFoundError, json.JSONDecodeError):
+            _overrides_cache = {}
+        _overrides_cache.setdefault("drug_class", {})
+        _overrides_cache.setdefault("family_risk", {})
+    return _overrides_cache
+
+
+def _persist_overrides() -> None:
+    os.makedirs(os.path.dirname(_OVERRIDES_PATH), exist_ok=True)
+    with open(_OVERRIDES_PATH, "w", encoding="utf-8") as f:
+        json.dump(_overrides_cache, f, indent=2, sort_keys=True)
+
+
+def remember_drug_class(drug: str, klass: str) -> bool:
+    """Learn drug -> class. Rejects anything outside KNOWN_DRUG_CLASSES — this
+    expands vocabulary (new drug names), it never invents a new category."""
+    if klass not in KNOWN_DRUG_CLASSES:
+        return False
+    _overrides()["drug_class"][_norm(drug)] = klass
+    _persist_overrides()
+    return True
+
+
+def remember_family_risk(condition: str, category: str) -> bool:
+    """Learn condition -> hereditary risk category. Same closed-vocabulary rule."""
+    if category not in KNOWN_RISK_CATEGORIES:
+        return False
+    _overrides()["family_risk"][_norm(condition)] = category
+    _persist_overrides()
+    return True
+
 
 # --- lookup helpers (the checks' API) ------------------------------------------
 def _norm(s: str) -> str:
@@ -99,11 +157,17 @@ def _norm(s: str) -> str:
 
 def drug_class(drug: str) -> Optional[str]:
     """Pharmacologic class for a drug name (tolerates a trailing dose, e.g.
-    'amoxicillin 500mg')."""
+    'amoxicillin 500mg'). Checks learned overrides before the curated table —
+    a dynamically-classified drug behaves identically to a hand-curated one."""
     n = _norm(drug)
+    ov = _overrides()["drug_class"]
+    if n in ov:
+        return ov[n]
     if n in DRUG_CLASS:
         return DRUG_CLASS[n]
     for token in n.replace("/", " ").split():
+        if token in ov:
+            return ov[token]
         if token in DRUG_CLASS:
             return DRUG_CLASS[token]
     return None
@@ -127,15 +191,20 @@ def monitoring_for(condition: str) -> List[dict]:
 
 def family_risk_for(condition: str) -> Optional[str]:
     """Hereditary risk category a relative's condition confers (None if none).
-    Matches exact or as a substring: extracted text often combines terms
-    ("heart attack (myocardial infarction)") rather than one bare vocabulary
-    key, so an exact-only lookup silently misses real phrasing."""
+    Checks learned overrides first, then matches the curated table exact or as
+    a substring: extracted text often combines terms ("heart attack
+    (myocardial infarction)") rather than one bare vocabulary key, so an
+    exact-only lookup silently misses real phrasing."""
     n = _norm(condition)
+    ov = _overrides()["family_risk"]
+    if n in ov:
+        return ov[n]
     if n in FAMILY_RISK:
         return FAMILY_RISK[n]
-    for key in sorted(FAMILY_RISK, key=len, reverse=True):
+    combined = {**FAMILY_RISK, **ov}
+    for key in sorted(combined, key=len, reverse=True):
         if key in n:
-            return FAMILY_RISK[key]
+            return combined[key]
     return None
 
 
@@ -197,13 +266,20 @@ def build_owl(path: str = _OWL_PATH) -> str:
     monitored_by = obj_prop("monitoredBy")
     confers_risk = obj_prop("confersFamilialRisk")
 
+    # Fold in learned overrides: a dynamically-classified drug/condition gets
+    # the exact same OWL edges as a hand-curated one, so Cognee's own
+    # resolver grounds it too — this is what makes the learning genuinely
+    # reach Cognee's knowledge graph, not just our local checks.
+    drug_class_all = {**DRUG_CLASS, **_overrides()["drug_class"]}
+    family_risk_all = {**FAMILY_RISK, **_overrides()["family_risk"]}
+
     # drug classes + cross-reactivity groups (subClassOf the group)
     for klass, group in CLASS_GROUP.items():
         g.add((cls(klass), RDFS.subClassOf, cls(group)))
-    for klass in set(DRUG_CLASS.values()):
+    for klass in set(drug_class_all.values()):
         cls(klass)
     # individual drugs typed by their class
-    for drug, klass in DRUG_CLASS.items():
+    for drug, klass in drug_class_all.items():
         d = uri(drug)
         g.add((d, RDF.type, uri(klass)))
     # conditions + monitoring edges
@@ -212,7 +288,7 @@ def build_owl(path: str = _OWL_PATH) -> str:
         for rule in rules:
             g.add((c, monitored_by, cls(rule["analyte"])))
     # family-history risk edges
-    for condition, category in FAMILY_RISK.items():
+    for condition, category in family_risk_all.items():
         g.add((cls(condition), confers_risk, cls(f"{category}_risk")))
 
     os.makedirs(os.path.dirname(path), exist_ok=True)

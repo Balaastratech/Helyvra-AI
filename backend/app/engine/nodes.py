@@ -13,7 +13,7 @@ specific status logic). `persist` then syncs the authoritative truth into Cognee
 from __future__ import annotations
 
 from app.engine.state import TRState
-from app.memory import cognee_client, ledger
+from app.memory import cognee_client, ledger, ontology
 from app.engine import judge as judge_mod
 
 
@@ -21,6 +21,42 @@ def _log(state: TRState, msg: str) -> list:
     actions = list(state.get("actions") or [])
     actions.append(msg)
     return actions
+
+
+def _try_dynamic_ground(fact) -> bool:
+    """Fallback when both the static ontology AND Cognee's OWL resolver miss:
+    ask the LLM to classify into an EXISTING category (never invents a new
+    one), remember it, and regenerate the OWL export so Cognee's own
+    grounding learns it too. Best-effort — a miss here just leaves
+    ontology_valid False, it never breaks the ingest.
+
+    Scoped to Medication and FamilyHistory: these are the two places a
+    vocabulary gap silently breaks a SAFETY check (an unrecognized drug can't
+    be checked for allergy cross-reactivity; an unrecognized family condition
+    can't feed the hereditary-risk check) — Condition/LabResult misses are
+    lower-stakes and stay on the static table only.
+    """
+    from app.memory import ontology_classify  # local: only imported when needed
+
+    attrs = fact.attributes or {}
+    try:
+        if fact.resource_type == "Medication":
+            drug = attrs.get("drug") or fact.value
+            klass = ontology_classify.classify_drug(drug)
+            if klass and ontology.remember_drug_class(drug, klass):
+                ontology.build_owl()
+                cognee_client.invalidate_ontology_resolver()
+                return True
+        elif fact.resource_type == "FamilyHistory":
+            condition = attrs.get("condition") or fact.value
+            category = ontology_classify.classify_family_risk(condition)
+            if category and ontology.remember_family_risk(condition, category):
+                ontology.build_owl()
+                cognee_client.invalidate_ontology_resolver()
+                return True
+    except Exception:  # pragma: no cover - best-effort, never breaks ingest
+        pass
+    return False
 
 
 # --- recall ---------------------------------------------------------------
@@ -185,9 +221,16 @@ async def persist(state: TRState) -> TRState:
     staged = state.get("new_fact")
     if staged is not None and classification != "CONSISTENT":
         valid = cognee_client.ground_fact(staged)
+        learned = False
+        if valid is False and staged.resource_type in ("Medication", "FamilyHistory"):
+            learned = _try_dynamic_ground(staged)
+            if learned:
+                staged.ontology_valid = True
+                valid = True
         if valid is not None:
             ledger.upsert(staged)
-            actions.append(f"persist: ontology_valid={valid} [{staged.id[:8]}].")
+            note = " (learned dynamically via LLM classification)" if learned else ""
+            actions.append(f"persist: ontology_valid={valid}{note} [{staged.id[:8]}].")
 
     if not state.get("cognee_sync", True):
         actions.append("persist: cognee_sync disabled (ledger only).")
