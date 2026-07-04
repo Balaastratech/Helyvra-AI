@@ -84,7 +84,7 @@ export function SplitChat() {
     <div className="flex h-full min-h-0 flex-col gap-4">
       <div className="grid min-h-0 flex-1 grid-cols-2 gap-4">
         <AssistantPane
-          title="Total Recall"
+          title="Helyvra"
           emoji="🧠"
           subtitle="Remembers what changed."
           mascot="/theme/mascot-alert.png"

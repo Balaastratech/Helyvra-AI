@@ -54,41 +54,52 @@ export function DropZone() {
   async function uploadFiles(files: File[]) {
     setStatus('uploading')
     setLines([])
-    // Keep a whole batch attached to one chart: once the first file resolves a
-    // patient, subsequent files in the batch attach to that same patient.
-    let active: string | null = patientId || null
-    let facts = 0
-    let ok = 0
-    const results: string[] = []
 
-    for (let i = 0; i < files.length; i++) {
-      const file = files[i]
-      setMessage(`Uploading ${file.name} (${i + 1}/${files.length})…`)
+    // Single file: the plain endpoint (unchanged, simplest path).
+    if (files.length === 1) {
+      const file = files[0]
+      setMessage(`Uploading ${file.name}…`)
       try {
-        const res: IntakeResponse = await api.intake(file, active || undefined)
-        ok += 1
-        facts += res.facts.length
+        const res: IntakeResponse = await api.intake(file, patientId || undefined)
+        if (!patientId && res.patient_id) setPatient(res.patient_id)
+        invalidate()
         const extra = res.created_patient ? ' · new chart' : ''
-        results.push(`✓ ${file.name} → ${res.patient_name}${extra} · ${res.facts.length} fact(s)`)
-        if (!active && res.patient_id) {
-          active = res.patient_id
-          setPatient(res.patient_id) // lock the batch to this chart
-        }
-        invalidate() // live: brief/graph update after each file
+        setStatus('success')
+        setMessage(`✓ ${file.name} → ${res.patient_name}${extra} · ${res.facts.length} fact(s)`)
       } catch (err: any) {
-        results.push(`✕ ${file.name} — ${err.message}`)
+        setStatus('error')
+        setMessage(`✕ ${file.name} — ${err.message}`)
       }
-      setLines([...results])
+      setTimeout(() => { setStatus('idle'); setMessage(''); setLines([]) }, 8000)
+      return
     }
 
-    const failed = files.length - ok
-    setStatus(failed === files.length ? 'error' : 'success')
-    setMessage(
-      files.length === 1
-        ? results[0]
-        : `${ok}/${files.length} file(s) ingested · ${facts} fact(s)` +
-          (failed ? ` · ${failed} failed` : ''),
-    )
+    // Multiple files: ONE request for the whole drop, not one per file — the
+    // backend does a single Cognee graph rebuild for the batch instead of one
+    // per file (cognify's cost scales with the patient's total fact count, so
+    // doing it once per file made an N-file drop take N times longer than
+    // it needed to).
+    setMessage(`Uploading ${files.length} files…`)
+    try {
+      const res = await api.intakeBatch(files, patientId || undefined)
+      const ok = res.items.filter((it) => it.ok)
+      const firstOk = ok.find((it) => it.patient_id)
+      if (!patientId && firstOk) setPatient(firstOk.patient_id)
+      const facts = ok.reduce((n, it) => n + it.facts.length, 0)
+      const lines = res.items.map((it) =>
+        it.ok
+          ? `✓ ${it.filename} → ${it.patient_name}${it.created_patient ? ' · new chart' : ''} · ${it.facts.length} fact(s)`
+          : `✕ ${it.filename} — ${it.error}`,
+      )
+      setLines(lines)
+      invalidate()
+      const failed = res.items.length - ok.length
+      setStatus(failed === res.items.length ? 'error' : 'success')
+      setMessage(`${ok.length}/${res.items.length} file(s) ingested · ${facts} fact(s)` + (failed ? ` · ${failed} failed` : ''))
+    } catch (err: any) {
+      setStatus('error')
+      setMessage(`✕ Batch upload failed — ${err.message}`)
+    }
     // Clear the transient banner but keep the per-file lines visible a bit longer.
     setTimeout(() => { setStatus('idle'); setMessage(''); setLines([]) }, 8000)
   }

@@ -27,3 +27,20 @@ Thumbs.db
 .playwright-mcp/
 patient-view.jpeg
 timeline-v*.jpeg
+
+# ECC agent-harness config (local tooling, not project source)
+.agent/
+.agents/
+.claude/
+
+
+# Kiro skills (local tooling/skills, not project source)
+.kiro/
+.graphify-out/
+.spike/
+.docs/
+
+# Demo video pipeline + plan (local tooling, not app source)
+video/
+.claude/
+docs/VIDEO_PLAN.md

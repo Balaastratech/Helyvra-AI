@@ -24,6 +24,7 @@ from __future__ import annotations
 import asyncio
 import inspect
 import json
+from datetime import date
 from time import perf_counter
 from typing import List, Optional
 
@@ -120,8 +121,15 @@ async def handle_message(patient_id: str, thread_id: str, message: str, doctor: 
     _fire(history.store_in_cognee(patient_id, "user", message))
 
     tools_map, decls, log = agent_tools.build_patient_tools(patient_id)
+    # Time awareness: the model can't judge which facts are "current" without
+    # knowing what day it is. Injected at call time (not baked into _SYSTEM)
+    # because today changes daily.
+    today_note = (
+        f"\n\nToday's date is {date.today().isoformat()}. Use it to decide what "
+        "counts as current vs. past when reading fact dates and validity spans."
+    )
     cfg = types.GenerateContentConfig(
-        system_instruction=_SYSTEM,
+        system_instruction=_SYSTEM + today_note,
         tools=[types.Tool(function_declarations=decls)],
         temperature=0,
         automatic_function_calling=types.AutomaticFunctionCallingConfig(disable=True),

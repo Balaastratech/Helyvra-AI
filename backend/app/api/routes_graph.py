@@ -24,7 +24,9 @@ from app.api.dto import (
     HealthResponse,
     WhyResponse,
 )
-from app.memory import cognee_client, ledger
+from app.checks.followup import _RISING_BAD
+from app.memory import cognee_client, ledger, ontology
+from app.memory.schema import ClinicalFact
 
 router = APIRouter(tags=["graph"])
 
@@ -213,6 +215,35 @@ async def graph_cognee(patient_id: str = Query("P001")) -> CogneeGraphResponse:
     )
 
 
+def _trend_value(f: ClinicalFact) -> Optional[float]:
+    try:
+        return float(f.attributes.get("value"))
+    except (TypeError, ValueError, AttributeError):
+        return None
+
+
+def _trend_reason(fact: ClinicalFact, siblings: List[ClinicalFact]) -> str:
+    """Clinical-language trend narrative — deliberately mirrors followup.py's
+    Pre-Visit-brief card wording (same _RISING_BAD direction knowledge) so a
+    doctor reads the SAME verdict here as on the brief, never a system-internal
+    'nothing replaced this' sentence that answers a question nobody asked."""
+    valued = [(f2, v) for f2 in siblings if (v := _trend_value(f2)) is not None]
+    if len(valued) < 2:
+        return f"{fact.label} has no other dated readings on record to compare against."
+    valued.sort(key=lambda fv: fv[0].valid_from)
+    analyte = ontology._norm(fact.attributes.get("analyte") or fact.subject)
+    first, last = valued[0][1], valued[-1][1]
+    seq = " → ".join(f"{v:g}" for _, v in valued)
+    start_date, end_date = valued[0][0].valid_from.isoformat(), valued[-1][0].valid_from.isoformat()
+    if first == last:
+        return f"{analyte.upper()} has stayed steady at {last:g} across {len(valued)} readings ({start_date} → {end_date})."
+    rising = last > first
+    wrong_way = (rising and analyte in _RISING_BAD) or (not rising and analyte not in _RISING_BAD)
+    direction = "rising" if rising else "falling"
+    verdict = "trending the wrong way despite prior results" if wrong_way else "trending in the right direction"
+    return f"{analyte.upper()} is {direction}: {seq} ({start_date} → {end_date}) — {verdict}."
+
+
 # --- provenance -----------------------------------------------------------
 @router.get("/why", response_model=WhyResponse)
 def why(fact_id: str = Query(...)) -> WhyResponse:
@@ -222,7 +253,9 @@ def why(fact_id: str = Query(...)) -> WhyResponse:
     the last one (each measurement is independently true), so it's never
     superseded — but "nothing has replaced it" reads as wrong next to a
     visibly rising HbA1c. When there's no supersession, look for other ACTIVE
-    facts sharing this subject and surface them as a trend instead.
+    facts sharing this subject and surface them as a CLINICAL trend instead —
+    what a doctor actually asked ("is this getting worse?"), not what the
+    reconciliation engine did internally.
     """
     fact = ledger.get(fact_id)
     if fact is None:
@@ -232,6 +265,7 @@ def why(fact_id: str = Query(...)) -> WhyResponse:
     sup = ledger.get(fact.superseded_by) if fact.superseded_by else None
 
     trend: list = []
+    trend_reason = ""
     if sup is None:
         siblings = [
             f for f in ledger.query_all(fact.patient_id, fact.subject)
@@ -239,6 +273,7 @@ def why(fact_id: str = Query(...)) -> WhyResponse:
         ]
         if len(siblings) > 1:
             trend = siblings
+            trend_reason = _trend_reason(fact, siblings)
 
     return WhyResponse(
         fact=fact,
@@ -248,6 +283,7 @@ def why(fact_id: str = Query(...)) -> WhyResponse:
         date=(sup.valid_from if sup else fact.valid_from),
         chain=chain,
         trend=trend,
+        trend_reason=trend_reason,
     )
 
 

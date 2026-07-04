@@ -224,9 +224,15 @@ def synthesize_answer(
         ))
 
     history_text = _format_history(visible_facts)
+    # Time awareness: "state the CURRENT truth first" is meaningless unless the
+    # model knows what "now" is. Always anchor to a concrete date — the rewound
+    # as_of when scrubbing, else today.
+    effective_date = as_of or date.today().isoformat()
     prompt = f"QUESTION: {question}\n"
-    if as_of:
-        prompt += f"(Answer as of date: {as_of})\n"
+    prompt += (
+        f"(TODAY'S DATE IS {date.today().isoformat()}. Answer as of {effective_date} — "
+        "treat facts valid on that date as current, later facts as not yet known.)\n"
+    )
     prompt += f"\nFULL FACT HISTORY (chronological):\n{history_text}"
 
     try:

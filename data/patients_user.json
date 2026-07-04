@@ -7,6 +7,14 @@
       "dob": "1999-06-01",
       "sex": "",
       "summary": "New chart — upload records to begin."
+    },
+    {
+      "patient_id": "P009",
+      "mrn": "RH-4471",
+      "name": "Rahul Sharma",
+      "dob": "1974-02-03",
+      "sex": "",
+      "summary": "New chart — upload records to begin."
     }
   ]
 }

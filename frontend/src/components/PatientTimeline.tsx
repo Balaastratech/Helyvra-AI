@@ -44,7 +44,28 @@ function groupFor(n: GraphNode): string {
 
 const isLab = (n: GraphNode) => (n.category ?? '') === 'LabResult'
 
-function tooltip(n: GraphNode, superseded: boolean): string {
+// A condition with no valid_to defaults to "still ongoing, draw it to now" —
+// correct for a chronic diagnosis (diabetes, hypertension), confidently WRONG
+// for a self-limiting illness that just never got an explicit end date (a
+// discharge summary saying "recovered" doesn't produce a new fact). Drawing
+// a 2021 case of pneumonia as an unbroken bar through today is the exact
+// "confidently wrong" failure mode this whole app exists to catch — just
+// showing up in the chart instead of the chat. These render as a dated EVENT
+// instead: honest about what we know (it happened) vs. what we don't (that
+// it's still true).
+const ACUTE_CONDITION_HINTS = [
+  'pneumonia', 'urinary tract infection', ' uti', 'bronchitis', 'influenza',
+  'common cold', 'gastroenteritis', 'dental infection', 'cellulitis',
+  'sinusitis', 'otitis media', 'strep throat', 'covid-19', 'conjunctivitis',
+  'ear infection', 'flu',
+]
+
+function looksAcute(label: string): boolean {
+  const n = label.toLowerCase()
+  return ACUTE_CONDITION_HINTS.some((hint) => n.includes(hint))
+}
+
+function tooltip(n: GraphNode, superseded: boolean, acuteNoEnd = false): string {
   const rows: string[] = [
     `<div style="font-weight:600;margin-bottom:2px">${escapeHtml(n.label)}</div>`,
     `<div>${escapeHtml(n.category ?? 'Other')}</div>`,
@@ -52,6 +73,12 @@ function tooltip(n: GraphNode, superseded: boolean): string {
     `<div>Source: ${escapeHtml(n.source ?? 'unknown')}</div>`,
   ]
   if (superseded) rows.push('<div style="color:#c77700">Replaced by a newer record</div>')
+  if (acuteNoEnd) {
+    rows.push(
+      '<div style="color:#5a6b7b">No explicit end date on record — shown as ' +
+        'an event, not assumed to still be active.</div>',
+    )
+  }
   if (n.ontology_valid) rows.push('<div style="color:#0e8c84">✓ grounded in medical ontology</div>')
   return `<div style="font:12px Inter,sans-serif;max-width:260px;line-height:1.4">${rows.join('')}</div>`
 }
@@ -98,21 +125,43 @@ function buildItems(nodes: GraphNode[], asOf: string | null, nowIso: string, vie
       const group = groupFor(n)
       const from = parseDate(n.valid_from).getTime()
       const to = parseDate(n.valid_to ?? nowIso).getTime()
-      const isPointFact = group === 'Vital' || group === 'Family' || !n.valid_to && to - from < DAY
+      // Every item shows its exact date on the chart itself — no hovering
+      // required to know when something happened. A closed range shows both
+      // ends; an open one shows the start only (its bar already communicates
+      // "runs to now"). Rendered as a bold, colored badge (vis-timeline's
+      // `content` is sanitized HTML, not plain text) — appended plain text
+      // was too easy to miss next to the label; a visually distinct chip
+      // isn't.
+      const dateText = n.valid_to ? `${n.valid_from} → ${n.valid_to}` : n.valid_from
+      const plainText = `${n.label} ${dateText}` // for width math only — no markup
+      const content = `${escapeHtml(n.label)} <span class="tl-date">${dateText}</span>`
+      const labelPx = plainText.length * CHAR_PX + 18
+      const acuteNoEnd = group === 'Condition' && !n.valid_to && looksAcute(n.label)
+      const isPointFact =
+        group === 'Vital' || group === 'Family' || acuteNoEnd || (!n.valid_to && to - from < DAY)
       const shortEpisode = n.valid_to != null && to - from < SHORT_RANGE_DAYS * DAY
-      const point = isPointFact || shortEpisode
-      // Would the label clip at the right edge of the visible panel? Then flip it left.
+      // Fit-aware: a bar physically narrower than its own text would clip the
+      // label INSIDE it (unreadable). Render those as a labeled dot instead —
+      // the label sits beside the dot and is always fully visible. Recomputed on
+      // every zoom, so a one-day fact is always a dot, and a longer bar that
+      // becomes wide enough when you zoom in turns back into a duration bar.
+      const barPx = view ? px(to) - px(from) : Infinity
+      const tooTightForLabel = view ? barPx < labelPx : false
+      const point = isPointFact || shortEpisode || tooTightForLabel
+      // Only a POINT carries its label OUTSIDE its marker, so only a point can
+      // clip the right edge and need flipping to the left of the dot. A range
+      // that stays a range is (by tooTightForLabel above) always wide enough to
+      // hold its label INSIDE the bar — flipping it would detach the text and
+      // leave it floating on empty lane, which is the bug we're killing.
       let edge = false
-      if (view) {
-        const labelPx = n.label.length * CHAR_PX + 18
-        const rightPx = point ? px(from) + labelPx : px(from) + Math.max(px(to) - px(from), labelPx)
-        edge = rightPx > view.centerW - 6
+      if (view && point) {
+        edge = px(from) + labelPx > view.centerW - 6
       }
       const base: any = {
         id: n.id,
         group,
-        content: n.label,
-        title: tooltip(n, superseded),
+        content,
+        title: tooltip(n, superseded, acuteNoEnd),
         className:
           `tl-cat-${group}` +
           (superseded ? ' tl-superseded' : '') +
@@ -122,6 +171,10 @@ function buildItems(nodes: GraphNode[], asOf: string | null, nowIso: string, vie
       }
       if (point) {
         base.type = 'point'
+        // Clear any `end` from a previous range render — items.update() MERGES,
+        // so a stale end left vis drawing the bordered bar while the label
+        // flipped out beside it (the "floating label" bug).
+        base.end = null
       } else {
         base.type = 'range'
         base.end = n.valid_to ?? nowIso
@@ -232,7 +285,7 @@ function LabTrends({
               })}
               {phPct >= 0 && phPct <= 100 && (
                 <span
-                  className="absolute top-0 h-full w-[1.5px] bg-active opacity-60"
+                  className="absolute top-0 h-full w-[1.5px] bg-active opacity-60 transition-[left] duration-100 ease-out"
                   style={{ left: `${phPct}%` }}
                 />
               )}
@@ -284,6 +337,12 @@ export function PatientTimeline() {
         GROUPS.findIndex((g) => g.id === a.id) - GROUPS.findIndex((g) => g.id === b.id),
       tooltip: { followMouse: true, overflowMethod: 'flip' },
       showCurrentTime: false,
+      // Month-level axis: months as minor ticks with the year as the major
+      // label above them, plus full day labels once zoomed in — not year-only.
+      format: {
+        minorLabels: { month: 'MMM', day: 'D MMM', week: 'D MMM', year: 'YYYY' },
+        majorLabels: { month: 'YYYY', day: 'MMM YYYY', week: 'MMM YYYY' },
+      },
     }
     const tl = new Timeline(containerRef.current, items, groups, options)
     tl.on('select', (props: { items: (string | number)[] }) => {
@@ -340,24 +399,37 @@ export function PatientTimeline() {
     if (!items || !groups || !tl) return
     const nodes = data?.nodes ?? []
     const nowIso = todayIso()
-    const built = buildItems(nodes, asOf, nowIso, viewRef.current)
+    // Recompute the hard pan/zoom universe for THIS patient's actual data.
+    const newBounds = computeBounds(nodes)
+    const key = `${patientId}:${nodes.length}`
+    const firstLoad = nodes.length > 0 && loadedRef.current !== key
+    // The window this build will actually render at, so buildItems can decide
+    // (fit-aware) which facts are too narrow for their label RIGHT NOW — not one
+    // repaint later. On first load that's the focus window we're about to set;
+    // otherwise the live view. Measure the center panel for the pixel geometry.
+    const focusStart = Math.max(newBounds.min, newBounds.today - 730 * DAY)
+    const center = containerRef.current?.querySelector('.vis-panel.vis-center') as HTMLElement | null
+    const centerW = center?.clientWidth ?? viewRef.current?.centerW ?? 800
+    const buildView: View = firstLoad
+      ? { start: focusStart, end: newBounds.max, centerW }
+      : viewRef.current ?? { start: win.start, end: win.end, centerW }
+    const built = buildItems(nodes, asOf, nowIso, buildView)
     const used = new Set(built.map((i) => i.group))
     groups.clear()
     groups.add(GROUPS.filter((g) => used.has(g.id)).map((g) => ({ id: g.id, content: g.label })))
     items.clear()
     items.add(built)
-    // Recompute the hard pan/zoom universe for THIS patient's actual data and
-    // push it onto the live instance — panning/zooming can never wander into
-    // empty space beyond it, and the slider (driven by the same `bounds`
-    // state) can never disagree with the chart about what "now" means.
-    const newBounds = computeBounds(nodes)
+    // Push the pan/zoom universe onto the live instance — panning/zooming can
+    // never wander into empty space beyond it, and the slider (driven by the
+    // same `bounds` state) can never disagree with the chart about "now".
     setBounds(newBounds)
     tl.setOptions({ min: new Date(newBounds.min), max: new Date(newBounds.max) })
-    // Fit to data once per patient/data load — never during a drag.
-    const key = `${patientId}:${nodes.length}`
-    if (nodes.length && loadedRef.current !== key) {
+    // Fit to data once per patient/data load — never during a drag. Open on the
+    // recent ~2 years so the axis shows MONTHS under the year; the full history
+    // (which collapses to year-only ticks) is one "Fit all" click away.
+    if (firstLoad) {
       loadedRef.current = key
-      tl.setWindow(new Date(newBounds.min), new Date(newBounds.max), { animation: false })
+      tl.setWindow(new Date(focusStart), new Date(newBounds.max), { animation: false })
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data, patientId])
@@ -431,8 +503,8 @@ export function PatientTimeline() {
         ))}
       </div>
       <div ref={containerRef} className="tl-root" />
-      <RewindScrub bounds={bounds} asOf={asOf} onScrub={onScrub} />
       <LabTrends nodes={nodes} win={win} leftPad={leftPad} asOf={asOf} />
+      <RewindScrub bounds={bounds} asOf={asOf} onScrub={onScrub} />
     </div>
   )
 }

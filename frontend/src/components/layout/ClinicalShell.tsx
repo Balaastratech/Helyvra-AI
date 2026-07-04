@@ -1,5 +1,5 @@
-import { Navigate, Outlet, useNavigate, NavLink } from 'react-router-dom'
-import { Stethoscope, Circle, HelpCircle, LogOut, Home, Search, GitCompare, Network, LayoutGrid } from 'lucide-react'
+import { Navigate, Outlet, useNavigate } from 'react-router-dom'
+import { Stethoscope, Circle, HelpCircle, LogOut, Home, Search } from 'lucide-react'
 import { useHealth, useBrief } from '@/api/hooks'
 import { useUi } from '@/store'
 import { PatientContextChip } from '@/components/clinical/PatientContextChip'
@@ -13,7 +13,8 @@ import { cn } from '@/lib/utils'
 /**
  * The light clinical chrome for the whole doctor workspace (UX §2). Slim top
  * bar: wordmark · patient-context chip (when in a patient) · clinician · health.
- * Noir lives only at the framed edges (cold-open, Compare), not here.
+ * Per-patient views (Compare, Memory Map, Cognee graph) live as tabs inside
+ * the patient workspace, not as global top-bar nav.
  */
 export function ClinicalShell() {
   const { doctor, patientId, setPatient, setDoctor, setHowOpen, setCmdkOpen } = useUi()
@@ -36,7 +37,7 @@ export function ClinicalShell() {
             <span className="grid h-7 w-7 place-items-center rounded-lg bg-active text-white">
               <Stethoscope className="h-4 w-4" />
             </span>
-            <span className="text-sm font-semibold tracking-tight text-text">Total Recall</span>
+            <span className="text-sm font-semibold tracking-tight text-text">Helyvra AI</span>
           </button>
           {patientId && brief && (
             <>
@@ -55,24 +56,6 @@ export function ClinicalShell() {
               />
             </>
           )}
-          <nav className="ml-2 hidden items-center gap-0.5 md:flex">
-            {[
-              { to: '/compare', label: 'Compare', icon: GitCompare },
-              { to: '/memory', label: 'Memory Map', icon: Network },
-              { to: '/board', label: 'Cognee graph', icon: LayoutGrid },
-            ].map((v) => (
-              <NavLink
-                key={v.to}
-                to={v.to}
-                className={({ isActive }) =>
-                  cn('flex items-center gap-1.5 rounded-lg px-2.5 py-1 text-xs font-medium transition-colors',
-                    isActive ? 'bg-active-soft text-active' : 'text-text-muted hover:bg-raised hover:text-text')
-                }
-              >
-                <v.icon className="h-3.5 w-3.5" /> {v.label}
-              </NavLink>
-            ))}
-          </nav>
         </div>
 
         <div className="flex items-center gap-3">

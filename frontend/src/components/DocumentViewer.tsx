@@ -4,6 +4,7 @@ import { X, FileText, AlertTriangle } from 'lucide-react'
 import { useDocument } from '@/api/hooks'
 import { useUi } from '@/store'
 import { Badge } from '@/components/ui/badge'
+import { DocumentBody } from '@/components/DocumentBody'
 import { cn } from '@/lib/utils'
 
 /**
@@ -111,7 +112,7 @@ export function DocumentViewer() {
                             cited ? 'border-active ring-2 ring-active/40' : 'border-border',
                           )}
                         >
-                          <p className="whitespace-pre-wrap text-sm leading-relaxed text-text">{chunk}</p>
+                          <DocumentBody title={data.title} text={chunk} />
                         </div>
                       )
                     })}

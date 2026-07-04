@@ -63,7 +63,7 @@ export function TitleSequence({ onComplete }: { onComplete: () => void }) {
         {/* neon logo */}
         <motion.img
           src="/theme/logo-neon.png"
-          alt="Total Recall"
+          alt="Helyvra AI"
           className="w-[min(70vw,560px)] motion-safe:animate-flicker"
           initial={reduced ? false : { opacity: 0 }}
           animate={{ opacity: 1 }}

@@ -1,0 +1,65 @@
+{
+  "doc_id": "UP-P009-c69c56ef",
+  "date": "2021-08-05",
+  "type": "Uploaded record",
+  "author": "discharge_summary_2021.pdf",
+  "title": "discharge_summary_2021.pdf",
+  "text": "City General Hospital — Internal Medicine\nDischarge Summary · Demo only — synthetic data, not medical advice. No real PHI.\nPatient: Rahul Sharma\nMRN: RH-4471\nDOB: 1974-02-03\nAdmission\nAdmission date: 2021-08-05. Discharge date: 2021-08-09. Mr. Sharma, a 47-year-old man (at time of\nadmission), was treated for community-acquired pneumonia and has recovered. Diabetes remained stable\nduring the stay.\nHospital Course\nEmpiric antibiotics were started. On day 2 the patient developed an adverse drug reaction (see Allergy\nReview, page 2). Antibiotics were changed and the reaction resolved. He was discharged in stable condition\nwith primary-care follow-up.\nDischarge Medications\nMetformin 500 mg twice daily (continued). Follow up with primary care.\n\n\nAllergy Review\nPage 2 · Allergy documentation · Demo only — synthetic data, not medical advice. No real PHI.\nDocumented Drug Allergy\nAllergy: Penicillin. During this admission the patient developed a reaction to a penicillin-class antibiotic:\nrash and breathing difficulty. Severity: severe. Date recorded: 2021-08-06. Recorded by: Dr. A. Adams.\nClinical instruction: AVOID penicillin-class antibiotics (including amoxicillin, ampicillin) and review\nbeta-lactam alternatives before prescribing.\n",
+  "uploaded": true,
+  "asserts": [
+    {
+      "resource_type": "Condition",
+      "subject": "diagnosis",
+      "predicate": "resolved",
+      "value": "community-acquired pneumonia",
+      "date": "2021-08-05",
+      "source": "discharge_summary_2021.pdf",
+      "attributes": {
+        "condition": "community-acquired pneumonia"
+      },
+      "raw_text": "City General Hospital — Internal Medicine\nDischarge Summary · Demo only — synthetic data, not medical advice. No real PHI.\nPatient: Rahul Sharma\nMRN: RH-4471\nDOB: 1974-02-03\nAdmission\nAdmission date: 2021-08-05. Discharge date: 2021-08-09. Mr. Sharma, a 47-year-old man (at time of\nadmission), was treated for community-acquired pneumonia and has recovered. Diabetes remained stable\nduring the stay.\nHospital Course\nEmpiric antibiotics were started. On day 2 the patient developed an adverse drug reaction (see Allergy\nReview, page 2). Antibiotics were changed and the reaction resolved. He was discharged in stable condition\nwith primary-care follow-up.\nDischarge Medications\nMetformin 500 mg twice daily (continued). Follow up with primary care.\n",
+      "page": 1
+    },
+    {
+      "resource_type": "Condition",
+      "subject": "diagnosis",
+      "predicate": "diagnosed",
+      "value": "diabetes",
+      "date": "2021-08-05",
+      "source": "discharge_summary_2021.pdf",
+      "attributes": {
+        "condition": "diabetes"
+      },
+      "raw_text": "City General Hospital — Internal Medicine\nDischarge Summary · Demo only — synthetic data, not medical advice. No real PHI.\nPatient: Rahul Sharma\nMRN: RH-4471\nDOB: 1974-02-03\nAdmission\nAdmission date: 2021-08-05. Discharge date: 2021-08-09. Mr. Sharma, a 47-year-old man (at time of\nadmission), was treated for community-acquired pneumonia and has recovered. Diabetes remained stable\nduring the stay.\nHospital Course\nEmpiric antibiotics were started. On day 2 the patient developed an adverse drug reaction (see Allergy\nReview, page 2). Antibiotics were changed and the reaction resolved. He was discharged in stable condition\nwith primary-care follow-up.\nDischarge Medications\nMetformin 500 mg twice daily (continued). Follow up with primary care.\n",
+      "page": 1
+    },
+    {
+      "resource_type": "Medication",
+      "subject": "medication",
+      "predicate": "prescribed",
+      "value": "Metformin 500 mg",
+      "date": "2021-08-09",
+      "source": "discharge_summary_2021.pdf",
+      "attributes": {
+        "drug": "metformin 500 mg"
+      },
+      "raw_text": "City General Hospital — Internal Medicine\nDischarge Summary · Demo only — synthetic data, not medical advice. No real PHI.\nPatient: Rahul Sharma\nMRN: RH-4471\nDOB: 1974-02-03\nAdmission\nAdmission date: 2021-08-05. Discharge date: 2021-08-09. Mr. Sharma, a 47-year-old man (at time of\nadmission), was treated for community-acquired pneumonia and has recovered. Diabetes remained stable\nduring the stay.\nHospital Course\nEmpiric antibiotics were started. On day 2 the patient developed an adverse drug reaction (see Allergy\nReview, page 2). Antibiotics were changed and the reaction resolved. He was discharged in stable condition\nwith primary-care follow-up.\nDischarge Medications\nMetformin 500 mg twice daily (continued). Follow up with primary care.\n",
+      "page": 1
+    },
+    {
+      "resource_type": "Allergy",
+      "subject": "allergy",
+      "predicate": "diagnosed",
+      "value": "Penicillin",
+      "date": "2021-08-06",
+      "source": "discharge_summary_2021.pdf",
+      "attributes": {
+        "substance": "penicillin",
+        "reaction": "rash and breathing difficulty",
+        "severity": "severe"
+      },
+      "raw_text": "Allergy Review\nPage 2 · Allergy documentation · Demo only — synthetic data, not medical advice. No real PHI.\nDocumented Drug Allergy\nAllergy: Penicillin. During this admission the patient developed a reaction to a penicillin-class antibiotic:\nrash and breathing difficulty. Severity: severe. Date recorded: 2021-08-06. Recorded by: Dr. A. Adams.\nClinical instruction: AVOID penicillin-class antibiotics (including amoxicillin, ampicillin) and review\nbeta-lactam alternatives before prescribing.\n",
+      "page": 2
+    }
+  ]
+}

@@ -203,15 +203,24 @@ async def ingest_document(req: IngestDocumentRequest) -> IngestDocumentResponse:
 
 
 # --- shared ingestion + upload --------------------------------------------
-async def _run_ingest(patient_id: str, doc: dict) -> IngestDocumentResponse:
+async def _run_ingest(
+    patient_id: str, doc: dict, cognify_after: bool = True,
+) -> IngestDocumentResponse:
     """Push a document's assertion(s) through the self-healing engine.
 
     Facts run through run_facts() (perf: ONE Cognee graph build for the whole
     document, not one per fact — each fact still gets its own full
     recall->judge->reconcile->ledger-write, so reconciliation is unaffected).
+
+    `cognify_after=False` (set by a multi-file batch caller — see
+    pipeline.run_batch) skips even that one per-document rebuild, deferring
+    it to the caller so an N-file drop pays the growing cognify cost once,
+    not N times.
     """
     built = records.facts_from_document(patient_id, doc)
-    states = await service.run_facts(patient_id, built, cognee_sync=True)
+    states = await service.run_facts(
+        patient_id, built, cognee_sync=True, cognify_after=cognify_after,
+    )
 
     classification, reason, actions, final = "NEW", "", [], []
     healed = False
@@ -232,7 +241,8 @@ async def _run_ingest(patient_id: str, doc: dict) -> IngestDocumentResponse:
         # withhold the entire document instead.
         for fact in built:
             await cognee_client.add_naive(fact)
-        await cognee_client.cognify_naive(patient_id)
+        if cognify_after:
+            await cognee_client.cognify_naive(patient_id)
 
     return IngestDocumentResponse(
         doc_id=doc["doc_id"], facts=final, classification=classification,

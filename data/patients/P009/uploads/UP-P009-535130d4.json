@@ -1,0 +1,127 @@
+{
+  "doc_id": "UP-P009-535130d4",
+  "date": "2019-01-01",
+  "type": "Uploaded record",
+  "author": "clinic_note_intake.txt",
+  "title": "clinic_note_intake.txt",
+  "text": "SUNRISE FAMILY CLINIC — New Patient Intake Note\r\nDemo only — synthetic data, not medical advice. No real PHI.\r\n\r\nPatient: Rahul Sharma   MRN: RH-4471   DOB: 1974-02-03\r\nDate: 2024-06-12\r\n\r\nHistory: Type 2 diabetes mellitus diagnosed in 2019, currently on metformin 500 mg twice daily. Hypertension — started on lisinopril 10 mg daily in 2024-02.\r\nLifestyle: Current smoker (about 1 pack/day), sedentary, limited exercise.\r\nLabs today: LDL cholesterol 165 mg/dL (high).\r\nFamily history: Father had a heart attack (myocardial infarction) at age 49. Mother — no significant history.",
+  "uploaded": true,
+  "asserts": [
+    {
+      "resource_type": "Condition",
+      "subject": "diagnosis",
+      "predicate": "diagnosed",
+      "value": "Type 2 diabetes mellitus",
+      "date": "2019-01-01",
+      "source": "clinic_note_intake.txt",
+      "attributes": {
+        "condition": "type 2 diabetes mellitus"
+      },
+      "raw_text": "SUNRISE FAMILY CLINIC — New Patient Intake Note\r\nDemo only — synthetic data, not medical advice. No real PHI.\r\n\r\nPatient: Rahul Sharma   MRN: RH-4471   DOB: 1974-02-03\r\nDate: 2024-06-12\r\n\r\nHistory: Type 2 diabetes mellitus diagnosed in 2019, currently on metformin 500 mg twice daily. Hypertension — started on lisinopril 10 mg daily in 2024-02.\r\nLifestyle: Current smoker (about 1 pack/day), sedentary, limited exercise.\r\nLabs today: LDL cholesterol 165 mg/dL (high).\r\nFamily history: Father had a heart attack (myocardial infarction) at age 49. Mother — no significant history."
+    },
+    {
+      "resource_type": "Medication",
+      "subject": "medication",
+      "predicate": "prescribed",
+      "value": "metformin 500 mg",
+      "date": "2024-06-12",
+      "source": "clinic_note_intake.txt",
+      "attributes": {
+        "drug": "metformin 500 mg"
+      },
+      "raw_text": "SUNRISE FAMILY CLINIC — New Patient Intake Note\r\nDemo only — synthetic data, not medical advice. No real PHI.\r\n\r\nPatient: Rahul Sharma   MRN: RH-4471   DOB: 1974-02-03\r\nDate: 2024-06-12\r\n\r\nHistory: Type 2 diabetes mellitus diagnosed in 2019, currently on metformin 500 mg twice daily. Hypertension — started on lisinopril 10 mg daily in 2024-02.\r\nLifestyle: Current smoker (about 1 pack/day), sedentary, limited exercise.\r\nLabs today: LDL cholesterol 165 mg/dL (high).\r\nFamily history: Father had a heart attack (myocardial infarction) at age 49. Mother — no significant history."
+    },
+    {
+      "resource_type": "Condition",
+      "subject": "diagnosis",
+      "predicate": "diagnosed",
+      "value": "Hypertension",
+      "date": "2024-06-12",
+      "source": "clinic_note_intake.txt",
+      "attributes": {
+        "condition": "hypertension"
+      },
+      "raw_text": "SUNRISE FAMILY CLINIC — New Patient Intake Note\r\nDemo only — synthetic data, not medical advice. No real PHI.\r\n\r\nPatient: Rahul Sharma   MRN: RH-4471   DOB: 1974-02-03\r\nDate: 2024-06-12\r\n\r\nHistory: Type 2 diabetes mellitus diagnosed in 2019, currently on metformin 500 mg twice daily. Hypertension — started on lisinopril 10 mg daily in 2024-02.\r\nLifestyle: Current smoker (about 1 pack/day), sedentary, limited exercise.\r\nLabs today: LDL cholesterol 165 mg/dL (high).\r\nFamily history: Father had a heart attack (myocardial infarction) at age 49. Mother — no significant history."
+    },
+    {
+      "resource_type": "Medication",
+      "subject": "medication",
+      "predicate": "prescribed",
+      "value": "lisinopril 10 mg",
+      "date": "2024-02-01",
+      "source": "clinic_note_intake.txt",
+      "attributes": {
+        "drug": "lisinopril 10 mg"
+      },
+      "raw_text": "SUNRISE FAMILY CLINIC — New Patient Intake Note\r\nDemo only — synthetic data, not medical advice. No real PHI.\r\n\r\nPatient: Rahul Sharma   MRN: RH-4471   DOB: 1974-02-03\r\nDate: 2024-06-12\r\n\r\nHistory: Type 2 diabetes mellitus diagnosed in 2019, currently on metformin 500 mg twice daily. Hypertension — started on lisinopril 10 mg daily in 2024-02.\r\nLifestyle: Current smoker (about 1 pack/day), sedentary, limited exercise.\r\nLabs today: LDL cholesterol 165 mg/dL (high).\r\nFamily history: Father had a heart attack (myocardial infarction) at age 49. Mother — no significant history."
+    },
+    {
+      "resource_type": "Lifestyle",
+      "subject": "lifestyle",
+      "predicate": "reported",
+      "value": "current smoker (about 1 pack/day)",
+      "date": "2024-06-12",
+      "source": "clinic_note_intake.txt",
+      "attributes": {
+        "factor": "smoking",
+        "value": "current smoker (about 1 pack/day)"
+      },
+      "raw_text": "SUNRISE FAMILY CLINIC — New Patient Intake Note\r\nDemo only — synthetic data, not medical advice. No real PHI.\r\n\r\nPatient: Rahul Sharma   MRN: RH-4471   DOB: 1974-02-03\r\nDate: 2024-06-12\r\n\r\nHistory: Type 2 diabetes mellitus diagnosed in 2019, currently on metformin 500 mg twice daily. Hypertension — started on lisinopril 10 mg daily in 2024-02.\r\nLifestyle: Current smoker (about 1 pack/day), sedentary, limited exercise.\r\nLabs today: LDL cholesterol 165 mg/dL (high).\r\nFamily history: Father had a heart attack (myocardial infarction) at age 49. Mother — no significant history."
+    },
+    {
+      "resource_type": "Lifestyle",
+      "subject": "lifestyle",
+      "predicate": "reported",
+      "value": "sedentary",
+      "date": "2024-06-12",
+      "source": "clinic_note_intake.txt",
+      "attributes": {
+        "factor": "exercise",
+        "value": "sedentary"
+      },
+      "raw_text": "SUNRISE FAMILY CLINIC — New Patient Intake Note\r\nDemo only — synthetic data, not medical advice. No real PHI.\r\n\r\nPatient: Rahul Sharma   MRN: RH-4471   DOB: 1974-02-03\r\nDate: 2024-06-12\r\n\r\nHistory: Type 2 diabetes mellitus diagnosed in 2019, currently on metformin 500 mg twice daily. Hypertension — started on lisinopril 10 mg daily in 2024-02.\r\nLifestyle: Current smoker (about 1 pack/day), sedentary, limited exercise.\r\nLabs today: LDL cholesterol 165 mg/dL (high).\r\nFamily history: Father had a heart attack (myocardial infarction) at age 49. Mother — no significant history."
+    },
+    {
+      "resource_type": "Lifestyle",
+      "subject": "lifestyle",
+      "predicate": "reported",
+      "value": "limited exercise",
+      "date": "2024-06-12",
+      "source": "clinic_note_intake.txt",
+      "attributes": {
+        "factor": "exercise",
+        "value": "limited exercise"
+      },
+      "raw_text": "SUNRISE FAMILY CLINIC — New Patient Intake Note\r\nDemo only — synthetic data, not medical advice. No real PHI.\r\n\r\nPatient: Rahul Sharma   MRN: RH-4471   DOB: 1974-02-03\r\nDate: 2024-06-12\r\n\r\nHistory: Type 2 diabetes mellitus diagnosed in 2019, currently on metformin 500 mg twice daily. Hypertension — started on lisinopril 10 mg daily in 2024-02.\r\nLifestyle: Current smoker (about 1 pack/day), sedentary, limited exercise.\r\nLabs today: LDL cholesterol 165 mg/dL (high).\r\nFamily history: Father had a heart attack (myocardial infarction) at age 49. Mother — no significant history."
+    },
+    {
+      "resource_type": "LabResult",
+      "subject": "lab ldl",
+      "predicate": "measured",
+      "value": "LDL cholesterol 165.0 mg/dL",
+      "date": "2024-06-12",
+      "source": "clinic_note_intake.txt",
+      "attributes": {
+        "analyte": "ldl",
+        "value": 165.0,
+        "unit": "mg/dL",
+        "abnormal_flag": "high"
+      },
+      "raw_text": "SUNRISE FAMILY CLINIC — New Patient Intake Note\r\nDemo only — synthetic data, not medical advice. No real PHI.\r\n\r\nPatient: Rahul Sharma   MRN: RH-4471   DOB: 1974-02-03\r\nDate: 2024-06-12\r\n\r\nHistory: Type 2 diabetes mellitus diagnosed in 2019, currently on metformin 500 mg twice daily. Hypertension — started on lisinopril 10 mg daily in 2024-02.\r\nLifestyle: Current smoker (about 1 pack/day), sedentary, limited exercise.\r\nLabs today: LDL cholesterol 165 mg/dL (high).\r\nFamily history: Father had a heart attack (myocardial infarction) at age 49. Mother — no significant history."
+    },
+    {
+      "resource_type": "FamilyHistory",
+      "subject": "family",
+      "predicate": "reported",
+      "value": "Father: heart attack (myocardial infarction) (age 49)",
+      "date": "2024-06-12",
+      "source": "clinic_note_intake.txt",
+      "attributes": {
+        "relation": "father",
+        "condition": "heart attack (myocardial infarction)",
+        "age_at_onset": 49
+      },
+      "raw_text": "SUNRISE FAMILY CLINIC — New Patient Intake Note\r\nDemo only — synthetic data, not medical advice. No real PHI.\r\n\r\nPatient: Rahul Sharma   MRN: RH-4471   DOB: 1974-02-03\r\nDate: 2024-06-12\r\n\r\nHistory: Type 2 diabetes mellitus diagnosed in 2019, currently on metformin 500 mg twice daily. Hypertension — started on lisinopril 10 mg daily in 2024-02.\r\nLifestyle: Current smoker (about 1 pack/day), sedentary, limited exercise.\r\nLabs today: LDL cholesterol 165 mg/dL (high).\r\nFamily history: Father had a heart attack (myocardial infarction) at age 49. Mother — no significant history."
+    }
+  ]
+}

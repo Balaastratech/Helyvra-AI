@@ -6,7 +6,7 @@ import { useUi } from '@/store'
 const STEPS = [
   { icon: Database, title: '1 · Open a chart', body: 'Pick a patient and review their source records.' },
   { icon: Zap, title: '2 · Ingest the records', body: 'Add documents to memory — later records correct earlier ones automatically.' },
-  { icon: MessageSquare, title: '3 · Ask the same question', body: 'Ask both assistants. Total Recall stays correct; Hungover AI repeats the outdated, dangerous answer.' },
+  { icon: MessageSquare, title: '3 · Ask the same question', body: 'Ask both assistants. Helyvra stays correct; Hungover AI repeats the outdated, dangerous answer.' },
 ]
 
 export function HowItWorks() {
@@ -47,7 +47,7 @@ export function HowItWorks() {
               <div>
                 <h2 className="text-xl font-semibold text-text">An AI that fixes its own memory</h2>
                 <p className="mt-1 text-sm text-text-muted">
-                  When records change, most AIs keep repeating the old answer. Total Recall detects
+                  When records change, most AIs keep repeating the old answer. Helyvra detects
                   the change, updates its memory, and can explain why — and even rewind time.
                 </p>
               </div>

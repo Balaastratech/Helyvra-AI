@@ -1,0 +1,47 @@
+{
+  "doc_id": "UP-P009-52e8d531",
+  "date": "2026-04-20",
+  "type": "Uploaded record",
+  "author": "med_change_note.txt",
+  "title": "med_change_note.txt",
+  "text": "SUNRISE FAMILY CLINIC — Progress Note\r\nDemo only — synthetic data, not medical advice. No real PHI.\r\n\r\nPatient: Rahul Sharma   MRN: RH-4471\r\nDate: 2026-04-20\r\n\r\nBlood pressure inadequately controlled on lisinopril. Stopped lisinopril; switched to amlodipine 5 mg daily. Patient tolerating well. — Dr. R. Mehta",
+  "uploaded": true,
+  "asserts": [
+    {
+      "resource_type": "Condition",
+      "subject": "diagnosis",
+      "predicate": "diagnosed",
+      "value": "Blood pressure inadequately controlled",
+      "date": "2026-04-20",
+      "source": "med_change_note.txt",
+      "attributes": {
+        "condition": "blood pressure inadequately controlled"
+      },
+      "raw_text": "SUNRISE FAMILY CLINIC — Progress Note\r\nDemo only — synthetic data, not medical advice. No real PHI.\r\n\r\nPatient: Rahul Sharma   MRN: RH-4471\r\nDate: 2026-04-20\r\n\r\nBlood pressure inadequately controlled on lisinopril. Stopped lisinopril; switched to amlodipine 5 mg daily. Patient tolerating well. — Dr. R. Mehta"
+    },
+    {
+      "resource_type": "Medication",
+      "subject": "medication",
+      "predicate": "prescribed",
+      "value": "lisinopril",
+      "date": "2026-04-20",
+      "source": "med_change_note.txt",
+      "attributes": {
+        "drug": "lisinopril"
+      },
+      "raw_text": "SUNRISE FAMILY CLINIC — Progress Note\r\nDemo only — synthetic data, not medical advice. No real PHI.\r\n\r\nPatient: Rahul Sharma   MRN: RH-4471\r\nDate: 2026-04-20\r\n\r\nBlood pressure inadequately controlled on lisinopril. Stopped lisinopril; switched to amlodipine 5 mg daily. Patient tolerating well. — Dr. R. Mehta"
+    },
+    {
+      "resource_type": "Medication",
+      "subject": "medication",
+      "predicate": "prescribed",
+      "value": "amlodipine 5 mg daily",
+      "date": "2026-04-20",
+      "source": "med_change_note.txt",
+      "attributes": {
+        "drug": "amlodipine 5 mg daily"
+      },
+      "raw_text": "SUNRISE FAMILY CLINIC — Progress Note\r\nDemo only — synthetic data, not medical advice. No real PHI.\r\n\r\nPatient: Rahul Sharma   MRN: RH-4471\r\nDate: 2026-04-20\r\n\r\nBlood pressure inadequately controlled on lisinopril. Stopped lisinopril; switched to amlodipine 5 mg daily. Patient tolerating well. — Dr. R. Mehta"
+    }
+  ]
+}

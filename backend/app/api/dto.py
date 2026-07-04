@@ -144,6 +144,11 @@ class WhyResponse(BaseModel):
     # is correct but misleading for a trend; this lets the UI show the history
     # instead of a flat dead-end.
     trend: List[ClinicalFact] = Field(default_factory=list)
+    # Clinical-language verdict for the trend above ("HBA1C is rising: 7.8 →
+    # 8.6 ... trending the wrong way"), NOT a description of what the
+    # reconciliation engine did — a doctor asked "is this getting worse?",
+    # not "did anything get superseded?". Empty when there's no trend.
+    trend_reason: str = ""
 
 
 # --- /health --------------------------------------------------------------

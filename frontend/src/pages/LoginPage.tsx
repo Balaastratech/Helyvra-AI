@@ -23,7 +23,8 @@ export function LoginPage() {
           <div className="mx-auto mb-3 grid h-12 w-12 place-items-center rounded-2xl bg-active text-white elev-1">
             <Stethoscope className="h-6 w-6" />
           </div>
-          <h1 className="text-2xl font-semibold tracking-tight text-text">Total Recall</h1>
+          <h1 className="text-2xl font-semibold tracking-tight text-text">Helyvra AI</h1>
+          <p className="mt-0.5 text-sm font-medium text-active">Never miss what matters in patient care.</p>
           <p className="mt-1 text-sm text-text-muted">Clinical copilot — choose a demo clinician to continue.</p>
         </div>
 

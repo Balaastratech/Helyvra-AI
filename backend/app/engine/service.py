@@ -59,13 +59,20 @@ async def run_fact(patient_id: str, fact: ClinicalFact, cognee_sync: bool = True
 
 
 async def run_facts(
-    patient_id: str, facts: List[ClinicalFact], cognee_sync: bool = True
+    patient_id: str, facts: List[ClinicalFact], cognee_sync: bool = True,
+    cognify_after: bool = True,
 ) -> List[TRState]:
     """Ingest several facts in order, then cognify ONCE (perf: not per fact).
 
     Each fact still flows through the full engine (recall→judge→reconcile→persist)
     and the ledger is updated per fact — only the expensive Cognee graph build is
-    batched to the end, which does not change any answer (the ledger is truth)."""
+    batched to the end, which does not change any answer (the ledger is truth).
+
+    `cognify_after=False` skips even that one graph build — for a multi-FILE
+    batch (pipeline.run_batch), where the caller does ONE cognify after every
+    file's facts are in, instead of once per file. Cognify's cost scales with
+    the patient's total accumulated facts, so doing it once per file in an
+    N-file drop re-pays that growing cost N times."""
     results: List[TRState] = []
     async with checkpointer() as saver:
         app = build_graph(checkpointer=saver)
@@ -79,7 +86,7 @@ async def run_facts(
                 cfg,
             )
             results.append(res)
-    if cognee_sync:
+    if cognee_sync and cognify_after:
         # One graph build for the whole batch. Best-effort: a Cognee lag must not
         # break the ingest (the ledger already holds the authoritative result).
         try:

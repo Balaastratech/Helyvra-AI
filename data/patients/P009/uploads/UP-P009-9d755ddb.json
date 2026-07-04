@@ -1,0 +1,35 @@
+{
+  "doc_id": "UP-P009-9d755ddb",
+  "date": "2026-06-14",
+  "type": "Uploaded record",
+  "author": "prescription_scan.png",
+  "title": "prescription_scan.png",
+  "text": "[Scanned/photographed document: prescription_scan.png — read by Gemini vision]",
+  "uploaded": true,
+  "asserts": [
+    {
+      "resource_type": "Medication",
+      "subject": "medication",
+      "predicate": "prescribed",
+      "value": "Amoxicillin 500 mg",
+      "date": "2026-06-14",
+      "source": "prescription_scan.png",
+      "attributes": {
+        "drug": "amoxicillin 500 mg"
+      },
+      "raw_text": "[Extracted from image: prescription_scan.png]"
+    },
+    {
+      "resource_type": "Condition",
+      "subject": "diagnosis",
+      "predicate": "diagnosed",
+      "value": "dental infection",
+      "date": "2026-06-14",
+      "source": "prescription_scan.png",
+      "attributes": {
+        "condition": "dental infection"
+      },
+      "raw_text": "[Extracted from image: prescription_scan.png]"
+    }
+  ]
+}

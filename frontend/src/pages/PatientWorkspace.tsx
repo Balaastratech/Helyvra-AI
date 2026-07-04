@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
-import { ClipboardList, MessageSquare, Network, GitCompare, ArrowUpRight } from 'lucide-react'
-import { Link } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
+import { ClipboardList, MessageSquare, Network, GitCompare, LayoutGrid, ArrowUpRight } from 'lucide-react'
 import { useUi } from '@/store'
 import { useBrief } from '@/api/hooks'
 import { PreVisitBrief } from '@/components/clinical/PreVisitBrief'
@@ -9,16 +8,18 @@ import { ClinicalCard } from '@/components/clinical/ClinicalCard'
 import { ChatPane } from '@/components/ChatPane'
 import { PatientTimeline } from '@/components/PatientTimeline'
 import { SplitChat } from '@/components/SplitChat'
+import { EvidenceBoard } from '@/components/EvidenceBoard'
 import { DropZone } from '@/components/DropZone'
 import { cn } from '@/lib/utils'
 
-type Tab = 'brief' | 'consult' | 'timeline' | 'compare'
+type Tab = 'brief' | 'consult' | 'timeline' | 'compare' | 'graph'
 
 const TABS: { key: Tab; label: string; icon: typeof ClipboardList }[] = [
   { key: 'brief', label: 'Pre-visit brief', icon: ClipboardList },
   { key: 'consult', label: 'Consult', icon: MessageSquare },
   { key: 'timeline', label: 'Timeline', icon: Network },
   { key: 'compare', label: 'Compare', icon: GitCompare },
+  { key: 'graph', label: 'Cognee graph', icon: LayoutGrid },
 ]
 
 export function PatientWorkspace() {
@@ -88,6 +89,14 @@ export function PatientWorkspace() {
           {tab === 'compare' && (
             <div className="h-full min-h-0 p-4">
               <SplitChat />
+            </div>
+          )}
+          {tab === 'graph' && (
+            <div
+              className="h-full min-h-0 bg-noir-bg bg-cover bg-center"
+              style={{ backgroundImage: 'url(/theme/board-cork.png)' }}
+            >
+              <EvidenceBoard />
             </div>
           )}
         </div>

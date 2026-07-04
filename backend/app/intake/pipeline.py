@@ -46,6 +46,9 @@ class IntakeResult:
     actions: List[str] = field(default_factory=list)
     created_patient: bool = False
     needs_verification: bool = False
+    filename: str = ""
+    ok: bool = True
+    error: str = ""
 
 
 def sniff_format(filename: str, raw_bytes: bytes) -> str:
@@ -98,7 +101,14 @@ async def run(
     raw_bytes: bytes,
     filename: str,
     patient_id_hint: Optional[str] = None,
+    cognify_after: bool = True,
 ) -> IntakeResult:
+    """`cognify_after=False` skips this file's own Cognee graph rebuild — for
+    a multi-file batch (run_batch below), where doing it once per FILE instead
+    of once for the whole drop was the remaining perf bug: cognify's cost
+    scales with the patient's total accumulated facts, so re-running it after
+    every single file in a 7-file drop compounds badly. The caller must then
+    cognify exactly once after the whole batch."""
     from app.api.routes_patients import _run_ingest  # reuse existing ingest logic
 
     fmt = sniff_format(filename, raw_bytes)
@@ -178,7 +188,9 @@ async def run(
     records.save_upload(patient_id, doc)
 
     # --- 4. Run through the self-healing engine ---
-    result = await _run_ingest(patient_id, {**doc, "patient_id": patient_id})
+    result = await _run_ingest(
+        patient_id, {**doc, "patient_id": patient_id}, cognify_after=cognify_after
+    )
 
     # Auto-link family: a relative named in this document may be another patient.
     _resolve_family_safe(patient_id)
@@ -195,6 +207,61 @@ async def run(
         actions=result.actions,
         created_patient=created_patient,
     )
+
+
+async def run_batch(
+    files: List[tuple[bytes, str]],
+    patient_id_hint: Optional[str] = None,
+) -> List[IntakeResult]:
+    """Ingest several files as ONE batch — the fix for a multi-file drag-drop.
+
+    Each file still runs its own full extraction + per-fact reconciliation
+    (recall -> judge -> reconcile -> ledger write is unaffected, exactly as
+    correct as the single-file path). What changes: every file's own Cognee
+    graph rebuild is skipped (cognify_after=False) and replaced with ONE
+    rebuild after the whole batch — cognify's cost scales with the patient's
+    TOTAL fact count, so doing it once per file in a 7-file drop was re-paying
+    that growing cost 7 times instead of once.
+
+    The first file to resolve a patient pins every subsequent file to that
+    same chart (mirrors the frontend's existing DropZone batching behavior).
+    """
+    from app.memory import cognee_client
+
+    results: List[IntakeResult] = []
+    active_patient = patient_id_hint
+    any_healed = False
+
+    for raw_bytes, filename in files:
+        try:
+            result = await run(raw_bytes, filename, active_patient, cognify_after=False)
+            result.filename = filename
+            if not active_patient:
+                active_patient = result.patient_id
+            any_healed = any_healed or result.healed
+            results.append(result)
+        except Exception as exc:
+            # One bad file (empty, unsupported, unidentifiable patient) must not
+            # abort the rest of the batch — matches the frontend's existing
+            # per-file ✓/✕ reporting in DropZone.
+            results.append(IntakeResult(
+                patient_id=active_patient or "", patient_name="", doc_id="",
+                filename=filename, ok=False, error=str(exc),
+            ))
+
+    if active_patient:
+        try:
+            await cognee_client.cognify(active_patient, temporal=True)
+            if any_healed:
+                await cognee_client.improve(active_patient)
+        except Exception:  # pragma: no cover - Cognee is best-effort; ledger is truth
+            pass
+        try:
+            await cognee_client.cognify_naive(active_patient)
+        except Exception:  # pragma: no cover - best-effort
+            pass
+
+    return results
 
 
 # --- identity helpers ---------------------------------------------------------

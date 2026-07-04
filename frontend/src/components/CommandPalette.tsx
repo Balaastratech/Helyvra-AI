@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Command } from 'cmdk'
 import { useNavigate } from 'react-router-dom'
-import { Search, UserRound, GitCompare, Network, LayoutGrid, Home, LogOut } from 'lucide-react'
+import { Search, UserRound, Network, Home, LogOut } from 'lucide-react'
 import { usePatients } from '@/api/hooks'
 import { useUi } from '@/store'
 
@@ -86,9 +86,7 @@ export function CommandPalette() {
           <Command.Group heading="Go to" className="mt-1 text-[10px] font-semibold uppercase tracking-wide text-text-faint [&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:py-1">
             {[
               { label: 'Dashboard', icon: Home, to: '/' },
-              { label: 'Compare (naive vs healed)', icon: GitCompare, to: '/compare' },
               { label: 'Memory Map', icon: Network, to: '/memory' },
-              { label: 'The Board (Cognee graph)', icon: LayoutGrid, to: '/board' },
             ].map((v) => (
               <Command.Item
                 key={v.to}

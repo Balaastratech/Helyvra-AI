@@ -159,6 +159,9 @@ export interface WhyResponse {
   /** Other active readings of the same subject (oldest first) — populated
    * only when this fact was never superseded, e.g. repeated lab values. */
   trend: ClinicalFact[]
+  /** Clinical-language verdict for `trend` ("HBA1C is rising: 7.8 -> 8.6 ...
+   * trending the wrong way"), not a description of what the engine did. */
+  trend_reason: string
 }
 
 // --- /health --------------------------------------------------------------
@@ -233,6 +236,25 @@ export interface IntakeResponse {
   reason: string
   actions: string[]
   created_patient: boolean
+}
+
+// --- /intake/batch (multi-file drop, one Cognee rebuild for the whole drop) -
+export interface BatchIntakeItem {
+  filename: string
+  ok: boolean
+  error: string
+  patient_id: string
+  patient_name: string
+  doc_id: string
+  facts: ClinicalFact[]
+  classification: string
+  healed: boolean
+  reason: string
+  actions: string[]
+  created_patient: boolean
+}
+export interface BatchIntakeResponse {
+  items: BatchIntakeItem[]
 }
 
 // --- /chat (conversational agent) -----------------------------------------

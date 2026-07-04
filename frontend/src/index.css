@@ -285,6 +285,21 @@ input[type='range'].rewind::-moz-range-thumb {
 .tl-root .vis-itemset .vis-item.tl-edge .vis-item-content {
   transform: translateX(calc(-100% - 14px)) !important;
 }
+/* A flipped label is translated LEFT of its marker. transform doesn't move
+   layout, so the item's own background box stays put at the dot while the text
+   slides out of it — the text ends up floating on bare lane (the reported bug).
+   Fix: for a flipped POINT, blank the item box and give the CONTENT its own
+   chip, so the pill travels with the text. The dot stays anchored on its date. */
+.tl-root .vis-item.vis-point.tl-edge {
+  background: transparent; border-color: transparent; box-shadow: none;
+}
+.tl-root .vis-item.vis-point.tl-edge .vis-item-content {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 2px 8px;
+  box-shadow: 0 1px 2px rgba(12, 21, 33, 0.06);
+}
 
 /* "not yet known" backdrop right of the playhead */
 .tl-root .vis-item.vis-background.tl-notyet {
@@ -314,8 +329,24 @@ input[type='range'].rewind::-moz-range-thumb {
 .tl-root .vis-item.vis-point.tl-cat-Family .vis-dot { border-color: #7c3aed; }
 .tl-root .vis-item.vis-dot { border-width: 4px; }
 
-/* the "as of" rewind cursor */
-.tl-root .vis-custom-time.asof { background-color: var(--color-active); width: 2px; }
+/* exact date, as a distinct badge next to every item's label — bold + a
+   different color from the label text so it can't be mistaken for part of
+   the sentence or missed at a glance (plain appended text was too easy to
+   overlook next to a long label). */
+.tl-root .vis-item .tl-date {
+  font-weight: 700;
+  color: var(--color-active);
+  font-variant-numeric: tabular-nums;
+}
+
+/* the "as of" rewind cursor.
+   ponytail: short left-transition so slider-driven scrubbing GLIDES the playhead
+   instead of teleporting; kept at 90ms so direct dragging of the bar still tracks
+   the cursor without visible rubber-banding. */
+.tl-root .vis-custom-time.asof {
+  background-color: var(--color-active); width: 2px;
+  transition: left 0.09s ease-out;
+}
 .tl-root .vis-custom-time.asof .vis-custom-time-marker {
   background: var(--color-active); color: #fff; font-size: 10px; border-radius: 6px; padding: 1px 6px;
 }

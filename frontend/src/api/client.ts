@@ -6,6 +6,7 @@ import type {
   AskRequest,
   AskResponse,
   AuditEntry,
+  BatchIntakeResponse,
   BriefResponse,
   ChatApproveRequest,
   ChatApproveResponse,
@@ -146,6 +147,23 @@ export const api = {
       throw new ApiError(res.status, detail)
     }
     return res.json() as Promise<IntakeResponse>
+  },
+
+  // Multi-file drop as ONE request: the backend does one Cognee graph rebuild
+  // for the whole batch instead of one per file (the actual fix for a 7-file
+  // drop taking minutes — cognify's cost scales with the patient's total
+  // fact count, so doing it N times instead of once was the real bottleneck).
+  intakeBatch: async (files: File[], patient_id?: string) => {
+    const form = new FormData()
+    for (const file of files) form.append('files', file)
+    if (patient_id) form.append('patient_id', patient_id)
+    const res = await fetch(`${API_BASE}/intake/batch`, { method: 'POST', body: form })
+    if (!res.ok) {
+      let detail = res.statusText
+      try { detail = (await res.json())?.detail ?? detail } catch { /* */ }
+      throw new ApiError(res.status, detail)
+    }
+    return res.json() as Promise<BatchIntakeResponse>
   },
 
   // --- Chat (conversational agent) ---

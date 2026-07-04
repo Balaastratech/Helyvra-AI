@@ -370,7 +370,7 @@ export function ChatPane() {
             <div className="flex flex-col items-center justify-center h-full text-center gap-4">
               <Brain className="h-12 w-12 text-active/40" />
               <div>
-                <h3 className="text-lg font-medium text-text">Total Recall Assistant</h3>
+                <h3 className="text-lg font-medium text-text">Helyvra Assistant</h3>
                 <p className="mt-1 text-sm text-text-muted max-w-md">
                   Ask about this patient's medical history. I remember everything —
                   what's current, what changed, when, and why.

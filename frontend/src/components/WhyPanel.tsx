@@ -23,13 +23,15 @@ export function WhyPanel() {
 
   // One plain sentence (design-brief): "X was cleared on DATE by SOURCE, so the earlier record no longer applies."
   // A repeated measurement (e.g. a lab value) never supersedes the last one —
-  // each reading is independently true — so that case gets its own sentence
-  // instead of the misleading "nothing has replaced it".
+  // each reading is independently true — so that case shows the CLINICAL
+  // verdict (rising/falling, right or wrong direction) computed backend-side
+  // from the same knowledge the Pre-Visit brief's trend card uses — not a
+  // description of what the reconciliation engine did or didn't do.
   const sentence =
     data && data.superseded_by
       ? `${data.superseded_by.label} on ${data.date} (${data.source}), so the earlier record no longer applies.`
-      : data && data.trend.length > 1
-        ? `No single record replaced another — this has been measured ${data.trend.length} times. Each reading stands on its own.`
+      : data && data.trend_reason
+        ? data.trend_reason
         : data
           ? `${data.fact.label} — still current; nothing has replaced it.`
           : ''

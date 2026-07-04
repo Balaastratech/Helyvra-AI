@@ -7,9 +7,7 @@ import { TitleSequence } from '@/components/cinematic/TitleSequence'
 import { LoginPage } from '@/pages/LoginPage'
 import { Dashboard } from '@/pages/Dashboard'
 import { PatientWorkspace } from '@/pages/PatientWorkspace'
-import { ComparePage } from '@/pages/ComparePage'
 import { MemoryMapPage } from '@/pages/MemoryMapPage'
-import { BoardPage } from '@/pages/BoardPage'
 
 const INTRO_KEY = 'tr-intro-played'
 
@@ -31,9 +29,7 @@ export default function App() {
         <Route element={<ClinicalShell />}>
           <Route index element={<Dashboard />} />
           <Route path="patient/:id" element={<PatientWorkspace />} />
-          <Route path="compare" element={<ComparePage />} />
           <Route path="memory" element={<MemoryMapPage />} />
-          <Route path="board" element={<BoardPage />} />
         </Route>
       </Routes>
       <AnimatePresence>

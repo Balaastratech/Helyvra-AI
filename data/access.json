@@ -5,7 +5,7 @@
       "name": "Dr. Anjali Mehta",
       "specialty": "Internal Medicine",
       "role": "doctor",
-      "patients": ["P001", "P002", "P003", "P010", "P011", "P012", "P013"]
+      "patients": ["P001", "P002", "P003", "P008", "P009", "P010", "P011", "P012", "P013"]
     },
     {
       "doctor_id": "dr_rao",

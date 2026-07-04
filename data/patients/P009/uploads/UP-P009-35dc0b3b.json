@@ -1,0 +1,79 @@
+{
+  "doc_id": "UP-P009-35dc0b3b",
+  "date": "2025-12-04",
+  "type": "Uploaded record",
+  "author": "lab_report_2025.pdf",
+  "title": "lab_report_2025.pdf",
+  "text": "Metro Diagnostics Laboratory\nLaboratory Report · Demo only — synthetic data, not medical advice. No real PHI.\nPatient: Rahul Sharma\nMRN: RH-4471\nDOB: 1974-02-03\nSpecimen collected: 2025-12-04. Reported: 2025-12-05. Ordering: Dr. R. Mehta.\nTest\nResult\nUnits\nReference range\nFlag\nHbA1c\n8.6\n%\n< 7.0\nHIGH\nCreatinine\n1.6\nmg/dL\n0.7 – 1.3\nHIGH\neGFR\n52\nmL/min/1.73m2\n> 60\nLOW\nLDL cholesterol\n165\nmg/dL\n< 100\nHIGH\nInterpretation\nHbA1c remains elevated and has risen versus prior results. Creatinine is elevated with reduced eGFR —\nrecommend nephrology review and repeat renal function.\n",
+  "uploaded": true,
+  "asserts": [
+    {
+      "resource_type": "LabResult",
+      "subject": "lab hba1c",
+      "predicate": "measured",
+      "value": "HbA1c 8.6 %",
+      "date": "2025-12-04",
+      "source": "lab_report_2025.pdf",
+      "attributes": {
+        "analyte": "hba1c",
+        "value": 8.6,
+        "unit": "%",
+        "ref_range": "< 7.0",
+        "abnormal_flag": "high"
+      },
+      "raw_text": "Metro Diagnostics Laboratory\nLaboratory Report · Demo only — synthetic data, not medical advice. No real PHI.\nPatient: Rahul Sharma\nMRN: RH-4471\nDOB: 1974-02-03\nSpecimen collected: 2025-12-04. Reported: 2025-12-05. Ordering: Dr. R. Mehta.\nTest\nResult\nUnits\nReference range\nFlag\nHbA1c\n8.6\n%\n< 7.0\nHIGH\nCreatinine\n1.6\nmg/dL\n0.7 – 1.3\nHIGH\neGFR\n52\nmL/min/1.73m2\n> 60\nLOW\nLDL cholesterol\n165\nmg/dL\n< 100\nHIGH\nInterpretation\nHbA1c remains elevated and has risen versus prior results. Creatinine is elevated with reduced eGFR —\nrecommend nephrology review and repeat renal function.\n",
+      "page": 1
+    },
+    {
+      "resource_type": "LabResult",
+      "subject": "lab creatinine",
+      "predicate": "measured",
+      "value": "Creatinine 1.6 mg/dL",
+      "date": "2025-12-04",
+      "source": "lab_report_2025.pdf",
+      "attributes": {
+        "analyte": "creatinine",
+        "value": 1.6,
+        "unit": "mg/dL",
+        "ref_range": "0.7 – 1.3",
+        "abnormal_flag": "high"
+      },
+      "raw_text": "Metro Diagnostics Laboratory\nLaboratory Report · Demo only — synthetic data, not medical advice. No real PHI.\nPatient: Rahul Sharma\nMRN: RH-4471\nDOB: 1974-02-03\nSpecimen collected: 2025-12-04. Reported: 2025-12-05. Ordering: Dr. R. Mehta.\nTest\nResult\nUnits\nReference range\nFlag\nHbA1c\n8.6\n%\n< 7.0\nHIGH\nCreatinine\n1.6\nmg/dL\n0.7 – 1.3\nHIGH\neGFR\n52\nmL/min/1.73m2\n> 60\nLOW\nLDL cholesterol\n165\nmg/dL\n< 100\nHIGH\nInterpretation\nHbA1c remains elevated and has risen versus prior results. Creatinine is elevated with reduced eGFR —\nrecommend nephrology review and repeat renal function.\n",
+      "page": 1
+    },
+    {
+      "resource_type": "LabResult",
+      "subject": "lab egfr",
+      "predicate": "measured",
+      "value": "eGFR 52.0 mL/min/1.73m2",
+      "date": "2025-12-04",
+      "source": "lab_report_2025.pdf",
+      "attributes": {
+        "analyte": "egfr",
+        "value": 52.0,
+        "unit": "mL/min/1.73m2",
+        "ref_range": "> 60",
+        "abnormal_flag": "low"
+      },
+      "raw_text": "Metro Diagnostics Laboratory\nLaboratory Report · Demo only — synthetic data, not medical advice. No real PHI.\nPatient: Rahul Sharma\nMRN: RH-4471\nDOB: 1974-02-03\nSpecimen collected: 2025-12-04. Reported: 2025-12-05. Ordering: Dr. R. Mehta.\nTest\nResult\nUnits\nReference range\nFlag\nHbA1c\n8.6\n%\n< 7.0\nHIGH\nCreatinine\n1.6\nmg/dL\n0.7 – 1.3\nHIGH\neGFR\n52\nmL/min/1.73m2\n> 60\nLOW\nLDL cholesterol\n165\nmg/dL\n< 100\nHIGH\nInterpretation\nHbA1c remains elevated and has risen versus prior results. Creatinine is elevated with reduced eGFR —\nrecommend nephrology review and repeat renal function.\n",
+      "page": 1
+    },
+    {
+      "resource_type": "LabResult",
+      "subject": "lab ldl",
+      "predicate": "measured",
+      "value": "LDL cholesterol 165.0 mg/dL",
+      "date": "2025-12-04",
+      "source": "lab_report_2025.pdf",
+      "attributes": {
+        "analyte": "ldl",
+        "value": 165.0,
+        "unit": "mg/dL",
+        "ref_range": "< 100",
+        "abnormal_flag": "high"
+      },
+      "raw_text": "Metro Diagnostics Laboratory\nLaboratory Report · Demo only — synthetic data, not medical advice. No real PHI.\nPatient: Rahul Sharma\nMRN: RH-4471\nDOB: 1974-02-03\nSpecimen collected: 2025-12-04. Reported: 2025-12-05. Ordering: Dr. R. Mehta.\nTest\nResult\nUnits\nReference range\nFlag\nHbA1c\n8.6\n%\n< 7.0\nHIGH\nCreatinine\n1.6\nmg/dL\n0.7 – 1.3\nHIGH\neGFR\n52\nmL/min/1.73m2\n> 60\nLOW\nLDL cholesterol\n165\nmg/dL\n< 100\nHIGH\nInterpretation\nHbA1c remains elevated and has risen versus prior results. Creatinine is elevated with reduced eGFR —\nrecommend nephrology review and repeat renal function.\n",
+      "page": 1
+    }
+  ]
+}
