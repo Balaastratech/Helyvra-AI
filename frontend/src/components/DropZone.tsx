@@ -60,7 +60,25 @@ export function DropZone() {
       const file = files[0]
       setMessage(`Uploading ${file.name}…`)
       try {
-        const res: IntakeResponse = await api.intake(file, patientId || undefined)
+        let res: IntakeResponse = await api.intake(file, patientId || undefined)
+        // Dedup: the exact same file was already uploaded. Ask before re-running
+        // the (paid) extraction + engine. Cancel is a no-op, not an error.
+        if (res.duplicate) {
+          const d = res.duplicate_of
+          const when = d?.uploaded_at ? new Date(d.uploaded_at).toLocaleDateString() : 'earlier'
+          const ok = window.confirm(
+            `${file.name} was already uploaded for ${d?.patient_name ?? 'this patient'} on ${when}. Upload anyway?`,
+          )
+          if (!ok) {
+            setStatus('idle')
+            setMessage(`↷ ${file.name} — already uploaded, skipped`)
+            setTimeout(() => { setStatus('idle'); setMessage('') }, 5000)
+            return
+          }
+          setStatus('uploading')
+          setMessage(`Re-uploading ${file.name}…`)
+          res = await api.intake(file, patientId || undefined, true)
+        }
         if (!patientId && res.patient_id) setPatient(res.patient_id)
         invalidate()
         const extra = res.created_patient ? ' · new chart' : ''
@@ -87,9 +105,11 @@ export function DropZone() {
       if (!patientId && firstOk) setPatient(firstOk.patient_id)
       const facts = ok.reduce((n, it) => n + it.facts.length, 0)
       const lines = res.items.map((it) =>
-        it.ok
-          ? `✓ ${it.filename} → ${it.patient_name}${it.created_patient ? ' · new chart' : ''} · ${it.facts.length} fact(s)`
-          : `✕ ${it.filename} — ${it.error}`,
+        it.duplicate
+          ? `↷ ${it.filename} — already uploaded, skipped`
+          : it.ok
+            ? `✓ ${it.filename} → ${it.patient_name}${it.created_patient ? ' · new chart' : ''} · ${it.facts.length} fact(s)`
+            : `✕ ${it.filename} — ${it.error}`,
       )
       setLines(lines)
       invalidate()
@@ -121,7 +141,7 @@ export function DropZone() {
       <input
         type="file"
         multiple
-        accept=".pdf,.json,.txt,.md,.csv"
+        accept=".pdf,.json,.txt,.md,.csv,.jpg,.jpeg,.png,.webp,.heic,.heif"
         onChange={handleFileSelect}
         className="absolute inset-0 cursor-pointer opacity-0"
         aria-label="Upload clinical documents"
@@ -134,7 +154,7 @@ export function DropZone() {
             Drop clinical documents here or <span className="text-active">browse</span>
           </p>
           <p className="text-xs text-text-muted/60">
-            One or many · PDF, FHIR JSON, CSV, or text — patient auto-detected
+            One or many · PDF, FHIR JSON, CSV, text, or photos/scans (jpg/png/webp/heic) — patient auto-detected
           </p>
         </div>
       )}

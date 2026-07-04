@@ -31,7 +31,7 @@ from app.intake.patient_index import resolve
 from app.memory import records
 from app.memory.schema import ClinicalFact
 
-_IMAGE_EXTS = (".png", ".jpg", ".jpeg", ".tif", ".tiff", ".bmp", ".gif")
+_IMAGE_EXTS = (".png", ".jpg", ".jpeg", ".webp", ".heic", ".heif", ".tif", ".tiff", ".bmp", ".gif")
 
 
 @dataclass
@@ -78,7 +78,8 @@ def extract_pdf_pages(raw_bytes: bytes) -> List[str]:
 
 _IMAGE_MIME = {
     ".png": "image/png", ".jpg": "image/jpeg", ".jpeg": "image/jpeg",
-    ".webp": "image/webp", ".gif": "image/png", ".bmp": "image/png",
+    ".webp": "image/webp", ".heic": "image/heic", ".heif": "image/heif",
+    ".gif": "image/png", ".bmp": "image/png",
     ".tif": "image/png", ".tiff": "image/png",
 }
 

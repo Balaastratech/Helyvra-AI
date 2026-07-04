@@ -20,11 +20,14 @@ def _normalize(s: str) -> str:
     return " ".join(s.lower().strip().replace("'", "").replace("-", " ").split())
 
 
-def resolve(name: str, dob: str = "", mrn: str = "") -> str:
+def find(name: str, dob: str = "", mrn: str = "") -> Optional[str]:
     """
-    Find an existing patient or create a new one.
-    Priority: MRN exact match > name+DOB exact match > create new.
-    Returns patient_id.
+    Match to an EXISTING patient without creating one.
+    Priority: MRN exact match > name+DOB exact match. Returns None if no match.
+
+    This is the single matching rule shared by automatic intake (via resolve
+    below) and manual chart creation (routes_patients.create_patient) — so the
+    two paths can never diverge into two different notions of "duplicate".
     """
     patients = records.list_patients()
 
@@ -46,9 +49,20 @@ def resolve(name: str, dob: str = "", mrn: str = "") -> str:
                 if not norm_dob or not p_dob or norm_dob == p_dob:
                     return p["patient_id"]
 
-    # 3. No match — auto-create
-    new = records.add_patient(name=name, dob=dob, mrn=mrn)
-    return new["patient_id"]
+    return None
+
+
+def resolve(name: str, dob: str = "", mrn: str = "") -> str:
+    """
+    Find an existing patient or create a new one.
+    Priority: MRN exact match > name+DOB exact match > create new.
+    Returns patient_id.
+    """
+    hit = find(name, dob, mrn)
+    if hit:
+        return hit
+    # No match — auto-create
+    return records.add_patient(name=name, dob=dob, mrn=mrn)["patient_id"]
 
 
 def resolve_or_none(name: str, dob: str = "", mrn: str = "") -> Optional[str]:

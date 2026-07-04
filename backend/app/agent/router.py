@@ -59,6 +59,18 @@ _MAX_ROUNDS = 6
 # its recall calls (one contested recall makes the whole answer contested).
 _CERTAINTY_RANK = {"contested": 2, "low_confidence": 1, "settled": 0}
 
+# Read-only tools whose returned text IS already a complete, grounded,
+# doctor-facing answer. When the first round is exactly ONE of these and nothing
+# else, the model's round-2 paraphrase adds latency (a whole extra Vertex call)
+# without changing the answer's content/citations/certainty — so we skip it and
+# use the tool's own result as the reply. ingest_fact/propose_forget are excluded:
+# their raw output ("Recorded 'X' ...") is a log line, not a reply, and always
+# needs round 2 to phrase a human sentence.
+_SINGLE_SHOT_TOOLS = {
+    "recall_patient_facts", "run_clinical_checks", "propose_order",
+    "get_timeline", "why_changed",
+}
+
 _SYSTEM = (
     "You are Total Recall, a clinical memory assistant for ONE patient. You can ONLY "
     "see and act on the current patient's records.\n\n"
@@ -141,7 +153,7 @@ async def handle_message(patient_id: str, thread_id: str, message: str, doctor: 
     client = genai.Client(vertexai=True, project=config.PROJECT, location=config.LOCATION)
     trace: List[dict] = []  # ordered per-turn trace: {seq, tool, args, result_summary, ms, ...}
     reply = ""
-    for _ in range(_MAX_ROUNDS):
+    for round_idx in range(_MAX_ROUNDS):
         try:
             resp = client.models.generate_content(
                 model=config.EXTRACTION_MODEL, contents=contents, config=cfg
@@ -202,6 +214,24 @@ async def handle_message(patient_id: str, thread_id: str, message: str, doctor: 
                 types.Part.from_function_response(name=fc.name, response={"result": out})
             )
         contents.append(types.Content(role="user", parts=resp_parts))
+
+        # Short-circuit (§4): a first round that is exactly one read-only tool
+        # already produced the doctor-facing answer — skip the round-2 paraphrase.
+        if round_idx == 0 and len(calls) == 1 and calls[0].name in _SINGLE_SHOT_TOOLS:
+            entry = trace[-1] if trace else {}
+            ans = entry.get("answer")
+            if ans and ans.get("answer_text"):
+                # recall's six-part contract: the reply the model was told to
+                # produce is the answer + its key reason — build it directly,
+                # byte-for-byte the tool's own content, no extra LLM call.
+                reply = ans["answer_text"]
+                if ans.get("reason"):
+                    reply = f"{reply} {ans['reason']}"
+            else:
+                # checks/order/timeline/why: the tool's returned text is already
+                # the doctor-facing reply — use it verbatim.
+                reply = str(out)
+            break
 
     if not reply:
         reply = "I wasn't able to finish that request — please try rephrasing."

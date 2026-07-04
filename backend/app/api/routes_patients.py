@@ -32,6 +32,7 @@ from app.api.dto import (
 from app.checks import engine as checks_engine
 from app.checks.cards import Card
 from app.engine import extract, service
+from app.intake import patient_index
 from app.memory import cognee_client, ledger, records
 from app.memory.schema import ClinicalFact
 from datetime import date as _date
@@ -47,9 +48,15 @@ def patients() -> PatientsResponse:
 
 @router.post("/patients", response_model=Patient)
 def create_patient(req: CreatePatientRequest) -> Patient:
-    """Create a new chart so a user can bring their own patient + records."""
+    """Create-or-find a chart. Runs the SAME three-tier match intake uses
+    (MRN > name+DOB) before creating, so a manual create of a patient who
+    already exists returns the existing chart (HTTP 200, create-or-find) rather
+    than silently making a duplicate the doctor then sees twice."""
     if not req.name.strip():
         raise HTTPException(422, "patient name is required.")
+    existing = patient_index.find(req.name, req.dob, req.mrn)
+    if existing:
+        return Patient(**records.get_patient(existing))
     return Patient(**records.add_patient(req.name, req.dob, req.sex, req.mrn))
 
 

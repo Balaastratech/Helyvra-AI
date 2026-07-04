@@ -136,10 +136,11 @@ export const api = {
     post<{ ok: boolean; consent: boolean }>('/family/consent', body),
 
   // --- Universal intake ---
-  intake: async (file: File, patient_id?: string) => {
+  intake: async (file: File, patient_id?: string, force = false) => {
     const form = new FormData()
     form.append('file', file)
     if (patient_id) form.append('patient_id', patient_id)
+    if (force) form.append('force', 'true')
     const res = await fetch(`${API_BASE}/intake`, { method: 'POST', body: form })
     if (!res.ok) {
       let detail = res.statusText

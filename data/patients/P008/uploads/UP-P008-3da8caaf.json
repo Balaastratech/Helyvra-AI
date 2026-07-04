@@ -1,0 +1,68 @@
+{
+  "doc_id": "UP-P008-3da8caaf",
+  "date": "2026-06-20",
+  "type": "Uploaded record",
+  "author": "son_intake_note.txt",
+  "title": "son_intake_note.txt",
+  "text": "SUNRISE FAMILY CLINIC — New Patient Intake Note\r\nDemo only — synthetic data, not medical advice. No real PHI.\r\n\r\nPatient: Arjun Sharma   MRN: AS-7788   DOB: 1999-06-01\r\nDate: 2026-06-20\r\n\r\nReason for visit: routine check, family history review.\r\nLifestyle: non-smoker, exercises regularly.\r\nFamily history: Father — Rahul Sharma, MRN RH-4471 — has type 2 diabetes and had a myocardial infarction at age 49. Mother — no significant history.",
+  "uploaded": true,
+  "asserts": [
+    {
+      "resource_type": "Lifestyle",
+      "subject": "lifestyle",
+      "predicate": "reported",
+      "value": "non-smoker",
+      "date": "2026-06-20",
+      "source": "son_intake_note.txt",
+      "attributes": {
+        "factor": "smoking",
+        "value": "non-smoker"
+      },
+      "raw_text": "SUNRISE FAMILY CLINIC — New Patient Intake Note\r\nDemo only — synthetic data, not medical advice. No real PHI.\r\n\r\nPatient: Arjun Sharma   MRN: AS-7788   DOB: 1999-06-01\r\nDate: 2026-06-20\r\n\r\nReason for visit: routine check, family history review.\r\nLifestyle: non-smoker, exercises regularly.\r\nFamily history: Father — Rahul Sharma, MRN RH-4471 — has type 2 diabetes and had a myocardial infarction at age 49. Mother — no significant history."
+    },
+    {
+      "resource_type": "Lifestyle",
+      "subject": "lifestyle",
+      "predicate": "reported",
+      "value": "exercises regularly",
+      "date": "2026-06-20",
+      "source": "son_intake_note.txt",
+      "attributes": {
+        "factor": "exercise",
+        "value": "exercises regularly"
+      },
+      "raw_text": "SUNRISE FAMILY CLINIC — New Patient Intake Note\r\nDemo only — synthetic data, not medical advice. No real PHI.\r\n\r\nPatient: Arjun Sharma   MRN: AS-7788   DOB: 1999-06-01\r\nDate: 2026-06-20\r\n\r\nReason for visit: routine check, family history review.\r\nLifestyle: non-smoker, exercises regularly.\r\nFamily history: Father — Rahul Sharma, MRN RH-4471 — has type 2 diabetes and had a myocardial infarction at age 49. Mother — no significant history."
+    },
+    {
+      "resource_type": "FamilyHistory",
+      "subject": "family",
+      "predicate": "reported",
+      "value": "Father: type 2 diabetes",
+      "date": "2026-06-20",
+      "source": "son_intake_note.txt",
+      "attributes": {
+        "relation": "father",
+        "condition": "type 2 diabetes",
+        "relative_name": "Rahul Sharma",
+        "relative_mrn": "RH-4471"
+      },
+      "raw_text": "SUNRISE FAMILY CLINIC — New Patient Intake Note\r\nDemo only — synthetic data, not medical advice. No real PHI.\r\n\r\nPatient: Arjun Sharma   MRN: AS-7788   DOB: 1999-06-01\r\nDate: 2026-06-20\r\n\r\nReason for visit: routine check, family history review.\r\nLifestyle: non-smoker, exercises regularly.\r\nFamily history: Father — Rahul Sharma, MRN RH-4471 — has type 2 diabetes and had a myocardial infarction at age 49. Mother — no significant history."
+    },
+    {
+      "resource_type": "FamilyHistory",
+      "subject": "family",
+      "predicate": "reported",
+      "value": "Father: myocardial infarction (age 49)",
+      "date": "2026-06-20",
+      "source": "son_intake_note.txt",
+      "attributes": {
+        "relation": "father",
+        "condition": "myocardial infarction",
+        "age_at_onset": 49,
+        "relative_name": "Rahul Sharma",
+        "relative_mrn": "RH-4471"
+      },
+      "raw_text": "SUNRISE FAMILY CLINIC — New Patient Intake Note\r\nDemo only — synthetic data, not medical advice. No real PHI.\r\n\r\nPatient: Arjun Sharma   MRN: AS-7788   DOB: 1999-06-01\r\nDate: 2026-06-20\r\n\r\nReason for visit: routine check, family history review.\r\nLifestyle: non-smoker, exercises regularly.\r\nFamily history: Father — Rahul Sharma, MRN RH-4471 — has type 2 diabetes and had a myocardial infarction at age 49. Mother — no significant history."
+    }
+  ]
+}

@@ -226,6 +226,13 @@ export interface IngestDocumentResponse {
 }
 
 // --- /intake (universal upload) -------------------------------------------
+/** The prior upload a re-uploaded file matched (dedup). */
+export interface DuplicateOf {
+  doc_id: string
+  patient_id: string
+  patient_name: string
+  uploaded_at: string
+}
 export interface IntakeResponse {
   patient_id: string
   patient_name: string
@@ -236,6 +243,9 @@ export interface IntakeResponse {
   reason: string
   actions: string[]
   created_patient: boolean
+  /** true when the exact same file was already uploaded (no re-processing). */
+  duplicate?: boolean
+  duplicate_of?: DuplicateOf | null
 }
 
 // --- /intake/batch (multi-file drop, one Cognee rebuild for the whole drop) -
@@ -252,6 +262,8 @@ export interface BatchIntakeItem {
   reason: string
   actions: string[]
   created_patient: boolean
+  duplicate?: boolean
+  duplicate_of?: DuplicateOf | null
 }
 export interface BatchIntakeResponse {
   items: BatchIntakeItem[]
