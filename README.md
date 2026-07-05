@@ -200,9 +200,18 @@ Full design in **[`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md)**. In short:
 
 ## 🤖 AI-assistance disclosure
 
-Built with AI assistance (Claude Code, Gemini) for pair-programming, scaffolding, and the code-generated
-demo video. All architecture decisions, verification, and final code review were done by the author.
-The submission complies with the hackathon rules on AI-tool disclosure.
+This project was built with the help of AI coding tools. In the interest of full transparency, here is
+every AI tool used to create this project:
+
+| AI tool | How it was used |
+|---|---|
+| **Claude Code** (Anthropic) | Pair-programming, scaffolding, refactoring, and the code-generated demo video pipeline |
+| **Kiro** (AWS) | Spec-driven development, requirements/design/task planning, and in-IDE implementation |
+| **Codex** (OpenAI) | Code generation, completions, and debugging assistance |
+| **Gemini** (Google) | Runtime LLM for clinical extraction, contradiction judging, and vision-based intake |
+
+All architecture decisions, verification, and final code review were done by the author. The submission
+complies with the hackathon rules on AI-tool disclosure.
 
 ## 📁 Repository layout
 
