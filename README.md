@@ -47,8 +47,8 @@ were entered in error.
 
 ## 🎬 Demo
 
-- **Demo video (~3 min):** _paste your YouTube/Drive link here_
-- **Live app:** _optional — paste deploy link, or run locally (below)_
+- **Demo video (~3 min):** [https://youtu.be/M2b2d1KMSjg?si=DFXfyz-yzr11dDnc]
+
 
 **The money shot** — the doctor asks the Consult chat *"Can I prescribe amoxicillin?"* and the agent
 answers, cited:
